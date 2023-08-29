@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Schedulog</string>
+    <string name="button_test_write">Test Write</string>
+    <string name="button_test_read">Test Read</string>
+</resources>

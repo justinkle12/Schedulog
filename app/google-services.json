@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1051622946249",
+    "firebase_url": "https://schedulog-default-rtdb.firebaseio.com",
+    "project_id": "schedulog",
+    "storage_bucket": "schedulog.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051622946249:android:5beebabaa7bf3b647ca418",
+        "android_client_info": {
+          "package_name": "com.example.schedulog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051622946249-9b9v98vluggrecgi3euup689i13mdh0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtOYVmhuOULWeu0YI-tnbcBlK959HOWUc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051622946249-9b9v98vluggrecgi3euup689i13mdh0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
