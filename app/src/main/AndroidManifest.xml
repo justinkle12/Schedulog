@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />  <!--internet privileges for api accessing-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>  <!--request access to gallery for image uploading-->
+
     <application
         android:name=".SchedulogApplication"
         android:allowBackup="true"
