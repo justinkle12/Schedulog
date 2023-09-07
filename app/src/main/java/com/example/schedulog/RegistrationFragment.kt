@@ -14,7 +14,9 @@ import com.google.firebase.auth.FirebaseUser
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.core.UserData
 import com.google.firebase.ktx.Firebase
+import com.example.schedulog.EntryFragment
 
 
 class RegistrationFragment : DialogFragment() {

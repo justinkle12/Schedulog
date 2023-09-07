@@ -1,14 +1,11 @@
+package com.example.schedulog
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import com.example.schedulog.FeedFragment
-import com.example.schedulog.R
 import com.example.schedulog.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -35,6 +32,7 @@ class LoginFragment : DialogFragment() {
                     if (task.isSuccessful) {
                         // Navigate to the FeedFragment upon successful login
                         navigateToFeedFragment()
+                        dismiss()
                     } else {
                         // Handle login failure, e.g., show an error message.
                         displayMessage("Login failed: " + task.exception?.message)
@@ -61,9 +59,10 @@ class LoginFragment : DialogFragment() {
     }
 
     private fun navigateToFeedFragment() {
-        val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-        transaction.replace(R.id.fragmentContainer, FeedFragment())
-        transaction.addToBackStack(null) // Optional: Adds the transaction to the back stack
+        val feedFragment = FeedFragment()
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainer, feedFragment)
+        transaction.addToBackStack(null) // If you want to add this transaction to the back stack
         transaction.commit()
     }
 }
