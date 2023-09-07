@@ -30,12 +30,28 @@ class LoginFragment : DialogFragment() {
             mAuth.signInWithEmailAndPassword(usernameOrEmail, password)
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
-                        // Navigate to the FeedFragment upon successful login
-                        navigateToFeedFragment()
-                        dismiss()
+
+                        if(mAuth.currentUser?.isEmailVerified == true){
+
+                            // Navigate to the FeedFragment upon successful login and user is verified
+                            dismiss()
+                            navigateToFeedFragment()
+
+                        }else {
+
+                            dismiss()
+                            navigateToAuthFragment()
+
+                        }
+
                     } else {
+
+
                         // Handle login failure, e.g., show an error message.
                         displayMessage("Login failed: " + task.exception?.message)
+
+
+
                     }
                 }
         }
@@ -65,4 +81,14 @@ class LoginFragment : DialogFragment() {
         transaction.addToBackStack(null) // If you want to add this transaction to the back stack
         transaction.commit()
     }
+
+    private fun navigateToAuthFragment() {
+        val authFragment = AuthFragment()
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainer, authFragment)
+        transaction.addToBackStack(null) // If you want to add this transaction to the back stack
+        transaction.commit()
+    }
+
+
 }

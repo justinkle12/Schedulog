@@ -1,6 +1,7 @@
 package com.example.schedulog
-
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.core.UserData
 import com.google.firebase.ktx.Firebase
 import com.example.schedulog.EntryFragment
+import com.google.firebase.auth.ktx.auth
 
 
 class RegistrationFragment : DialogFragment() {
@@ -49,6 +51,19 @@ class RegistrationFragment : DialogFragment() {
 
                         // Write user registration data to the Realtime Database
                         testWrite(userData)
+
+                        //Send user a verification email
+                        mAuth.currentUser?.sendEmailVerification()
+                            ?.addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    Log.d(TAG, "Email sent.")
+
+                                }else(Log.d(TAG,"Email has not been sent."))
+
+                            }
+
+
+
 
                         displayUserData(username, email)
                     } else {
