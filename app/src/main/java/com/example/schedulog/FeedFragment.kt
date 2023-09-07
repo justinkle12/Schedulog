@@ -38,7 +38,7 @@ class FeedFragment : Fragment() {
         // For example, you can navigate back to the login screen
         // Replace R.id.fragmentContainer with the ID of the container where you want to display the login fragment
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, LoginFragment())
+        transaction.replace(R.id.fragmentContainer, EntryFragment())
         transaction.commit()
     }
 }
