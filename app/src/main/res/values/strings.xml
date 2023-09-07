@@ -2,4 +2,6 @@
     <string name="app_name">Schedulog</string>
     <string name="button_test_write">Test Write</string>
     <string name="button_test_read">Test Read</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
