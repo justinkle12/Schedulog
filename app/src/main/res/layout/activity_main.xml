@@ -19,10 +19,20 @@
         android:id="@+id/button_testread"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_test_read"
+        android:text="@string/button_load_picture"
         app:layout_constraintStart_toEndOf="@+id/button_testwrite"
         app:layout_constraintTop_toTopOf="parent"
         android:onClick="testRead"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_testread"
+        app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

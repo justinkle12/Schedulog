@@ -3,4 +3,5 @@
     <string name="button_test_write">Test Write</string>
     <string name="button_test_read">Test Read</string>
     <string name="button_select_picture">Select Picture</string>
+    <string name="button_load_picture">Load Picture</string>
 </resources>
