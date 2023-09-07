@@ -94,7 +94,10 @@ class MainActivity : AppCompatActivity() {
             testWrite(imagePath)
         }
     }
-
+    /* Parameters: String
+    *  Output: void
+    *  This method takes an image file path and encodes it to base 64 string.
+    *  The string is added to the DB and can be converted back to an image. */
     fun testWrite(selectedImagePath: String?){
         // Write a message to the database
         val database = Firebase.database
@@ -110,6 +113,9 @@ class MainActivity : AppCompatActivity() {
         Timber.i("%s | Writing | %s", myRef, encodedImage)
     }
 
+    /* Parameters: Uri
+    *  Output: String
+    *  This method will get the image path from a Uri. */
     private fun getRealPathFromURI(contentURI: Uri): String? {
         val cursor = contentResolver.query(contentURI, null, null, null, null)
         return if (cursor == null) { // Source is Dropbox or other similar local file path
@@ -120,9 +126,12 @@ class MainActivity : AppCompatActivity() {
             cursor.getString(idx)
         }
     }
-
+    /* Parameters: None
+    *  Output: None
+    *  Currently, this method changes the image view from the image that is on the firebase DB. */
     fun testRead(){
         val database = Firebase.database
+        val storage = Firebase.storage
         val myRef = database.getReference("images")
         // Read from the database
         myRef.addValueEventListener(object: ValueEventListener {
