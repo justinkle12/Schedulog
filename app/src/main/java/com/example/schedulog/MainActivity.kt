@@ -12,12 +12,15 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
 
@@ -84,33 +87,69 @@ class MainActivity : AppCompatActivity() {
 
 
     /** Functions and methods **/
+    fun writeNewImage(userId: String, imageUri: Uri){
+        Firebase.database.reference.child("images")
+            .child(userId)
+            .setValue(imageUri.toString())
+    }
+
+    fun UploadFileTask(userId: String, imageUri: Uri, imageRef: StorageReference){
+        val database = Firebase.database
+        val dbImageRef = database.getReference("images/$userId")
+        val uploadFileTask = imageRef.putFile(imageUri)
+
+        val urlTask = uploadFileTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            imageRef.downloadUrl
+        }.addOnCompleteListener{ task ->
+            if (task.isSuccessful) {
+                val downloadUri = task.result
+                // put Uri into DB and show in logcat
+                writeNewImage("me", downloadUri)
+                Timber.i("%s | Writing | %s", dbImageRef, downloadUri)
+            } else {
+                Timber.i("Unsuccessful Uri download")
+            }
+        }
+        uploadFileTask.addOnFailureListener {
+            Timber.i("Failed to upload image")
+        }.addOnSuccessListener { taskSnapshot ->
+            taskSnapshot.metadata
+        }
+    }
+
     // overriding activity result solely for uploading images as strings to the DB
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == pickImage) {
             Timber.i("Picked image and result OK")
             imageUri = data?.data
-            imagePath = imageUri?.let { getRealPathFromURI(it) }
-            testWrite(imagePath)
+            //imagePath = imageUri?.let { getRealPathFromURI(it) }
+            imageUri?.let { testWrite(it) }
         }
     }
     /* Parameters: String
     *  Output: void
     *  This method takes an image file path and encodes it to base 64 string.
     *  The string is added to the DB and can be converted back to an image. */
-    fun testWrite(selectedImagePath: String?){
+    fun testWrite(imageUri: Uri){
         // Write a message to the database
-        val database = Firebase.database
-        val myRef = database.getReference("images")
+        val selectedImagePath = getRealPathFromURI(imageUri)
+        val storage = Firebase.storage
+        var storageRef = storage.reference
+        val newImageRef = storageRef.child("images/users/me/$selectedImagePath")
         // convert image string 'selectedImagePath' to bitmap to bytearray for storing into DB
         val bm = BitmapFactory.decodeFile(selectedImagePath)
         val baos = ByteArrayOutputStream()
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos) // bm is the bitmap object
-        val b = baos.toByteArray()
-        val encodedImage: String = Base64.encodeToString(b, Base64.DEFAULT)
-        // put into DB and show in logcat
-        myRef.setValue(encodedImage)
-        Timber.i("%s | Writing | %s", myRef, encodedImage)
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)    // bm is the bitmap object
+        val data = baos.toByteArray()
+        /*val encodedImage: String = Base64.encodeToString(data, Base64.DEFAULT)*/
+        val uploadTask = newImageRef.putBytes(data)                 // uploads to storage DB
+        UploadFileTask("me", imageUri, newImageRef)
     }
 
     /* Parameters: Uri
@@ -129,10 +168,15 @@ class MainActivity : AppCompatActivity() {
     /* Parameters: None
     *  Output: None
     *  Currently, this method changes the image view from the image that is on the firebase DB. */
+    //TODO need to try and fix upload image from downloading url
     fun testRead(){
+        val context = this
+        // Reference to an image file in Cloud Storage
+        val storageReference = Firebase.storage.reference
+        val storageRef = storageReference
+
         val database = Firebase.database
-        val storage = Firebase.storage
-        val myRef = database.getReference("images")
+        val myRef = database.getReference("images/me")
         // Read from the database
         myRef.addValueEventListener(object: ValueEventListener {
 
@@ -143,10 +187,18 @@ class MainActivity : AppCompatActivity() {
                 Timber.i("%s | Reading | %s" , myRef, value)
                 // Decoding image string from the DB and sending it to the activity
                 try{
-                    val imageBytes: ByteArray = Base64.decode(value, Base64.DEFAULT)
-                    val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                    /*val imageBytes: ByteArray = Base64.decode(value, Base64.DEFAULT)
+                    val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)*/
+                    val gsReference = value?.let { Firebase.storage.getReferenceFromUrl(it) }
+                    gsReference?.downloadUrl?.addOnSuccessListener {
+                        // downloads url from db
+                    }?.addOnFailureListener{
+                        Timber.i("Download url unsuccessful")
+                    }
+
                     val iView = findViewById<ImageView>(R.id.imageView)
-                    iView.setImageBitmap(decodedImage)
+                    /*iView.setImageBitmap(decodedImage)*/
+                    Glide.with(context).load(gsReference).into(iView)
                 }
                 catch (e: Error){
                     Timber.i("Error when uploading image")
