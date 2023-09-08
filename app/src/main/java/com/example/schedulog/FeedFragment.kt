@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
 class FeedFragment : Fragment() {
@@ -29,6 +30,14 @@ class FeedFragment : Fragment() {
             // Call the logout function
             logoutUser()
         }
+
+        // Find the delete account button and set its click listener
+        val deleteAccountButton = view.findViewById<Button>(R.id.deleteAccountButton)
+        deleteAccountButton.setOnClickListener {
+            // Call the delete account function
+            deleteAccount()
+        }
+
         return view
     }
 
@@ -41,5 +50,37 @@ class FeedFragment : Fragment() {
         transaction.replace(R.id.fragmentContainer, EntryFragment())
         transaction.commit()
     }
+
+    private fun deleteAccount() {
+        val user = mAuth.currentUser
+
+        if (user != null) {
+            user.delete()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Account deletion successful
+                        // You can perform actions like displaying a success message to the user
+                        displayMessage("Account deleted successfully.")
+                    } else {
+                        // Account deletion failed
+                        // You can handle the error by displaying an error message to the user
+                        displayMessage("Account deletion failed: ${task.exception?.message}")
+                    }
+                }
+        } else {
+            // currentUser is null, handle the case when the user is not logged in
+            displayMessage("User is not logged in.")
+        }
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainer, EntryFragment())
+        transaction.commit()
+    }
+
+    private fun displayMessage(message: String) {
+        // You can display the message in a TextView or Toast, for example
+        // Here's an example using a Toast
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
 }
 
