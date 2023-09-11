@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.schedulog.databinding.ActivityMainBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -25,19 +26,20 @@ class MainActivity : AppCompatActivity() {
     /*variables for selecting images from gallery*/
     private val pickImage = 100
     private var imageUri: Uri? = null
-    private var imagePath: String? = null
+    private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         Timber.i("onCreate Called")
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
         //setContentView(R.layout.activity_events) for scrollable view
 
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
-        val writeBtn = findViewById<Button>(R.id.button_testwrite)
-        val readBtn = findViewById<Button>(R.id.button_testread)
+        val writeBtn = binding.buttonTestwrite
+        val readBtn = binding.buttonTestread
 
         writeBtn.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
@@ -140,7 +142,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    /* Parameters: String
+    /* Parameters: Uri
     *  Output: void
     *  This method takes an image file path and encodes it to base 64 string.
     *  The string is added to the DB and can be converted back to an image. */
@@ -209,7 +211,7 @@ class MainActivity : AppCompatActivity() {
 
                 // Try to update imageView
                 try{
-                    // Gets image reference
+                    // Gets image reference on update
                     val gsReference = value?.let { Firebase.storage.getReferenceFromUrl(it) }
                     gsReference?.downloadUrl?.addOnSuccessListener {
                         // downloads url from db
@@ -218,7 +220,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     // Do stuff. In this case, update imageView using Glide
-                    val iView = findViewById<ImageView>(R.id.imageView)
+                    val iView = binding.imageView
                     Glide.with(context).load(gsReference).into(iView)
                 }
                 catch (e: Error){
