@@ -9,39 +9,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.schedulog.databinding.PostItemBinding
-
-/*class PostAdapter(private val context: Context, private val postList: ArrayList<Post>) :
-    RecyclerView.Adapter<PostAdapter.ViewHolder>() {
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val postImage: ImageView = itemView.findViewById(R.id.postImage)
-        val postDescription: TextView = itemView.findViewById(R.id.postDescription)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.post_item, parent, false)
-        return ViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val post = postList[position]
-
-        // Load the image using Glide
-        Glide.with(context).load(post.imageUrl).into(holder.postImage)
-
-        holder.postDescription.text = post.description
-    }
-
-    override fun getItemCount(): Int {
-        return postList.size
-    }
-}*/
+import timber.log.Timber
 
 class PostViewHolder (
     private val binding: PostItemBinding
 ) : RecyclerView.ViewHolder(binding.root){
     fun bind(postItem: PostItem){
-        Glide.with(binding.root).load(postItem.imageUrl).into(binding.postImage)    // not sure if binding.root is correct
+        binding.postDescription.text = postItem.description
+        Glide.with(binding.root).load(postItem.image_url).into(binding.postImage)    // not sure if binding.root is correct
     }
 }
 
@@ -62,6 +37,7 @@ class PostListAdapter(
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
+        Timber.tag("PostListAdapter").i(postItems.toString())
         val post = postItems[position]
         holder.bind(post)
     }
