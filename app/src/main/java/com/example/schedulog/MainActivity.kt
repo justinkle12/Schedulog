@@ -38,6 +38,14 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        if (savedInstanceState == null) {
+            // adding postFragment to activity_main.xml for testing purposes
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            val postFragment = PostFragment() // Create an instance of your PostFragment
+            fragmentTransaction.add(R.id.container, postFragment)
+            fragmentTransaction.commit()
+        }
+
         val writeBtn = binding.buttonTestwrite
         val readBtn = binding.buttonTestread
 
