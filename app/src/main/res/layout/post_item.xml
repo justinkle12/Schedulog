@@ -9,18 +9,18 @@
 
     <TextView
         android:id="@+id/postDescription"
-        android:layout_width="326dp"
-        android:layout_height="58dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:padding="8dp"
+        android:padding="@dimen/image_margin"
         android:textColor="#000000"
         android:textSize="16sp" />
 
     <ImageView
         android:id="@+id/postImage"
-        android:layout_width="match_parent"
-        android:layout_height="151dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:adjustViewBounds="true"
         android:paddingLeft="@dimen/image_margin"
         android:paddingTop="@dimen/image_margin"
