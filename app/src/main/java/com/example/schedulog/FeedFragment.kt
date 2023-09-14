@@ -74,12 +74,28 @@ class FeedFragment : Fragment() {
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, EntryFragment())
         transaction.commit()
+
+        // Find the schedule button and set its click listener to open the com.example.schedulog.ScheduleFragment
+        view?.findViewById<Button>(R.id.scheduleButton)?.setOnClickListener {
+            openScheduleFragment()
+        }
+
+
     }
 
     private fun displayMessage(message: String) {
         // You can display the message in a TextView or Toast, for example
         // Here's an example using a Toast
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun openScheduleFragment() {
+        // Create and navigate to the com.example.schedulog.ScheduleFragment
+        val scheduleFragment = ScheduleFragment()
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainer, scheduleFragment)
+        transaction.addToBackStack(null) // Optional: Add to back stack for navigation
+        transaction.commit()
     }
 
 }
