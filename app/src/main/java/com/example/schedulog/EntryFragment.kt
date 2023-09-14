@@ -35,26 +35,7 @@ class EntryFragment : Fragment() {
             loginFragment.show(requireFragmentManager(), "LoginFragment")
         }
 
-        // Button testWrite click listener (assuming you have this function)
-        binding.buttonTestwrite.setOnClickListener {
-            // Call your testWrite function here
-            testWrite()
-        }
-
-        // Button testRead click listener (assuming you have this function)
-        binding.buttonTestread.setOnClickListener {
-            // Call your testRead function here
-            testRead()
-        }
-
         return binding.root
     }
 
-    private fun testWrite() {
-        // Your testWrite logic goes here
-    }
-
-    private fun testRead() {
-        // Your testRead logic goes here
-    }
 }
