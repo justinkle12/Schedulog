@@ -1,5 +1,6 @@
 package com.example.schedulog
 
+import AccountProfileFragment
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -64,12 +65,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     //fun handleDrawerLocking(isLoginSuccessful: Boolean) {
-        //val drawerLayout = binding.drawerLayout
-        //if (isLoginSuccessful) {
-            //drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-        //} else {
-            //drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        //}
+    //val drawerLayout = binding.drawerLayout
+    //if (isLoginSuccessful) {
+    //drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+    //} else {
+    //drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    //}
     //}
 
     override fun onBackPressed() {

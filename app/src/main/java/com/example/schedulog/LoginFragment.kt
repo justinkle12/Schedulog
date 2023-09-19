@@ -1,12 +1,10 @@
 package com.example.schedulog
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import com.example.schedulog.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -28,7 +26,6 @@ class LoginFragment : DialogFragment() {
         binding.loginButton.setOnClickListener {
             val usernameOrEmail = binding.editTextUsernameOrEmail.text.toString().trim()
             val password = binding.editTextPassword.text.toString().trim()
-
 
             mAuth.signInWithEmailAndPassword(usernameOrEmail, password)
                 .addOnCompleteListener(requireActivity()) { task ->
