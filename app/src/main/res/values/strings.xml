@@ -2,6 +2,5 @@
     <string name="app_name">Schedulog</string>
     <string name="button_test_write">Test Write</string>
     <string name="button_test_read">Test Read</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Welcome to the Account Profile!!!</string>
+    <string name="hello_blank_fragment" />
 </resources>
