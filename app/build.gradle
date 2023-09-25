@@ -2,20 +2,23 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'org.jetbrains.kotlin.kapt'
 }
+
 
 android {
     namespace 'com.example.schedulog'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.schedulog"
         minSdk 19
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true                        // for the multidex class SchedulogApplication
     }
 
     buildTypes {
@@ -31,10 +34,8 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    viewBinding {
-        enabled = true
-    }
     buildFeatures {
+        viewBinding true
         dataBinding true
     }
 }
@@ -54,4 +55,15 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation("com.google.firebase:firebase-storage-ktx")                  // firebase cloud storage
+    implementation 'com.firebaseui:firebase-ui-storage:7.2.0'                   // firebaseUI Storage only
+    implementation 'com.jakewharton.timber:timber:5.0.1'                        // logging
+    implementation 'androidx.fragment:fragment-ktx:1.4.1'                       // fragments to easily pass data
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'                   // scrollable feed
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    kapt 'com.github.bumptech.glide:compiler:4.16.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
 }

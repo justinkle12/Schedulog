@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         btnHamburger.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
+    }
 
         // Handle navigation item clicks
         navigationView.setNavigationItemSelectedListener { menuItem ->
