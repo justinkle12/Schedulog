@@ -38,7 +38,7 @@ class ImageSelect : AppCompatActivity() {
         if (savedInstanceState == null) {
             // adding postFragment to activity_main.xml for testing purposes
             val fragmentTransaction = supportFragmentManager.beginTransaction()
-            val postFragment = PostFragment() // Create an instance of your PostFragment
+            val postFragment = FeedTestFragment() // Create an instance of your PostFragment
             fragmentTransaction.add(R.id.container, postFragment)
             fragmentTransaction.commit()
         }

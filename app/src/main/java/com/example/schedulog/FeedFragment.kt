@@ -5,81 +5,83 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.schedulog.databinding.FragmentFeedBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import timber.log.Timber
 
 class FeedFragment : Fragment() {
 
-    private lateinit var mAuth: FirebaseAuth
+    private var _binding: FragmentFeedBinding? = null
+    private val binding
+        get() = checkNotNull(_binding) {
+            "Cannot access binding because it is null. Is the view visible?"
+        }
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_feed, container, false)
-        mAuth = FirebaseAuth.getInstance()
+        _binding =
+            FragmentFeedBinding.inflate(inflater, container, false)
+        binding.postGrid.layoutManager = GridLayoutManager(context, 1)
 
-        val textView = view.findViewById<TextView>(R.id.textViewFeed)
-        textView.text = "Welcome to the Feed Fragment!"
+        // Initialize variables
+        val postItemList = ArrayList<PostItem>()
+        val postListAdapter = PostListAdapter(postItemList)
+        val recyclerView = binding.postGrid
+
+        // Set RecyclerView Post adapter
+        recyclerView.adapter = postListAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val dividerItemDecoration = DividerItemDecoration(
+            recyclerView.context,
+            DividerItemDecoration.VERTICAL
+        )
+        recyclerView.addItemDecoration(dividerItemDecoration)
+
+        // Initialize Firebase reference
+        val database = Firebase.database
+        val postsRef = database.getReference("posts")
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                postItemList.clear() // Clear the list to avoid duplicates
 
 
-        // Find the logout button and set its click listener
-        val logoutButton = view.findViewById<Button>(R.id.logoutButton)
-        logoutButton.setOnClickListener {
-            // Call the logout function
-            logoutUser()
-        }
+                for (postSnapshot in dataSnapshot.children) {
+                    val postItem = postSnapshot.getValue(PostItem::class.java)
 
-        // Find the delete account button and set its click listener
-        val deleteAccountButton = view.findViewById<Button>(R.id.deleteAccountButton)
-        deleteAccountButton.setOnClickListener {
-            // Call the delete account function
-            deleteAccount()
-        }
-
-        return view
-    }
-
-    private fun logoutUser() {
-        mAuth.signOut()
-        // You can navigate to another fragment or perform any other necessary actions here
-        // For example, you can navigate back to the login screen
-        // Replace R.id.fragmentContainer with the ID of the container where you want to display the login fragment
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, EntryFragment())
-        transaction.commit()
-    }
-
-    private fun deleteAccount() {
-        val user = mAuth.currentUser
-
-        if (user != null) {
-            user.delete()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Account deletion successful
-                        // You can perform actions like displaying a success message to the user
-                        displayMessage("Account deleted successfully.")
-                    } else {
-                        // Account deletion failed
-                        // You can handle the error by displaying an error message to the user
-                        displayMessage("Account deletion failed: ${task.exception?.message}")
+                    if (postItem != null) {
+                        postItemList.add(postItem)
+                        Timber.tag("PostFragment").i(postItem.toString())
                     }
                 }
-        } else {
-            // currentUser is null, handle the case when the user is not logged in
-            displayMessage("User is not logged in.")
+
+                // Update UI with the new postList
+                postListAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle database errors here
+                Timber.e("%s | Error reading post | %s", TAG, databaseError.toString())
+            }
         }
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, EntryFragment())
-        transaction.commit()
+
+        postsRef.addValueEventListener(postListener)
+
+        return binding.root
     }
 
-    private fun displayMessage(message: String) {
-        // You can display the message in a TextView or Toast, for example
-        // Here's an example using a Toast
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    companion object {
+        private const val TAG = "PostFragment"
     }
 
 }
