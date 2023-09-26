@@ -1,14 +1,14 @@
 package com.example.schedulog
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.schedulog.databinding.FragmentPostBinding
+import com.example.schedulog.databinding.FragmentFeedBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -16,10 +16,9 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import timber.log.Timber
 
+class FeedFragment : Fragment() {
 
-class PostFragment : Fragment() {
-
-    private var _binding: FragmentPostBinding? = null
+    private var _binding: FragmentFeedBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
@@ -31,7 +30,7 @@ class PostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding =
-            FragmentPostBinding.inflate(inflater, container, false)
+            FragmentFeedBinding.inflate(inflater, container, false)
         binding.postGrid.layoutManager = GridLayoutManager(context, 1)
 
         // Initialize variables
@@ -82,7 +81,8 @@ class PostFragment : Fragment() {
     }
 
     companion object {
-        private const val TAG = "PostFragment"
+        private const val TAG = "FeedFragment"
     }
 
 }
+
