@@ -61,6 +61,7 @@ class RegistrationFragment : DialogFragment() {
                             val loginFragment = LoginFragment()
                             loginFragment.show(requireFragmentManager(), "LoginFragment")
                             //displayUserData(username, email)
+
                         } else {
                             Toast.makeText(
                                 requireContext(),
