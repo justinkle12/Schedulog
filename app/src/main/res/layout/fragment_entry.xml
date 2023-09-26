@@ -1,62 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <!--
+    /*
+     *	This content is generated from the API File Info.
+     *	(Alt+Shift+Ctrl+I).
+     *
+     *	@desc
+     *	@file 		menu
+     *	@date 		Tuesday 26th of September 2023 03:52:41 AM
+     *	@title 		Page 1
+     *	@author
+     *	@keywords
+     *	@generator 	Export Kit v1.3.figma
+     *
+     */
+    -->
+    <RelativeLayout android:id="@+id/menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
-        <FrameLayout
-            android:id="@+id/fragmentContainer"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout android:id="@+id/content_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.595" />
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/registerButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="268dp"
-            android:text="Register"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView android:id="@+id/image_2"
+                android:src="@drawable/mainbg"
+                android:contentDescription="mainbg"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"/>
 
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="328dp"
-            android:text="Login"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView android:id="@+id/image_1"
+                android:src="@drawable/schedulog_logo"
+                android:contentDescription="SchedulogLogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="99dp"
+                android:layout_width="390dp"
+                android:layout_height="375dp" />
 
-        <TextView
-            android:id="@+id/displayUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerButton" />
+            <RelativeLayout android:id="@+id/button"
+                android:layout_marginTop="526dp"
+                android:layout_marginStart="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
 
-        <TextView
-            android:id="@+id/displayEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/displayUsername" />
+                <RelativeLayout android:id="@+id/button_ek4"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_width="395dp"
+                    android:layout_height="84dp"
+                    >
+
+                    <View   android:id="@+id/rectangle_2"
+                        android:background="@drawable/rectangle_2_shape"
+                        android:alpha="0.60000002384186"
+                        android:layout_marginStart="-0dp"
+                        android:layout_marginTop="-0dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
+
+                <RelativeLayout android:id="@+id/button_1"
+                    android:layout_marginStart="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <View   android:id="@+id/rectangle_2_ek1"
+                        android:background="@drawable/rectangle_2_ek1_shape"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="167dp"
+                        android:layout_height="52dp" />
+
+                    <TextView android:id="@+id/log_in"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal|center"
+                        android:gravity="center"
+                        android:textSize="13sp"
+                        android:textColor="@color/shape_color"
+                        android:layout_marginLeft="58dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_width="52.3dp"
+                        android:layout_height="20.3dp"
+                        android:text="@string/log_in_string"
+                        />
+
+                </RelativeLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+                <RelativeLayout android:id="@+id/button_ek10"
+                    android:layout_marginStart="210dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="167dp"
+                    android:layout_height="52dp"
+                    >
+
+                    <View   android:id="@+id/rectangle_2_ek2"
+                        android:background="@drawable/rectangle_2_ek2_shape"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TextView android:id="@+id/register"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal|center"
+                        android:gravity="center"
+                        android:textSize="13sp"
+                        android:textColor="@color/_bg__menu_color"
+                        android:layout_marginLeft="49dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_width="71.3dp"
+                        android:layout_height="20.3dp"
+                        android:text="@string/register_string"
+                        />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</LinearLayout>

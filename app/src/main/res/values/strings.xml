@@ -3,4 +3,19 @@
     <string name="button_test_write">Test Write</string>
     <string name="button_test_read">Test Read</string>
     <string name="hello_blank_fragment" />
+
+
+    <!-- menu strings -->
+
+    <string name="ek_img_content">ExportKit Image</string>
+    <string name="log_in_string">log in</string>
+    <string name="register_string">register</string>
+    <!-- register strings -->
+
+    <string name="passtext_string">Password</string>
+    <string name="passconftext_string">Confirm Password</string>
+    <string name="emailtext_string">Email</string>
+    <string name="usernametext_string">Username</string>
+    <string name="signupbuttonname_string">Sign Up</string>
+    <string name="registertitle_string">Register</string>
 </resources>

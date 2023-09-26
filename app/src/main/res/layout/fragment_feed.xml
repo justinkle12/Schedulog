@@ -16,15 +16,4 @@
         android:textSize="24sp"
         android:textColor="#000" />
 
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout" />
-
-    <Button
-        android:id="@+id/deleteAccountButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete Account" />
 </LinearLayout>
