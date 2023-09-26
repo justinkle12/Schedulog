@@ -2,4 +2,7 @@
     <string name="app_name">Schedulog</string>
     <string name="button_test_write">Test Write</string>
     <string name="button_test_read">Test Read</string>
+    <string name="hello_blank_fragment">Blank Fragment</string>
+    <string name="button_select_picture">Select Picture</string>
+    <string name="button_load_picture">Load Picture</string>
 </resources>

@@ -1,98 +1,85 @@
 package com.example.schedulog
 
-import androidx.appcompat.app.AppCompatActivity
+import AccountProfileFragment
 import android.os.Bundle
-import android.widget.Button
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
-import timber.log.Timber
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.schedulog.databinding.ActivityMainBinding
+
+
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val drawerLayout = binding.drawerLayout
+        val navigationView = binding.navigationView
+        val btnHamburger = binding.btnHamburger
 
-        Timber.i("onCreate Called")
+        //drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
-        setContentView(R.layout.activity_main)
-
-        val writeBtn = findViewById<Button>(R.id.button_testwrite)
-        val readBtn = findViewById<Button>(R.id.button_testread)
-
-        writeBtn.setOnClickListener() {
-            testWrite()
+        // Open the navigation drawer when the hamburger icon is clicked
+        btnHamburger.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        readBtn.setOnClickListener() {
-            testRead()
+        // Handle navigation item clicks
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            // Handle clicks on menu items here
+            when (menuItem.itemId) {
+                R.id.nav_item_1 -> {
+                    val fragment = AccountProfileFragment()
+                    val transaction = supportFragmentManager.beginTransaction()
+                    transaction.replace(R.id.fragmentContainer, fragment)
+                    transaction.addToBackStack(null) // Optional, for back navigation
+                    transaction.commit()
+                }
+                R.id.nav_item_2 -> {
+                    val fragment = FeedFragment()
+                    val transaction = supportFragmentManager.beginTransaction()
+                    transaction.replace(R.id.fragmentContainer, fragment)
+                    transaction.addToBackStack(null) // Optional, for back navigation
+                    transaction.commit()
+                }
+            }
+            // Close the drawer
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
         }
+
+        if (savedInstanceState == null) {
+            // Only add the EntryFragment if it's not already added (prevents overlapping fragments)
+            val fragmentManager: FragmentManager = supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentContainer, EntryFragment())
+            transaction.addToBackStack(null) // Optional, for navigation
+            transaction.commit()
+        }
+
+
     }
 
-    /** Lifecycle Methods **/
-    /** So far only added logging methods. Can add code to interact with lifecycles.**/
-    override fun onStart() {
-        super.onStart()
+    //fun handleDrawerLocking(isLoginSuccessful: Boolean) {
+    //val drawerLayout = binding.drawerLayout
+    //if (isLoginSuccessful) {
+    //drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+    //} else {
+    //drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    //}
+    //}
 
-        Timber.i("onStart Called")
-    }
+    override fun onBackPressed() {
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
 
-    override fun onResume() {
-        super.onResume()
-        Timber.i("onResume Called")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Timber.i("onPause Called")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Timber.i("onStop Called")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Timber.i("onDestroy Called")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Timber.i("onRestart Called")
-    }
-
-
-    /** Functions and methods **/
-    fun testWrite(){
-        // Write a message to the database
-        val database = Firebase.database
-        val myRef = database.getReference("Justin")
-
-        val value = "Hello, World! - Justin"
-        myRef.setValue(value)
-        Timber.i("%s | Writing | %s", myRef, value)
-    }
-
-    fun testRead(){
-        val database = Firebase.database
-        val myRef = database.getReference("Justin")
-        // Read from the database
-        myRef.addValueEventListener(object: ValueEventListener {
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                val value = snapshot.getValue<String>()
-                Timber.i("%s | Reading | %s" , myRef, value)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Timber.i("firebase: Failed to read value", error.toException())
-            }
-
-        })
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 }
