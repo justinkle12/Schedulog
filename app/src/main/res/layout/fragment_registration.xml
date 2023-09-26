@@ -41,7 +41,7 @@
 
             <View   android:id="@+id/bottombar"
                 android:background="@drawable/bottombar_shape"
-                android:layout_marginStart="119dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="832dp"
                 android:layout_width="135dp"
                 android:layout_height="5dp" />
@@ -178,7 +178,10 @@
 
 
             <TextView android:id="@+id/registertitle"
-                android:layout_gravity="center_horizontal|center"
+                android:fontFamily="@font/quicksand_variable"
+                android:textStyle="bold"
+                android:shadowColor="@color/black"
+                android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:textSize="36sp"
                 android:textColor="@color/_bg__register_color"
@@ -190,7 +193,7 @@
                 />
 
             <ImageView android:id="@+id/backarrow"
-                android:src="@drawable/vectorarrow"
+                android:src="@drawable/backarrow"
                 android:contentDescription="vectorarrow"
                 android:layout_marginStart="23dp"
                 android:layout_marginTop="91.35dp"

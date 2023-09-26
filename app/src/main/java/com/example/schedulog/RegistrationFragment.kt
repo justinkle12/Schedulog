@@ -34,49 +34,58 @@ class RegistrationFragment : DialogFragment() {
 
         // Set click listener for the register button
         binding.rectsignup.setOnClickListener {
-            val username = binding.usernametext.text.toString().trim()
-            val email = binding.emailtext.text.toString().trim()
-            val password = binding.passtext.text.toString().trim()
-            val passconf = binding.passconftext.text.toString().trim()
+            try {
+                val username = binding.usernametext.text.toString().trim()
+                val email = binding.emailtext.text.toString().trim()
+                val password = binding.passtext.text.toString().trim()
+                val passconf = binding.passconftext.text.toString().trim()
 
-            if(password == passconf) {
-                mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(requireActivity()) { task ->
-                        if (task.isSuccessful) {
-                            val user: FirebaseUser? = mAuth.currentUser
+                if(password == passconf) {
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(requireActivity()) { task ->
+                            if (task.isSuccessful) {
+                                val user: FirebaseUser? = mAuth.currentUser
 
-                            // Create a UserData object with the user's information
-                            val userData = UserData(username, email)
+                                // Create a UserData object with the user's information
+                                val userData = UserData(username, email)
 
-                            // Write user registration data to the Realtime Database
-                            testWrite(userData)
-                            Toast.makeText(
-                                requireContext(),
-                                binding.usernametext.text.toString() + "\n"
-                                + binding.emailtext.text.toString() + "\n"
-                                + "has been successfully registered",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            dismiss()
-                            val loginFragment = LoginFragment()
-                            loginFragment.show(requireFragmentManager(), "LoginFragment")
-                            //displayUserData(username, email)
+                                // Write user registration data to the Realtime Database
+                                testWrite(userData)
+                                Toast.makeText(
+                                    requireContext(),
+                                    binding.usernametext.text.toString() + "\n"
+                                            + binding.emailtext.text.toString() + "\n"
+                                            + "has been successfully registered",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                dismiss()
+                                val loginFragment = LoginFragment()
+                                loginFragment.show(requireFragmentManager(), "LoginFragment")
+                                //displayUserData(username, email)
 
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "Registration failed: " + task.exception?.message,
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Registration failed: " + task.exception?.message,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
-                    }
-            }else{
+                }else{
+                    Toast.makeText(
+                        requireContext(),
+                        "Passwords don't match!!!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }catch (e: IllegalArgumentException){
                 Toast.makeText(
                     requireContext(),
-                    "Passwords don't match!!!",
+                    "Fill in all details!!!",
                     Toast.LENGTH_SHORT
                 ).show()
             }
+
         }
         return binding.root
     }

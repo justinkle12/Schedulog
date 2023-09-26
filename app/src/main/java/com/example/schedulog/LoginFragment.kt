@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.example.schedulog.databinding.FragmentLoginBinding
@@ -23,9 +24,9 @@ class LoginFragment : DialogFragment() {
         mAuth = FirebaseAuth.getInstance()
 
         // Set click listener for the login button
-        binding.loginButton.setOnClickListener {
-            val usernameOrEmail = binding.editTextUsernameOrEmail.text.toString().trim()
-            val password = binding.editTextPassword.text.toString().trim()
+        binding.rectlogin.setOnClickListener {
+            val usernameOrEmail = binding.useremailtext.text.toString().trim()
+            val password = binding.passtext.text.toString().trim()
 
             mAuth.signInWithEmailAndPassword(usernameOrEmail, password)
                 .addOnCompleteListener(requireActivity()) { task ->
@@ -36,7 +37,11 @@ class LoginFragment : DialogFragment() {
                         dismiss()
                     } else {
                         // Handle login failure, e.g., show an error message.
-                        displayMessage("Login failed: " + task.exception?.message)
+                        Toast.makeText(
+                            requireContext(),
+                            "Login failed: " + task.exception?.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
         }
@@ -44,9 +49,9 @@ class LoginFragment : DialogFragment() {
         return binding.root
     }
 
-    private fun displayMessage(message: String) {
-        binding.displayMessage.text = message
-    }
+    //private fun displayMessage(message: String) {
+        //binding.displayMessage.text = message
+    //}
     override fun onStart() {
         super.onStart()
 

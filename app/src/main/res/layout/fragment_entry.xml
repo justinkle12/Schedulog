@@ -30,10 +30,8 @@
             <ImageView android:id="@+id/image_2"
                 android:src="@drawable/mainbg"
                 android:contentDescription="mainbg"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:scaleType="fitXY"/>
 
             <ImageView android:id="@+id/image_1"

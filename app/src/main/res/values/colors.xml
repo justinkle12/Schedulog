@@ -21,4 +21,7 @@
 
     <color name="_bg__register_color">#FFFFFF</color>
     <color name="bottombar_color">#000000</color>
+
+    <!--  login colors  -->
+    <color name="_bg__login_color">#FFFFFF</color>
 </resources>
