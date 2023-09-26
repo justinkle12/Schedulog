@@ -15,7 +15,7 @@
      *
      */
     -->
-    <RelativeLayout android:id="@+id/register"
+    <ScrollView android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
@@ -71,7 +71,8 @@
                         android:textColor="@color/bottombar_color"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/passtext_string" />
+                        android:hint="@string/passtext_string"
+                        android:inputType="textPassword"/>
 
                 </FrameLayout>
 
@@ -94,7 +95,8 @@
                         android:textColor="@color/bottombar_color"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/passconftext_string" />
+                        android:hint="@string/passconftext_string"
+                        android:inputType="textPassword"/>
 
                 </FrameLayout>
 
@@ -197,5 +199,5 @@
 
         </RelativeLayout>
 
-    </RelativeLayout>
+    </ScrollView>
 </layout>
