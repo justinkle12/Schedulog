@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.Schedulog" parent="Base.Theme.Schedulog" />
+
 </resources>

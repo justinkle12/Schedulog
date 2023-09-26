@@ -28,11 +28,14 @@ class RegistrationFragment : DialogFragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_registration, container, false)
         mAuth = FirebaseAuth.getInstance()
 
+        binding.backarrow.setOnClickListener{
+            dismiss()
+        }
         // Set click listener for the register button
-        binding.registerButton.setOnClickListener {
-            val username = binding.editTextUsername.text.toString().trim()
-            val email = binding.editTextEmail.text.toString().trim()
-            val password = binding.editTextPassword.text.toString().trim()
+        binding.rectsignup.setOnClickListener {
+            val username = binding.usernametext.text.toString().trim()
+            val email = binding.emailtext.text.toString().trim()
+            val password = binding.passtext.text.toString().trim()
 
             mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()) { task ->
@@ -45,7 +48,7 @@ class RegistrationFragment : DialogFragment() {
                         // Write user registration data to the Realtime Database
                         testWrite(userData)
 
-                        displayUserData(username, email)
+                        //displayUserData(username, email)
                     } else {
                         Toast.makeText(
                             requireContext(),
@@ -57,10 +60,10 @@ class RegistrationFragment : DialogFragment() {
         }
         return binding.root
     }
-    private fun displayUserData(username: String, email: String) {
-        binding.displayUsername.text = "Username: $username"
-        binding.displayEmail.text = "Email: $email"
-    }
+    //private fun displayUserData(username: String, email: String) {
+        //binding.usernametext.text = "Username: $username"
+        //binding.emailtext.text = "Email: $email"
+    //}
 
     override fun onStart() {
         super.onStart()
