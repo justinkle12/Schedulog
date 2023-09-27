@@ -46,6 +46,13 @@ class MainActivity : AppCompatActivity() {
                     transaction.addToBackStack(null) // Optional, for back navigation
                     transaction.commit()
                 }
+                R.id.nav_item_3 -> {
+                    val fragment = ScheduleFragment()
+                    val transaction = supportFragmentManager.beginTransaction()
+                    transaction.replace(R.id.fragmentContainer, fragment)
+                    transaction.addToBackStack(null) // Optional, for back navigation
+                    transaction.commit()
+                }
             }
             // Close the drawer
             drawerLayout.closeDrawer(GravityCompat.START)
