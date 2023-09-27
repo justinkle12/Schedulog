@@ -1,5 +1,4 @@
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import timber.log.Timber
 
 class AccountProfileFragment : Fragment() {
 
@@ -97,13 +97,13 @@ class AccountProfileFragment : Fragment() {
     private fun loadAccountUsername() {
         val currentUser = mAuth.currentUser
 
-        Log.d("MyApp", "Current user: $currentUser")
+        Timber.tag(TAG).d("Current user: %s", currentUser)
 
         // Check if the user is authenticated
         if (currentUser != null) {
             val userId = currentUser.uid
 
-            Log.d("MyApp", "User ID: $userId")
+            Timber.tag(TAG).d("User ID: %s", userId)
 
             // Reference to the "users" node in the database
             val usersRef: DatabaseReference = database.reference.child("users")
@@ -115,28 +115,33 @@ class AccountProfileFragment : Fragment() {
                     val username = userData?.get("username") as String?
 
                     if (username != null && userData?.get("email") == currentUser.email) {
-                        Log.d("MyApp", "Username: $username")
+                        Timber.tag(TAG).d("Username: %s", username)
 
                         // Set the retrieved username in the binding
                         binding.accountName.text = username
                     }
                 }
 
-                override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                override fun onChildChanged(
+                    dataSnapshot: DataSnapshot,
+                    previousChildName: String?
+                ) {
                     // Handle changes if needed
                 }
 
                 override fun onChildRemoved(dataSnapshot: DataSnapshot) {
                     // Handle removal if needed
+                    Timber.tag(TAG).i("child removed: %s", dataSnapshot)
                 }
 
                 override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
                     // Handle movement if needed
+                    Timber.tag(TAG).i("child moved: %s to %s", dataSnapshot, previousChildName) //uncertain
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
                     // Handle errors if needed
-                    Log.e("MyApp", "Database error: $databaseError")
+                    Timber.tag(TAG).e("Database error: %s", databaseError)
                 }
             }
 
@@ -145,7 +150,9 @@ class AccountProfileFragment : Fragment() {
         }
     }
 
-
+    companion object {
+        private const val TAG = "AccountProfileFragment"
+    }
 
 
 }
