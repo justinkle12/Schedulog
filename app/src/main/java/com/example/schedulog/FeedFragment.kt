@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,9 +36,14 @@ class FeedFragment : Fragment() {
         binding.postGrid.layoutManager = GridLayoutManager(context, 1)
 
         // Initialize variables
-        val postItemList = ArrayList<PostItem>()
+        var postItemList = ArrayList<PostItem>()
         val postListAdapter = PostListAdapter(postItemList)
         val recyclerView = binding.postGrid
+        val searchView = binding.actionSearch
+        searchView.clearFocus()
+        //Prefilled search
+        searchView.queryHint = "Search Events Here"
+
 
         // Set RecyclerView Post adapter
         recyclerView.adapter = postListAdapter
@@ -69,16 +76,54 @@ class FeedFragment : Fragment() {
                 postListAdapter.notifyDataSetChanged()
             }
 
+
             override fun onCancelled(databaseError: DatabaseError) {
                 // Handle database errors here
                 Timber.e("%s | Error reading post | %s", TAG, databaseError.toString())
             }
         }
+        //filters list and then
+        fun filterList(newText: String?) {
+            var emptyList = ArrayList<PostItem>()
+            var filteredList = ArrayList<PostItem>()
+            for(item in postItemList){
+                if(item.description.lowercase().contains(newText.toString().lowercase())){
+                    filteredList.add(item)
+                }
+            }
+            if(filteredList.isEmpty()){
+                Toast.makeText(requireContext(),"No Data Found",Toast.LENGTH_SHORT).show()
+                Timber.e("Empty!")
+                postListAdapter.setFilteredList(emptyList)
+            }else{
+                postListAdapter.setFilteredList(filteredList)
+            }
+        }
+        //listens to user input change or submit
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                filterList(newText)
+
+                return false
+            }
+        })
+
+
+
 
         postsRef.addValueEventListener(postListener)
 
         return binding.root
     }
+
+
+
 
     companion object {
         private const val TAG = "FeedFragment"

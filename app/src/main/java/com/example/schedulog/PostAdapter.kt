@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.schedulog.databinding.PostItemBinding
@@ -21,7 +22,7 @@ class PostViewHolder (
 }
 
 class PostListAdapter(
-    private val postItems: List<PostItem>
+    private var postItems: List<PostItem>
 ) : RecyclerView.Adapter<PostViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -40,6 +41,15 @@ class PostListAdapter(
         Timber.tag("PostListAdapter").i(postItems.toString())
         val post = postItems[position]
         holder.bind(post)
+
+
+
+
+    }
+
+    fun setFilteredList(filteredList: ArrayList<PostItem>) {
+        this.postItems = filteredList
+        notifyDataSetChanged()
     }
 }
 
