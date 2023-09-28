@@ -1,6 +1,8 @@
 package com.example.schedulog
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,6 +64,22 @@ class RegistrationFragment : DialogFragment() {
                                 val loginFragment = LoginFragment()
                                 loginFragment.show(requireFragmentManager(), "LoginFragment")
                                 //displayUserData(username, email)
+
+                                //Send user a verification email
+                                mAuth.currentUser?.sendEmailVerification()
+                                    ?.addOnCompleteListener { task ->
+                                        if (task.isSuccessful) {
+                                            Log.d(TAG, "Email sent.")
+
+                                        }else(Log.d(TAG,"Email has not been sent."))
+
+                                    }
+
+
+
+
+                                //displayUserData(username, email)
+
 
                             } else {
                                 Toast.makeText(

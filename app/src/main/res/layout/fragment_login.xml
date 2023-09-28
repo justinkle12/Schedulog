@@ -129,7 +129,7 @@
                 android:shadowColor="@color/black"/>
 
             <ImageView
-                android:id="@+id/vector"
+                android:id="@+id/backarrow"
                 android:src="@drawable/backarrow"
                 android:contentDescription="vector"
                 android:layout_marginStart="22.71dp"

@@ -23,6 +23,11 @@ class LoginFragment : DialogFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         mAuth = FirebaseAuth.getInstance()
 
+
+        binding.backarrow.setOnClickListener{
+            dismiss()
+        }
+
         // Set click listener for the login button
         binding.rectlogin.setOnClickListener {
             val usernameOrEmail = binding.useremailtext.text.toString().trim()
@@ -31,10 +36,21 @@ class LoginFragment : DialogFragment() {
             mAuth.signInWithEmailAndPassword(usernameOrEmail, password)
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
-                        // Navigate to the FeedFragment upon successful login
-                        navigateToFeedFragment()
-                        //MainActivity().handleDrawerLocking(true)
-                        dismiss()
+                        //testing purposes only, uncomment to bypass authentication
+                        //dismiss()
+                        //navigateToFeedFragment()
+                        if(mAuth.currentUser?.isEmailVerified == true){
+
+                            // Navigate to the FeedFragment upon successful login and user is verified
+                            dismiss()
+                            navigateToFeedFragment()
+
+                        }else {
+
+                            dismiss()
+                            navigateToAuthFragment()
+
+                        }
                     } else {
                         // Handle login failure, e.g., show an error message.
                         Toast.makeText(
@@ -68,6 +84,14 @@ class LoginFragment : DialogFragment() {
         val feedFragment = FeedFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, feedFragment)
+        transaction.addToBackStack(null) // If you want to add this transaction to the back stack
+        transaction.commit()
+    }
+
+    private fun navigateToAuthFragment() {
+        val authFragment = AuthFragment()
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainer, authFragment)
         transaction.addToBackStack(null) // If you want to add this transaction to the back stack
         transaction.commit()
     }
