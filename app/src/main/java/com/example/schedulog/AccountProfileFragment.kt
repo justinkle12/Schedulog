@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.schedulog.EntryFragment
 import com.example.schedulog.R
+import com.example.schedulog.RateUserDialogFragment
 import com.example.schedulog.databinding.FragmentAccountProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
@@ -47,6 +48,13 @@ class AccountProfileFragment : Fragment() {
         deleteAccountButton.setOnClickListener {
             // Call the delete account function
             deleteAccount()
+        }
+
+        //Bind Write a Review button and set its click listener
+        val writeReviewButton = binding.buttonWriteReview
+        writeReviewButton.setOnClickListener {
+            val dialogFragment = RateUserDialogFragment.newInstance()
+            dialogFragment.show(parentFragmentManager, "RateUserDialogFragment")
         }
 
         return view

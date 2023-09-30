@@ -5,4 +5,7 @@
     <string name="hello_blank_fragment">Blank Fragment</string>
     <string name="button_select_picture">Select Picture</string>
     <string name="button_load_picture">Load Picture</string>
+    <string name="button_write_a_review">Write a Review</string>
+    <string name="write_a_review_hint">Write a review...</string>
+    <string name="submit">Submit</string>
 </resources>

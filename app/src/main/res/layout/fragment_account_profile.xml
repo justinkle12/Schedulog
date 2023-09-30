@@ -50,4 +50,11 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="-275dp" />
 
+    <Button
+        android:id="@+id/buttonWriteReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/button_write_a_review" />
+
 </FrameLayout>
