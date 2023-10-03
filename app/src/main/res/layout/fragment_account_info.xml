@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="16dp" android:visibility="visible">
+    <!--  User Icon  -->
+    <ImageView android:id="@+id/imageViewUserIcon" android:layout_width="96dp" android:layout_height="96dp" android:layout_gravity="center" android:layout_marginBottom="16dp" android:src="@drawable/user_profile"/>
+    <!--  User Name  -->
+    <TextView android:id="@+id/textViewUsername" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:layout_marginBottom="16dp" android:text="\@john.doe@example.com" android:textSize="18sp" android:textStyle="bold"/>
+    <!--  Username  -->
+    <TextView android:id="@+id/textViewDOB" android:layout_width="300dp" android:layout_height="wrap_content" android:layout_gravity="center" android:layout_marginBottom="24dp" android:text="January 1, 1990" android:textAlignment="center" android:textSize="18sp" android:textStyle="bold"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="24dp" android:orientation="horizontal">
+        <TextView android:id="@+id/textViewUsernameLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Username: " android:textSize="16sp" android:textStyle="bold"/>
+        <EditText android:id="@+id/editTextUsername" android:layout_width="57dp" android:layout_height="wrap_content" android:layout_weight="1" android:background="@android:color/transparent" android:text="john.doe@example.com" android:textSize="16sp"/>
+        <Button android:id="@+id/btnEditUsername" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Edit"/>
+    </LinearLayout>
+    <!--  User Date of Birth  -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp" android:orientation="horizontal">
+        <TextView android:id="@+id/textViewDOBLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Date of Birth: " android:textSize="16sp" android:textStyle="bold"/>
+        <EditText android:id="@+id/editTextDOB" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:background="@android:color/transparent" android:text="January 1, 1990" android:textSize="16sp" android:visibility="visible"/>
+        <Button android:id="@+id/btnEditDOB" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Edit"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/Donebutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Done" />
+
+    <Button
+        android:id="@+id/DeleteAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Account" />
+</LinearLayout>

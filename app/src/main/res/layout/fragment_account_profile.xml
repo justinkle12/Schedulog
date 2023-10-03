@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:elevation="4dp"
+    android:orientation="vertical"
+    tools:context=".AccountProfileFragment">
 
-    <Button
-        android:id="@+id/logoutButton"
+
+    <!-- User Icon -->
+    <ImageView
+        android:id="@+id/imageViewUserIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/user_profile" />
+
+    <!-- User Name -->
+    <TextView
+        android:id="@+id/textViewUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="275dp"
+        android:layout_marginBottom="16dp"
+        android:text="\@John Doe"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Buttons -->
+
+    <Button
+        android:id="@+id/btnMySchedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="My Schedule" />
+
+    <Button
+        android:id="@+id/btnManageAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Manage Account Info" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Logout" />
 
-    <Button
-        android:id="@+id/deleteAccountButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="175dp"
-        android:text="Delete Account" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:text="@string/hello_blank_fragment" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="-200dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/elon" />
-
-    <TextView
-        android:id="@+id/accountName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="-275dp" />
-
-</FrameLayout>
+</LinearLayout>

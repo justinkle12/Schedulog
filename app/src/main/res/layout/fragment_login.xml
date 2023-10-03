@@ -1,52 +1,142 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/login"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".MainActivity">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:layout_gravity="center"
-            android:textSize="24sp"
-            android:layout_marginTop="20dp"/>
-
-        <EditText
-            android:id="@+id/editTextUsernameOrEmail"
+        <RelativeLayout
+            android:id="@+id/content_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Username or Email"
-            android:layout_marginTop="20dp"
-            android:padding="8dp"/>
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/editTextPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="8dp"/>
+            <View
+                android:id="@+id/_bg__login"
+                android:background="@drawable/_bg__login_shape"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:layout_marginTop="20dp"/>
+            <ImageView
+                android:id="@+id/imagebg"
+                android:src="@drawable/imagebg"
+                android:contentDescription="imagebg"
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/displayMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"/>
+            <View
+                android:id="@+id/bottombar"
+                android:background="@drawable/bottombar_shape"
+                android:layout_width="135dp"
+                android:layout_height="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="832dp" />
 
-    </LinearLayout>
-</layout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <!-- Username/Email FrameLayout -->
+                <FrameLayout
+                    android:layout_width="343dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="295dp">
+
+                    <View
+                        android:id="@+id/rectuseremail"
+                        android:background="@drawable/username_emailbar_shape"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:id="@+id/useremailtext"
+                        android:textSize="15sp"
+                        android:textColor="@color/bottombar_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/username_email_string" />
+
+                </FrameLayout>
+
+                <!-- Password FrameLayout -->
+                <FrameLayout
+                    android:layout_width="343dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="370dp">
+
+                    <View
+                        android:id="@+id/rectpass"
+                        android:background="@drawable/passwordbar_shape"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:id="@+id/passtext"
+                        android:textSize="15sp"
+                        android:textColor="@color/bottombar_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/passwordhint_string"
+                        android:inputType="textPassword" />
+
+                </FrameLayout>
+
+                <!-- Login Button FrameLayout -->
+                <FrameLayout
+                    android:layout_width="343dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="445dp">
+
+                    <View
+                        android:id="@+id/rectlogin"
+                        android:background="@drawable/loginbuttonbar_shape"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/loginbuttontext"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal|center"
+                        android:gravity="center"
+                        android:textSize="13sp"
+                        android:textColor="@color/_bg__login_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/loginbuttontext_string" />
+
+                </FrameLayout>
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/logintitle"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:textSize="36sp"
+                android:textColor="@color/_bg__login_color"
+                android:layout_width="213dp"
+                android:layout_height="65.6dp"
+                android:layout_marginLeft="87dp"
+                android:layout_marginTop="166dp"
+                android:text="@string/logintitle_string"
+                android:fontFamily="@font/quicksand_variable"
+                android:textStyle="bold"
+                android:shadowColor="@color/black"/>
+
+            <ImageView
+                android:id="@+id/backarrow"
+                android:src="@drawable/backarrow"
+                android:contentDescription="vector"
+                android:layout_marginStart="22.71dp"
+                android:layout_marginTop="88.35dp"
+                android:layout_width="27.34dp"
+                android:layout_height="26.49dp" />
+
+        </RelativeLayout>
+    </ScrollView>
+    </layout>

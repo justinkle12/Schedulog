@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 
 import com.example.schedulog.databinding.FragmentEntryBinding
 
-import com.example.schedulog.RegistrationFragment
-
 data class UserData(val username: String, val email: String)
 
 class EntryFragment : Fragment() {
@@ -21,16 +19,15 @@ class EntryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEntryBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this // Required for LiveData in layouts
 
         // Register button click listener
-        binding.registerButton.setOnClickListener {
+        binding.buttonEk10.setOnClickListener {
             val registrationFragment = RegistrationFragment()
             registrationFragment.show(requireFragmentManager(), "RegistrationFragment")
         }
 
         // Login button click listener
-        binding.loginButton.setOnClickListener {
+        binding.button1.setOnClickListener {
             val loginFragment = LoginFragment()
             loginFragment.show(requireFragmentManager(), "LoginFragment")
         }

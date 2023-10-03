@@ -1,0 +1,803 @@
+{
+  "name": "register",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "sOcIOdzStHKfNSwo9kRLFf",
+    "node": "407:1462",
+    "version": "4222531030",
+    "component-id": "7c29b7bb34a637237e55f9a6bf223aadf4e1ca31"
+  },
+  "default": "Register",
+  "documentation": "I hope this works",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "Login"
+      },
+      {
+        "type": "group",
+        "id": "ScreenHolder"
+      },
+      {
+        "type": "group",
+        "id": "ComponentPass"
+      },
+      {
+        "type": "group",
+        "id": "ComponentPassConf"
+      },
+      {
+        "type": "group",
+        "id": "ComponentEmail"
+      },
+      {
+        "type": "group",
+        "id": "ComponentUser"
+      },
+      {
+        "type": "group",
+        "id": "SignUpButton"
+      },
+      {
+        "type": "text",
+        "id": "RegisterTitle"
+      },
+      {
+        "type": "group",
+        "id": "Buttontrash"
+      },
+      {
+        "type": "image",
+        "id": "ImageBG"
+      },
+      {
+        "type": "image",
+        "id": "image 1"
+      },
+      {
+        "type": "vector",
+        "id": "BottomBar"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 2"
+      },
+      {
+        "type": "text",
+        "id": "registertrash"
+      },
+      {
+        "type": "group",
+        "id": "ButtonScreenHolder"
+      },
+      {
+        "type": "vector",
+        "id": "RectScrerenHolder"
+      },
+      {
+        "type": "text",
+        "id": "next"
+      },
+      {
+        "type": "vector",
+        "id": "RectPass"
+      },
+      {
+        "type": "text",
+        "id": "PassText"
+      },
+      {
+        "type": "vector",
+        "id": "RectPassConf"
+      },
+      {
+        "type": "text",
+        "id": "PassConfText"
+      },
+      {
+        "type": "vector",
+        "id": "RectEmail"
+      },
+      {
+        "type": "text",
+        "id": "EmailText"
+      },
+      {
+        "type": "vector",
+        "id": "RectUser"
+      },
+      {
+        "type": "text",
+        "id": "UsernameText"
+      },
+      {
+        "type": "vector",
+        "id": "RectSignUp"
+      },
+      {
+        "type": "text",
+        "id": "SignUpButtonName"
+      }
+    ],
+    "modes": {
+      "Register": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": "false",
+            "children": [
+              "Login",
+              "ScreenHolder",
+              "ComponentPass",
+              "ComponentPassConf",
+              "ComponentEmail",
+              "ComponentUser",
+              "SignUpButton",
+              "RegisterTitle"
+            ],
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            }
+          },
+          {
+            "id": "Login",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "390.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "844.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Buttontrash",
+              "ImageBG",
+              "image 1",
+              "BottomBar"
+            ],
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            }
+          },
+          {
+            "id": "ScreenHolder",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "390.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "844.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "ButtonScreenHolder"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "ComponentPass",
+            "margin": {
+              "left": "23.0",
+              "top": "422.0",
+              "right": "24.0",
+              "bottom": "370.0"
+            },
+            "stroke-alignment": "center",
+            "is-structured": "false",
+            "children": [
+              "RectPass",
+              "PassText"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "ComponentPassConf",
+            "margin": {
+              "left": "23.0",
+              "top": "487.0",
+              "right": "24.0",
+              "bottom": "305.0"
+            },
+            "stroke-alignment": "center",
+            "is-structured": "false",
+            "children": [
+              "RectPassConf",
+              "PassConfText"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "ComponentEmail",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "23.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "357.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "343.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "52.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "RectEmail",
+              "EmailText"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "ComponentUser",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "23.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "292.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "343.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "52.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "RectUser",
+              "UsernameText"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "SignUpButton",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "23.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "563.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "343.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "52.0"
+              }
+            },
+            "stroke-alignment": "center",
+            "is-structured": "false",
+            "children": [
+              "RectSignUp",
+              "SignUpButtonName"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "RegisterTitle",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "93.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "166.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "204.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "55.0"
+              }
+            },
+            "font-weight": "500.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "Register",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align-vertical": "center",
+            "text-size": "36.0",
+            "letter-spacing": "-0.54",
+            "line-height": "1.25",
+            "typeface": "Quicksand"
+          },
+          {
+            "id": "Buttontrash",
+            "presence": "false",
+            "margin": {
+              "left": "206.0",
+              "top": "396.0",
+              "right": "17.0",
+              "bottom": "396.0"
+            },
+            "stroke-alignment": "center",
+            "is-structured": "false",
+            "children": [
+              "Rectangle 2",
+              "registertrash"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "ImageBG",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "31.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "0.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "image-content": "image_bg.png",
+            "scale": "cover"
+          },
+          {
+            "id": "image 1",
+            "presence": "false",
+            "margin": {
+              "top": "99.0",
+              "bottom": "370.0"
+            },
+            "drop-shadow": {
+              "color": {
+                "alpha": "0.24705882352941178",
+                "hue": "0.0",
+                "saturation": "0.0",
+                "value": "0.0"
+              },
+              "blur": "4.0",
+              "offset-x": "0.0",
+              "offset-y": "4.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "scale": "cover"
+          },
+          {
+            "id": "BottomBar",
+            "margin": {
+              "left": "119.0",
+              "top": "832.0",
+              "right": "136.0",
+              "bottom": "7.0"
+            },
+            "border-radius": "10.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "bottom_bar.svg"
+          },
+          {
+            "id": "Rectangle 2",
+            "border-radius": "6.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            }
+          },
+          {
+            "id": "registertrash",
+            "presence": "false",
+            "margin": {
+              "left": "51.0",
+              "top": "19.0",
+              "right": "51.0",
+              "bottom": "18.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "900.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "register",
+            "overflow": "visible",
+            "text-align-vertical": "center",
+            "text-size": "13.0",
+            "letter-spacing": "0.52",
+            "line-height": "1.171875",
+            "case": "upper"
+          },
+          {
+            "id": "ButtonScreenHolder",
+            "stroke-alignment": "center",
+            "is-structured": "false",
+            "children": [
+              "RectScrerenHolder",
+              "next"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "RectScrerenHolder",
+            "border-radius": "6.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rect_screren_holder.svg"
+          },
+          {
+            "id": "next",
+            "presence": "false",
+            "margin": {
+              "left": "176.8240966796875",
+              "top": "426.6227111816406",
+              "right": "178.1759033203125",
+              "bottom": "402.3772888183594"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "900.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "next",
+            "overflow": "visible",
+            "text-align-vertical": "center",
+            "text-size": "13.0",
+            "letter-spacing": "0.52",
+            "line-height": "1.171875",
+            "case": "upper"
+          },
+          {
+            "id": "RectPass",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rect_pass.svg"
+          },
+          {
+            "id": "PassText",
+            "margin": {
+              "left": "17.0",
+              "top": "17.0",
+              "right": "265.0",
+              "bottom": "17.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "••••••••••••",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-align-vertical": "center",
+            "text-size": "15.0",
+            "line-height": "1.171875"
+          },
+          {
+            "id": "RectPassConf",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rect_pass_conf.svg"
+          },
+          {
+            "id": "PassConfText",
+            "margin": {
+              "left": "17.0",
+              "top": "17.0",
+              "right": "265.0",
+              "bottom": "17.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "••••••••••••",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-align-vertical": "center",
+            "text-size": "15.0",
+            "line-height": "1.171875"
+          },
+          {
+            "id": "RectEmail",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rect_email.svg"
+          },
+          {
+            "id": "EmailText",
+            "margin": {
+              "left": "17.0",
+              "top": "17.0",
+              "right": "177.0",
+              "bottom": "16.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "lee.sin@example.com",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-align-vertical": "center",
+            "text-size": "15.0",
+            "line-height": "1.25",
+            "typeface": "Quicksand"
+          },
+          {
+            "id": "RectUser",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rect_user.svg"
+          },
+          {
+            "id": "UsernameText",
+            "margin": {
+              "left": "17.0",
+              "top": "17.0",
+              "right": "256.0",
+              "bottom": "16.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "username",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-align-vertical": "center",
+            "text-size": "15.0",
+            "line-height": "1.25",
+            "typeface": "Quicksand"
+          },
+          {
+            "id": "RectSignUp",
+            "border-radius": "6.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rect_sign_up.svg"
+          },
+          {
+            "id": "SignUpButtonName",
+            "margin": {
+              "left": "143.28741455078125",
+              "top": "18.0",
+              "right": "145.71258544921875",
+              "bottom": "18.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "Sign Up",
+            "overflow": "visible",
+            "text-align-vertical": "center",
+            "text-size": "13.0",
+            "letter-spacing": "0.52",
+            "line-height": "1.25",
+            "typeface": "Quicksand",
+            "case": "upper"
+          }
+        ]
+      }
+    }
+  },
+  "previews": [
+    {
+      "design": "Register",
+      "size": {
+        "width": 390.0,
+        "height": 844.0
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

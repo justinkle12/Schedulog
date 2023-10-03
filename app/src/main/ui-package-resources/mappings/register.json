@@ -1,0 +1,6 @@
+{
+    "target": "Register",
+    "package": "com.example.schedulog.register",
+    "generateImplementation": true,
+    "generatePreviews": true
+}

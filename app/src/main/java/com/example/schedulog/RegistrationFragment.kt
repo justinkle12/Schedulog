@@ -1,6 +1,8 @@
 package com.example.schedulog
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,39 +30,87 @@ class RegistrationFragment : DialogFragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_registration, container, false)
         mAuth = FirebaseAuth.getInstance()
 
+        binding.backarrow.setOnClickListener{
+            dismiss()
+        }
+
         // Set click listener for the register button
-        binding.registerButton.setOnClickListener {
-            val username = binding.editTextUsername.text.toString().trim()
-            val email = binding.editTextEmail.text.toString().trim()
-            val password = binding.editTextPassword.text.toString().trim()
+        binding.rectsignup.setOnClickListener {
+            try {
+                val username = binding.usernametext.text.toString().trim()
+                val email = binding.emailtext.text.toString().trim()
+                val password = binding.passtext.text.toString().trim()
+                val passconf = binding.passconftext.text.toString().trim()
 
-            mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        val user: FirebaseUser? = mAuth.currentUser
+                if(password == passconf) {
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(requireActivity()) { task ->
+                            if (task.isSuccessful) {
+                                val user: FirebaseUser? = mAuth.currentUser
 
-                        // Create a UserData object with the user's information
-                        val userData = UserData(username, email)
+                                // Create a UserData object with the user's information
+                                val userData = UserData(username, email)
 
-                        // Write user registration data to the Realtime Database
-                        testWrite(userData)
+                                // Write user registration data to the Realtime Database
+                                testWrite(userData)
+                                Toast.makeText(
+                                    requireContext(),
+                                    binding.usernametext.text.toString() + "\n"
+                                            + binding.emailtext.text.toString() + "\n"
+                                            + "has been successfully registered",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                dismiss()
+                                val loginFragment = LoginFragment()
+                                loginFragment.show(requireFragmentManager(), "LoginFragment")
+                                //displayUserData(username, email)
 
-                        displayUserData(username, email)
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Registration failed: " + task.exception?.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                                //Send user a verification email
+                                mAuth.currentUser?.sendEmailVerification()
+                                    ?.addOnCompleteListener { task ->
+                                        if (task.isSuccessful) {
+                                            Log.d(TAG, "Email sent.")
+
+                                        }else(Log.d(TAG,"Email has not been sent."))
+
+                                    }
+
+
+
+
+                                //displayUserData(username, email)
+
+
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Registration failed: " + task.exception?.message,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                }else{
+                    Toast.makeText(
+                        requireContext(),
+                        "Passwords don't match!!!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
+            }catch (e: IllegalArgumentException){
+                Toast.makeText(
+                    requireContext(),
+                    "Fill in all details!!!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
         }
         return binding.root
     }
-    private fun displayUserData(username: String, email: String) {
-        binding.displayUsername.text = "Username: $username"
-        binding.displayEmail.text = "Email: $email"
-    }
+    //private fun displayUserData(username: String, email: String) {
+        //binding.usernametext.text = "Username: $username"
+        //binding.emailtext.text = "Email: $email"
+    //}
 
     override fun onStart() {
         super.onStart()

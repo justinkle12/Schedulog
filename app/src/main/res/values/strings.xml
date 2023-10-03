@@ -2,6 +2,26 @@
     <string name="app_name">Schedulog</string>
     <string name="button_test_write">Test Write</string>
     <string name="button_test_read">Test Read</string>
+
+    <!-- menu strings -->
+
+    <string name="ek_img_content">ExportKit Image</string>
+    <string name="log_in_string">LOG IN</string>
+    <string name="register_string">REGISTER</string>
+    <!-- register strings -->
+
+    <string name="passtext_string">Password</string>
+    <string name="passconftext_string">Confirm Password</string>
+    <string name="emailtext_string">Email</string>
+    <string name="usernametext_string">Username</string>
+    <string name="signupbuttonname_string">SIGN UP</string>
+    <string name="registertitle_string">Register</string>
+
+    <!--  login strings  -->
+    <string name="passwordhint_string">Password</string>
+    <string name="username_email_string">Username/Email</string>
+    <string name="loginbuttontext_string">LOGIN</string>
+    <string name="logintitle_string">Login</string>
     <string name="hello_blank_fragment">Blank Fragment</string>
     <string name="button_select_picture">Select Picture</string>
     <string name="button_load_picture">Load Picture</string>

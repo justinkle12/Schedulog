@@ -1,6 +1,6 @@
 package com.example.schedulog
 
-import AccountProfileFragment
+import com.example.schedulog.AccountProfileFragment
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat

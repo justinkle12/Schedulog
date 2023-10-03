@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.example.schedulog.databinding.FragmentLoginBinding
@@ -22,21 +23,41 @@ class LoginFragment : DialogFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         mAuth = FirebaseAuth.getInstance()
 
+
+        binding.backarrow.setOnClickListener{
+            dismiss()
+        }
+
         // Set click listener for the login button
-        binding.loginButton.setOnClickListener {
-            val usernameOrEmail = binding.editTextUsernameOrEmail.text.toString().trim()
-            val password = binding.editTextPassword.text.toString().trim()
+        binding.rectlogin.setOnClickListener {
+            val usernameOrEmail = binding.useremailtext.text.toString().trim()
+            val password = binding.passtext.text.toString().trim()
 
             mAuth.signInWithEmailAndPassword(usernameOrEmail, password)
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
-                        // Navigate to the FeedFragment upon successful login
-                        navigateToFeedFragment()
-                        //MainActivity().handleDrawerLocking(true)
-                        dismiss()
+                        //testing purposes only, uncomment to bypass authentication
+                        //dismiss()
+                        //navigateToFeedFragment()
+                        if(mAuth.currentUser?.isEmailVerified == true){
+
+                            // Navigate to the FeedFragment upon successful login and user is verified
+                            dismiss()
+                            navigateToFeedFragment()
+
+                        }else {
+
+                            dismiss()
+                            navigateToAuthFragment()
+
+                        }
                     } else {
                         // Handle login failure, e.g., show an error message.
-                        displayMessage("Login failed: " + task.exception?.message)
+                        Toast.makeText(
+                            requireContext(),
+                            "Login failed: " + task.exception?.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
         }
@@ -44,9 +65,9 @@ class LoginFragment : DialogFragment() {
         return binding.root
     }
 
-    private fun displayMessage(message: String) {
-        binding.displayMessage.text = message
-    }
+    //private fun displayMessage(message: String) {
+        //binding.displayMessage.text = message
+    //}
     override fun onStart() {
         super.onStart()
 
@@ -63,6 +84,14 @@ class LoginFragment : DialogFragment() {
         val feedFragment = FeedFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, feedFragment)
+        transaction.addToBackStack(null) // If you want to add this transaction to the back stack
+        transaction.commit()
+    }
+
+    private fun navigateToAuthFragment() {
+        val authFragment = AuthFragment()
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainer, authFragment)
         transaction.addToBackStack(null) // If you want to add this transaction to the back stack
         transaction.commit()
     }
