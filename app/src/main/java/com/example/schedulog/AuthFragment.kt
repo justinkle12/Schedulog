@@ -10,12 +10,11 @@ import com.example.schedulog.databinding.FragmentLoginBinding
 
 import com.google.firebase.auth.FirebaseAuth
 
-class  AuthFragment : DialogFragment() {
+class AuthFragment : DialogFragment() {
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var binding: FragmentAuthBinding
 
-    //creates a view using a binding with our auth_fragment xml
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,12 +23,12 @@ class  AuthFragment : DialogFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_auth, container, false)
         mAuth = FirebaseAuth.getInstance()
 
-        // Set click listener for the auth view back to login button
+        // Set click listener for the login button
         binding.authButton.setOnClickListener {
 
-            //return user back to login fragment
+                //return user back to login fragment
 
-            navigateToLoginFragment()
+                navigateToLoginFragment()
 
         }
 
