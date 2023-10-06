@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import timber.log.Timber
 
 class AccountProfileFragment : Fragment() {
@@ -35,6 +36,9 @@ class AccountProfileFragment : Fragment() {
 
         // Load and display the current user's account username
         loadAccountUsername()
+
+        // Load and display the rating for the current user
+        loadAccountRating()
 
         // Find the logout button and set its click listener
         val logoutButton = binding.logoutButton
@@ -156,6 +160,45 @@ class AccountProfileFragment : Fragment() {
             // Add the ChildEventListener to the "users" node
             usersRef.addChildEventListener(childEventListener)
         }
+    }
+
+    private fun loadAccountRating(){
+        val ratedUserId = "bryant88" //TODO Replace with the userId with rated user
+        val ratingsRef = FirebaseDatabase.getInstance().getReference("user_ratings/$ratedUserId")
+
+        ratingsRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val ratings = mutableListOf<Float>()
+
+                // Iterate and add the rating value given to the rated user
+                for (ratingSnapshot in dataSnapshot.children) {
+                    val rating = ratingSnapshot.child("rating").getValue(Float::class.java)
+                    rating?.let {
+                        ratings.add(it)
+                    }
+                }
+
+                // Show list of rating values in logcat
+                Timber.tag(TAG).d(ratings.toString())
+
+                // Calculate the average rating
+                if (ratings.isNotEmpty()) {
+                    val averageRating = ratings.average()
+                    val averageRatingTextView = String.format("%.2f", averageRating)
+                    binding.textValueRating.text = averageRatingTextView
+                    binding.ratedUserBar.rating = averageRating.toFloat()
+                    Timber.tag(TAG).i("loadAccountRating | %s rating: %s", ratedUserId, averageRatingTextView)
+                } else {
+                    // Handle the case where there are no ratings
+                    Timber.tag(TAG).i("loadAccountRating | %s has no ratings.", ratedUserId)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle database error
+                Timber.tag(TAG).e("Database error: %s", databaseError)
+            }
+        })
     }
 
     companion object {
