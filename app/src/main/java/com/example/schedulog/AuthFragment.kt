@@ -9,6 +9,7 @@ import com.example.schedulog.databinding.FragmentAuthBinding
 import com.example.schedulog.databinding.FragmentLoginBinding
 
 import com.google.firebase.auth.FirebaseAuth
+import timber.log.Timber
 
 class AuthFragment : DialogFragment() {
 
@@ -27,7 +28,6 @@ class AuthFragment : DialogFragment() {
         binding.authButton.setOnClickListener {
 
                 //return user back to login fragment
-
                 navigateToLoginFragment()
 
         }
@@ -38,6 +38,7 @@ class AuthFragment : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
+        Timber.tag(TAG).i("onStart called")
 
         // Adjust the dialog size here
         val dialog = dialog
@@ -56,7 +57,8 @@ class AuthFragment : DialogFragment() {
         transaction.commit()
     }
 
-
-
+    companion object {
+        private const val TAG = "AuthFragment"
+    }
 
 }

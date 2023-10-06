@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.example.schedulog.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import timber.log.Timber
 
 class LoginFragment : DialogFragment() {
 
@@ -42,6 +43,7 @@ class LoginFragment : DialogFragment() {
                     } else {
                         // Handle login failure, e.g., show an error message.
                         displayMessage("Login failed: " + task.exception?.message)
+                        Timber.tag(TAG).e("Login failed: %s", task.exception?.message)
                     }
                 }
         }
@@ -54,6 +56,7 @@ class LoginFragment : DialogFragment() {
     }
     override fun onStart() {
         super.onStart()
+        Timber.tag(TAG).i("onStart called")
 
         // Adjust the dialog size here
         val dialog = dialog
@@ -80,5 +83,8 @@ class LoginFragment : DialogFragment() {
         transaction.commit()
     }
 
+    companion object {
+        private const val TAG = "LoginFragment"
+    }
 
 }

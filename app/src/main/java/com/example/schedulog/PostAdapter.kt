@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.example.schedulog.databinding.PostItemBinding
 import timber.log.Timber
 
+/* This class is responsible for holding onto an instance of the view and
+ * binding the PostItem(post_item.xml) to the RecyclerView(fragment_feed.xml). */
 class PostViewHolder (
     private val binding: PostItemBinding
 ) : RecyclerView.ViewHolder(binding.root){
@@ -20,6 +22,9 @@ class PostViewHolder (
     }
 }
 
+
+/* This class is responsible for providing the PostViewHolder instances with a PostItem.
+ * Also responsible for the communicating between RecyclerView and data. */
 class PostListAdapter(
     private val postItems: List<PostItem>
 ) : RecyclerView.Adapter<PostViewHolder>() {
