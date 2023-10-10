@@ -51,6 +51,43 @@
         android:text="Logout" />
 
     <Button
+        android:id="@+id/buttonWriteReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/button_write_a_review" />
+
+    <TextView
+        android:id="@+id/textRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/text_rating"
+        android:translationX="-10dp"
+        android:translationY="45dp" />
+
+    <TextView
+        android:id="@+id/textValueRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/text_value_rating"
+        android:translationX="45dp"
+        android:translationY="25dp" />
+
+    <RatingBar
+        android:id="@+id/ratedUserBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:filterTouchesWhenObscured="false"
+        android:focusableInTouchMode="false"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:stepSize=".01"
+        android:translationY="25dp" />
+
+    <Button
         android:id="@+id/deleteAccountButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,52 +112,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="-200dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/elon" />
-
-    <TextView
-        android:id="@+id/accountName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="-275dp" />
-
-    <Button
-        android:id="@+id/buttonWriteReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/button_write_a_review" />
-
-    <TextView
-        android:id="@+id/textRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/text_rating"
-        android:translationX="-10dp"
-        android:translationY="40dp" />
-
-    <TextView
-        android:id="@+id/textValueRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/text_value_rating"
-        android:translationX="45dp"
-        android:translationY="40dp" />
-
-    <RatingBar
-        android:id="@+id/ratedUserBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:filterTouchesWhenObscured="false"
-        android:focusableInTouchMode="false"
-        android:isIndicator="true"
-        android:numStars="5"
-        android:stepSize=".01"
-        android:translationY="75dp" />
+        android:src="@drawable/user_profile" />
 
 </LinearLayout>

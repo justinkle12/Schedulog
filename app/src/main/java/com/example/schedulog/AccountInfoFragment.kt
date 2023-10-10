@@ -52,8 +52,6 @@ class AccountInfoFragment : DialogFragment() {
             deleteAccount()
         }
 
-
-
         return view
     }
 
