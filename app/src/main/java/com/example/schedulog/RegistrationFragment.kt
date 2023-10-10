@@ -14,6 +14,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.example.schedulog.EntryFragment
+import com.google.firebase.auth.ktx.auth
+import timber.log.Timber
 
 
 class RegistrationFragment : DialogFragment() {
@@ -69,14 +72,11 @@ class RegistrationFragment : DialogFragment() {
                                 mAuth.currentUser?.sendEmailVerification()
                                     ?.addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
-                                            Log.d(TAG, "Email sent.")
+                                            Timber.tag(TAG).d("Email sent.")
 
-                                        }else(Log.d(TAG,"Email has not been sent."))
+                                        }else (Timber.tag(TAG).d("Email has not been sent."))
 
                                     }
-
-
-
 
                                 //displayUserData(username, email)
 
@@ -137,5 +137,9 @@ class RegistrationFragment : DialogFragment() {
         if (userId != null) {
             usersRef.child(userId).setValue(userData)
         }
+    }
+
+    companion object {
+        private const val TAG = "RegistrationFragment"
     }
 }
