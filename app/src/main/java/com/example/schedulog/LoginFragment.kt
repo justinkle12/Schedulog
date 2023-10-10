@@ -85,7 +85,7 @@ class LoginFragment : DialogFragment() {
     }
 
     private fun navigateToFeedFragment() {
-        val feedFragment = FeedFragment()
+        val feedFragment = FeedAndCalendarFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, feedFragment)
         transaction.addToBackStack(null) // If you want to add this transaction to the back stack
