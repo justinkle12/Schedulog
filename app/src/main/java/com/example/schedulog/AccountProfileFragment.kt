@@ -21,6 +21,8 @@ class AccountProfileFragment : DialogFragment() {
     private lateinit var binding: FragmentAccountProfileBinding
     private lateinit var mAuth: FirebaseAuth
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,14 +42,14 @@ class AccountProfileFragment : DialogFragment() {
         loadAccountRating()
 
         // Find the logout button and set its click listener
-        val logoutButton = binding.btnLogout
+        val logoutButton = binding.logoutButtonBtn
         logoutButton.setOnClickListener {
             // Call the logout function
             logoutUser()
         }
 
         //Find the Manage account info button and set its click listener
-        val accountInfoButton = binding.btnManageAccount
+        val accountInfoButton = binding.manageAccButtonBtn
         accountInfoButton.setOnClickListener {
             // Call the logout function
             navigateUserToAccountInfo()
@@ -58,6 +60,12 @@ class AccountProfileFragment : DialogFragment() {
         writeReviewButton.setOnClickListener {
             val dialogFragment = RateUserDialogFragment.newInstance()
             dialogFragment.show(parentFragmentManager, "RateUserDialogFragment")
+        }
+
+        fetchCurrentUserUsername { username ->
+            // Use the 'username' in your UI or perform any other actions
+            val userNameTextView = binding.username
+            userNameTextView.text = username
         }
 
         return view
@@ -108,7 +116,7 @@ class AccountProfileFragment : DialogFragment() {
                         Timber.tag(TAG).d("Username: %s", username)
 
                         // Set the retrieved username in the binding
-                        binding.textViewUsername.text = username
+                        binding.username.text = username
                     }
                 }
 
@@ -140,6 +148,35 @@ class AccountProfileFragment : DialogFragment() {
         }
     }
 
+    // Function to fetch the current user's username
+    fun fetchCurrentUserUsername(onUsernameFetched: (String) -> Unit) {
+        // Get the current user's UID
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val uid = currentUser?.uid
+
+        // Create a reference to the Firebase Realtime Database
+        val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference()
+
+        // Assuming you have a "users" node and under it, UID and "username" child
+        if (uid != null) {
+            val userReference: DatabaseReference = databaseReference.child("users").child(uid)
+            val usernameReference: DatabaseReference = userReference.child("username")
+
+            // Add a ValueEventListener to fetch the username
+            usernameReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val username = dataSnapshot.value.toString()
+
+                    // Pass the username to the callback function
+                    onUsernameFetched(username)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle any errors here, if necessary
+                }
+            })
+        }
+    }
     private fun loadAccountRating(){
         val ratedUserId = "bryant88" //TODO Replace with the userId with rated user
         val ratingsRef = FirebaseDatabase.getInstance().getReference("user_ratings/$ratedUserId")

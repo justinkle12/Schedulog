@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
 
     <!-- menu colors -->
 
@@ -24,4 +25,15 @@
 
     <!--  login colors  -->
     <color name="_bg__login_color">#FFFFFF</color>
+
+    <!--  create_event colors  -->
+    <color name="_bg__create_event_color">#FFFFFF</color>
+    <color name="topbarline_color">#7B7B7B</color>
+    <color name="createeventtitle_color">#000000</color>
+    <color name="createeventrect_color">#FF3737</color>
+
+    <!--  accountprofile colors  -->
+    <color name="_bg__accountprofile_color">#FFFFFF</color>
+    <color name="_bg__logout_button_ek1_color">#000000</color>
+    <color name="username_color">#8B8B8B</color>
 </resources>

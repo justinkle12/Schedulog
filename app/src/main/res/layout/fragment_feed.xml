@@ -1,7 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/post_grid"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</androidx.recyclerview.widget.RecyclerView>
+
+    <!-- Include your RelativeLayout with EditText here -->
+    <RelativeLayout android:id="@+id/content_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <View   android:id="@+id/_bg__create_event"
+            android:background="@drawable/_bg__create_event_shape"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_width="390dp"
+            android:layout_height="844dp" />
+
+        <View   android:id="@+id/topbarline"
+            android:background="@drawable/topbarline_shape"
+            android:alpha="0.36000001430511"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="78dp"
+            android:layout_width="390dp"
+            android:layout_height="1dp" />
+
+        <TextView android:id="@+id/event_title"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal|center"
+            android:gravity="center"
+            android:textSize="26sp"
+            android:textColor="@color/createeventtitle_color"
+            android:layout_marginLeft="68dp"
+            android:layout_marginTop="23dp"
+            android:layout_width="253dp"
+            android:layout_height="73.6dp"
+            android:hint="Feed" />
+
+        <ImageView android:id="@+id/_sidebarbutton"
+            android:src="@drawable/_sidebarbutton"
+            android:contentDescription="_sidebarbutton"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="40dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp" />
+
+        <ImageView
+            android:id="@+id/sidebarbutton2"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="340dp"
+            android:layout_marginTop="40dp"
+            android:contentDescription="_sidebarbutton"
+            android:src="@drawable/_sidebarbutton" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="310dp"
+            android:layout_marginTop="10dp"
+            android:text="Create Event\n'Testing Button'" />
+        <!-- Your RecyclerView -->
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/post_grid"
+            android:layout_marginTop="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </RelativeLayout>
+</LinearLayout>

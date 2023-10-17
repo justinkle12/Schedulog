@@ -25,6 +25,20 @@
     <string name="hello_blank_fragment">Blank Fragment</string>
     <string name="button_select_picture">Select Picture</string>
     <string name="button_load_picture">Load Picture</string>
+
+    <!--  create_event strings  -->
+    <string name="createeventtitle_string">Create Event</string>
+    <string name="eventtitletext_string">Name of event</string>
+    <string name="eventstartendtext_string">Start time - End time</string>
+    <string name="eventdatetext_string">Date of event</string>
+    <string name="eventdesctext_string">Description of event</string>
+    <string name="createeventtext_string">create event</string>
+
+    <!--  accountprofile strings  -->
+    <string name="logout_text_string">Logout</string>
+    <string name="manage_acc_text_string">Manage Account Info</string>
+    <string name="user_first_last_name_string">Firstname Lastname</string>
+    <string name="username_string">"@username"</string>
     <string name="button_write_a_review">Write a Review</string>
     <string name="write_a_review_hint">Write a review...</string>
     <string name="submit">Submit</string>

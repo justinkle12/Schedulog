@@ -55,7 +55,7 @@ class RegistrationFragment : DialogFragment() {
                                 val userData = UserData(username, email)
 
                                 // Write user registration data to the Realtime Database
-                                testWrite(userData)
+                                registerUser(userData)
                                 Toast.makeText(
                                     requireContext(),
                                     binding.usernametext.text.toString() + "\n"
@@ -125,21 +125,26 @@ class RegistrationFragment : DialogFragment() {
     }
 
     // ... Rest of your code
-    fun testWrite(userData: com.example.schedulog.UserData) {
-        // Write user registration data to the database
-        val database = Firebase.database
-        val usersRef = database.getReference("users") // "users" is the node where user information will be stored
+    fun registerUser(userData: com.example.schedulog.UserData) {
+        // Get the current user from Firebase Authentication
+        val currentUser = FirebaseAuth.getInstance().currentUser
 
-        // Create a unique key for the user
-        val userId = usersRef.push().key
+        if (currentUser != null) {
+            // Write user registration data to the database using the user's UID
+            val database = Firebase.database
+            val usersRef = database.getReference("users") // "users" is the node
+            // user information will be stored
 
-        // Use the unique key to set the user's data in the database
-        if (userId != null) {
-            usersRef.child(userId).setValue(userData)
+            // Use the user's UID to set the user's data in the database
+            usersRef.child(currentUser.uid).setValue(userData)
+        } else {
+            // Handle the case where the current user is null (not authenticated)
+            // You may want to show an error message or take appropriate action
         }
     }
 
     companion object {
         private const val TAG = "RegistrationFragment"
     }
+
 }

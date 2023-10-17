@@ -1,5 +1,6 @@
 package com.example.schedulog
 
+import EventOptionsFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,6 +38,12 @@ class FeedFragment : Fragment() {
         val postItemList = ArrayList<PostItem>()
         val postListAdapter = PostListAdapter(postItemList)
         val recyclerView = binding.postGrid
+
+        //Create Event Button
+        binding.sidebarbutton2.setOnClickListener{
+            val eventoptions = EventOptionsFragment()
+            eventoptions.show(requireFragmentManager(), "EventOptionsFragment")
+        }
 
         // Set RecyclerView Post adapter
         recyclerView.adapter = postListAdapter
