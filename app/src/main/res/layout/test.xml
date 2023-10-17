@@ -1,0 +1,212 @@
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="wrap_content" >
+    <!--
+    /*
+     *	This content is generated from the API File Info.
+     *	(Alt+Shift+Ctrl+I).
+     *
+     *	@desc
+     *	@file 		accountprofile
+     *	@date 		Sunday 08th of October 2023 12:49:13 AM
+     *	@title 		Page 1
+     *	@author
+     *	@keywords
+     *	@generator 	Export Kit v1.3.figma
+     *
+     */
+    -->
+
+    <ScrollView android:id="@+id/accountprofile"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
+        <RelativeLayout android:id="@+id/content_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <View   android:id="@+id/_bg__accountprofile"
+                android:background="@drawable/_bg__accountprofile_shape"
+                android:layout_marginStart="-1dp"
+                android:layout_marginTop="-1dp"
+                android:layout_width="390dp"
+                android:layout_height="844dp" />
+
+
+            <Button
+                android:id="@+id/Done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="0dp"
+                android:background="@color/black"
+                android:text="Edit"
+                android:textColor="@color/black" />
+
+            <RelativeLayout
+                android:id="@+id/last_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="378dp">
+
+                <TextView
+                    android:id="@+id/edit_last_name_label"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:text="Last Name: "
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/edit_last_name_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="300dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/black"
+                    android:text="Edit"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/edit_last_name"
+                    android:layout_width="172.6dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="87dp"
+                    android:layout_marginTop="0dp"
+                    android:text="trash"
+                    android:textColor="@color/_bg__logout_button_ek1_color"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/username_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="178dp">
+
+                <TextView
+                    android:id="@+id/username_label"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:text="Username: "
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/email_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="300dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/black"
+                    android:text="Edit"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/email_text"
+                    android:layout_width="172.6dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="85dp"
+                    android:layout_marginTop="0dp"
+                    android:text="trash"
+                    android:textColor="@color/_bg__logout_button_ek1_color"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout android:id="@+id/first_name"
+                android:layout_marginTop="278dp"
+                android:layout_marginStart="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/edit_first_name_label"
+                    android:layout_centerVertical="true"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:text="First Name: "
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <Button   android:id="@+id/edit_first_name_btn"
+                    android:background="@color/black"
+                    android:layout_marginStart="300dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:textColor="@color/black"
+                    />
+
+                <EditText android:id="@+id/edit_first_name"
+                    android:textSize="16sp"
+                    android:textColor="@color/_bg__logout_button_ek1_color"
+                    android:layout_marginLeft="87dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="172.6dp"
+                    android:layout_height="match_parent"
+                    android:text="trash"
+                    />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout android:id="@+id/user_profile"
+                android:layout_marginTop="100dp"
+                android:layout_marginStart="102dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <RelativeLayout android:id="@+id/avatar"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView   android:id="@+id/_bg__avatar_ek1"
+                        android:background="@drawable/_bg__avatar_ek1_shape"
+                        android:src="@drawable/user_profile"
+                        android:layout_marginStart="-1.5dp"
+                        android:layout_marginTop="-1.5dp"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp" />
+
+                </RelativeLayout>
+
+                <TextView android:id="@+id/user_first_last_name"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/_bg__logout_button_ek1_color"
+                    android:layout_marginLeft="67dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="164.6dp"
+                    android:layout_height="24.6dp"
+                    android:text="@string/user_first_last_name_string"
+                    />
+
+                <TextView android:id="@+id/username"
+                    android:textSize="14sp"
+                    android:textColor="@color/username_color"
+                    android:layout_marginLeft="67dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_width="163.4dp"
+                    android:layout_height="22.4dp"
+                    android:text="@string/username_string"
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+</HorizontalScrollView>
