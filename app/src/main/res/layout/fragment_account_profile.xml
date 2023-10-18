@@ -1,235 +1,300 @@
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="wrap_content" >
-    <!--
-    /*
-     *	This content is generated from the API File Info.
-     *	(Alt+Shift+Ctrl+I).
-     *
-     *	@desc
-     *	@file 		accountprofile
-     *	@date 		Sunday 08th of October 2023 12:49:13 AM
-     *	@title 		Page 1
-     *	@author
-     *	@keywords
-     *	@generator 	Export Kit v1.3.figma
-     *
-     */
-    -->
-    <ScrollView android:id="@+id/accountprofile"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" >
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-        <RelativeLayout android:id="@+id/content_container"
+
+    <RelativeLayout
+        android:id="@+id/user_profile"
+        android:layout_width="229dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/avatar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp">
 
-            <View   android:id="@+id/_bg__accountprofile"
-                android:background="@drawable/_bg__accountprofile_shape"
-                android:layout_marginStart="-1dp"
-                android:layout_marginTop="-1dp"
-                android:layout_width="390dp"
-                android:layout_height="844dp" />
-
-
-            <RelativeLayout android:id="@+id/logout_button"
-                android:layout_marginTop="436dp"
-                android:layout_marginStart="40dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
-
-                <Button   android:id="@+id/logout_button_btn"
-                    android:background="@color/transparent"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <ImageView android:id="@+id/logout_image"
-                    android:src="@drawable/logout_image"
-                    android:contentDescription="logout_image"
-                    android:layout_marginStart="-2dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_width="15.81dp"
-                    android:layout_height="19.5dp" />
-
-                <TextView android:id="@+id/logout_text"
-                    android:textSize="16sp"
-                    android:textColor="@color/_bg__logout_button_ek1_color"
-                    android:layout_marginLeft="34dp"
-                    android:layout_marginTop="-2dp"
-                    android:layout_width="67.6dp"
-                    android:layout_height="26.6dp"
-                    android:text="@string/logout_text_string"
-                    />
-
-            </RelativeLayout>
-
-            <RelativeLayout android:id="@+id/schedule_button"
-                android:layout_marginTop="278dp"
-                android:layout_marginStart="75dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
-
-                <Button   android:id="@+id/schedule_button_btn"
-                    android:background="@color/transparent"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <TextView android:id="@+id/schedule_button_text"
-                    android:textSize="16sp"
-                    android:textColor="@color/_bg__logout_button_ek1_color"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_width="172.6dp"
-                    android:layout_height="26.6dp"
-                    android:text="My Schedule"
-                    />
-
-            </RelativeLayout>
-
-            <RelativeLayout android:id="@+id/manage_acc_button"
-                android:layout_marginTop="357dp"
-                android:layout_marginStart="75dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
-
-                <Button   android:id="@+id/manage_acc_button_btn"
-                    android:background="@color/transparent"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <TextView android:id="@+id/manage_acc_text"
-                    android:textSize="16sp"
-                    android:textColor="@color/_bg__logout_button_ek1_color"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_width="172.6dp"
-                    android:layout_height="26.6dp"
-                    android:text="@string/manage_acc_text_string"
-                    />
-
-            </RelativeLayout>
-
-
-            <RelativeLayout android:id="@+id/user_profile"
-                android:layout_marginTop="100dp"
-                android:layout_marginStart="102dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
-
-                <RelativeLayout android:id="@+id/avatar"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
-
-                    <ImageView   android:id="@+id/_bg__avatar_ek1"
-                        android:background="@drawable/_bg__avatar_ek1_shape"
-                        android:src="@drawable/user_profile"
-                        android:layout_marginStart="-1.5dp"
-                        android:layout_marginTop="-1.5dp"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp" />
-
-                </RelativeLayout>
-
-    <Button
-        android:id="@+id/buttonWriteReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/button_write_a_review" />
-
-    <TextView
-        android:id="@+id/textRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/text_rating"
-        android:translationX="-10dp"
-        android:translationY="45dp" />
-
-    <TextView
-        android:id="@+id/textValueRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/text_value_rating"
-        android:translationX="45dp"
-        android:translationY="25dp" />
-
-    <RatingBar
-        android:id="@+id/ratedUserBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:filterTouchesWhenObscured="false"
-        android:focusableInTouchMode="false"
-        android:isIndicator="true"
-        android:numStars="5"
-        android:stepSize=".01"
-        android:translationY="25dp" />
-
-    <Button
-        android:id="@+id/deleteAccountButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="175dp"
-        android:text="Delete Account" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:text="@string/hello_blank_fragment" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="-200dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/user_profile" />
-
-                <TextView android:id="@+id/user_first_last_name"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="@color/_bg__logout_button_ek1_color"
-                    android:layout_marginLeft="67dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_width="164.6dp"
-                    android:layout_height="24.6dp"
-                    android:text="@string/user_first_last_name_string"
-                    />
-
-                <TextView android:id="@+id/username"
-                    android:textSize="14sp"
-                    android:textColor="@color/username_color"
-                    android:layout_marginLeft="67dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_width="163.4dp"
-                    android:layout_height="22.4dp"
-                    android:text="@string/username_string"
-                    />
-
-            </RelativeLayout>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/_bg__avatar_ek1"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="@dimen/button_padding_margin"
+                android:layout_marginTop="@dimen/button_padding_margin"
+                android:layout_marginEnd="@dimen/button_padding_margin"
+                android:layout_marginBottom="@dimen/button_padding_margin"
+                android:scaleType="fitXY"
+                android:src="@drawable/user_profile"
+                app:shapeAppearanceOverlay="@style/ImageStyle_Corners_Rounded"
+                tools:visibility="visible" />
 
         </RelativeLayout>
 
-    </ScrollView>
-</HorizontalScrollView>
+        <TextView
+            android:id="@+id/user_first_last_name"
+            android:layout_width="155dp"
+            android:layout_height="22dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/button_padding_margin"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/button_padding_margin"
+            android:layout_marginBottom="0dp"
+            android:layout_toEndOf="@+id/avatar"
+            android:text="@string/user_first_last_name_string"
+            android:textColor="@color/_bg__logout_button_ek1_color"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="83dp"
+            android:layout_height="23dp"
+            android:layout_below="@+id/user_first_last_name"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/button_padding_margin"
+            android:layout_marginLeft="67dp"
+            android:layout_marginEnd="@dimen/button_padding_margin"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/avatar"
+            android:gravity="center_vertical"
+            android:text="@string/username_string"
+            android:textColor="@color/username_color"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/user_rating_info"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_profile"
+        tools:visibility="visible">
+
+
+        <TextView
+            android:id="@+id/textRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/text_rating" />
+
+        <TextView
+            android:id="@+id/textValueRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="125dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/text_value_rating"
+            tools:layout_editor_absoluteX="45dp"
+            tools:layout_editor_absoluteY="25dp" />
+
+        <RatingBar
+            android:id="@+id/ratedUserBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/button_padding_margin"
+            android:layout_marginTop="@dimen/button_padding_margin"
+            android:layout_marginEnd="@dimen/button_padding_margin"
+            android:layout_marginBottom="@dimen/button_padding_margin"
+            android:filterTouchesWhenObscured="false"
+            android:focusableInTouchMode="false"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize=".01" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/write_review_button"
+        android:layout_width="145dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/user_rating_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/user_rating_info"
+        app:layout_constraintTop_toTopOf="@+id/user_rating_info"
+        tools:visibility="visible">
+
+        <Button
+            android:id="@+id/buttonWriteReview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/transparent" />
+
+        <TextView
+            android:id="@+id/text_button_write_a_review"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="@string/button_write_a_review"
+            android:textColor="@color/_bg__logout_button_ek1_color"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/schedule_button"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_rating_info"
+        tools:visibility="visible">
+
+        <Button
+            android:id="@+id/schedule_button_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/transparent" />
+
+        <TextView
+            android:id="@+id/schedule_button_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="My Schedule"
+            android:textColor="@color/_bg__logout_button_ek1_color"
+            android:textSize="16sp"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/manage_acc_button"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/logout_button"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible">
+
+        <Button
+            android:id="@+id/manage_acc_button_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/transparent" />
+
+        <TextView
+            android:id="@+id/manage_acc_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/button_padding_margin"
+            android:layout_marginTop="@dimen/button_padding_margin"
+            android:layout_marginEnd="@dimen/button_padding_margin"
+            android:layout_marginBottom="@dimen/button_padding_margin"
+            android:gravity="center"
+            android:text="@string/manage_acc_text_string"
+            android:textColor="@color/_bg__logout_button_ek1_color"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/logout_button"
+        android:layout_width="103dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible">
+
+        <Button
+            android:id="@+id/logout_button_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="@color/transparent" />
+
+        <ImageView
+            android:id="@+id/logout_image"
+            android:layout_width="17dp"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="2dp"
+            android:layout_toStartOf="@+id/logout_text"
+            android:contentDescription="logout_image"
+            android:src="@drawable/logout_image" />
+
+        <TextView
+            android:id="@+id/logout_text"
+            android:layout_width="63dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/button_padding_margin"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="2dp"
+            android:gravity="center"
+            android:text="@string/logout_text_string"
+            android:textColor="@color/_bg__logout_button_ek1_color"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

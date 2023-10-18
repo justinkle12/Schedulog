@@ -4,6 +4,5 @@
 	android:shape="rectangle" >
 	<corners android:radius="16dp" />
 	<stroke android:color="#000000" android:width="1.5dp" />
-	<solid android:color="@color/_bg__logout_button_ek1_color" />
 </shape>
 
