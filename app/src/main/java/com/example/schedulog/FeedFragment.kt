@@ -1,6 +1,6 @@
 package com.example.schedulog
 
-import EventOptionsFragment
+import com.example.schedulog.EventOptionsFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.schedulog.databinding.FragmentFeedBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -33,7 +34,9 @@ class FeedFragment : Fragment() {
         _binding =
             FragmentFeedBinding.inflate(inflater, container, false)
         binding.postGrid.layoutManager = GridLayoutManager(context, 1)
-
+// Log the user's UID
+        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+        Timber.d("Current User UID: %s", currentUserUid)
         // Initialize variables
         val postItemList = ArrayList<PostItem>()
         val postListAdapter = PostListAdapter(postItemList)
