@@ -26,7 +26,7 @@ class PostViewHolder (
 /* This class is responsible for providing the PostViewHolder instances with a PostItem.
  * Also responsible for the communicating between RecyclerView and data. */
 class PostListAdapter(
-    private val postItems: List<PostItem>
+    private var postItems: List<PostItem>
 ) : RecyclerView.Adapter<PostViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -45,6 +45,10 @@ class PostListAdapter(
         Timber.tag("PostListAdapter").i(postItems.toString())
         val post = postItems[position]
         holder.bind(post)
+    }
+    fun setFilteredList(filteredList: ArrayList<PostItem>) {
+        this.postItems = filteredList
+        notifyDataSetChanged()
     }
 }
 

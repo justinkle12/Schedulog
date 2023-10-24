@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:tools="http://schemas.android.com/tools">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -62,7 +64,22 @@
             android:layout_marginTop="10dp"
             android:text="Create Event\n'Testing Button'" />
         <!-- Your RecyclerView -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".MainActivity">
 
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/action_search"
+                android:actionViewClass="androidx.appcompat.widget.SearchView"
+                android:showAsAction="ifRoom|collapseActionView"
+                />
+
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/post_grid"
@@ -73,3 +90,4 @@
 
     </RelativeLayout>
 </LinearLayout>
+</layout>
