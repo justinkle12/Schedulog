@@ -7,6 +7,9 @@ import com.example.schedulog.databinding.CalendarItemBinding
 import timber.log.Timber
 
 
+
+//TODO! DELETE THIS FILE
+
 /* This class is responsible for holding onto an instance of the view and
  * binding the CalendarItem(calendar_item.xml) to the RecyclerView(fragment_feed.xml). */
 class CalendarViewHolder(
