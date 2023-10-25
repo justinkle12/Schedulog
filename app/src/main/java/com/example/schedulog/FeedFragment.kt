@@ -61,7 +61,7 @@ class FeedFragment : Fragment() {
 
                     if (postItem != null) {
                         postItemList.add(postItem)
-                        Timber.tag("PostFragment").i(postItem.toString())
+                        Timber.tag(TAG).i(postItem.toString())
                     }
                 }
 

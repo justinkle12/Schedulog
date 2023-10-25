@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import timber.log.Timber
+import java.util.Calendar
 
 class FeedCalendarFragment : Fragment() {
     private var _binding: FragmentFeedCalendarBinding? = null
@@ -33,21 +34,17 @@ class FeedCalendarFragment : Fragment() {
         binding.calendarGrid.layoutManager = GridLayoutManager(context, 1)
 
         // Initialize variables
-        val calendarDataList = mutableListOf<CalendarData>()
-
-        // Populate the list with data for each calendar view item **This is only for testing**
-        calendarDataList.add(CalendarData(1523516143569, 1))
-        calendarDataList.add(CalendarData(1623186143769, 3))
-        calendarDataList.add(CalendarData(1624186843769, 3))
-        calendarDataList.add(CalendarData(1590316143569, 2))
-        calendarDataList.add(CalendarData(1696635353091, 1))
-
-        // Initialize remaining variables
-        val calendarListAdapter = CalendarAdapter(calendarDataList)
+        val postItemList = ArrayList<PostItem>()
+        val postListAdapter = PostListAdapter(postItemList)
         val recyclerView = binding.calendarGrid
 
-        // Set RecyclerView Calendar adapter
-        recyclerView.adapter = calendarListAdapter
+        // Initialize Calendar
+        val calendarView = binding.calendarView
+        val todayInMillis = System.currentTimeMillis()
+        calendarView.date = todayInMillis
+
+        // Set RecyclerView for feedCalendar adapter
+        recyclerView.adapter = postListAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         val dividerItemDecoration = DividerItemDecoration(
             recyclerView.context,
@@ -57,11 +54,95 @@ class FeedCalendarFragment : Fragment() {
 
         // Initialize Firebase reference
         val database = Firebase.database
-        val postsRef = database.getReference("")
+        val postsRef = database.getReference("posts")
 
-        //TODO get calendar data from firebase
+        // Listen for updates on selecting calendar dates
+        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            // When the user selects a different date, this callback is triggered
 
+            // Create a Calendar instance and set it to the selected date
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, month)
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            // Get the selected date in milliseconds
+            val selectedDateInMillis = calendar.timeInMillis
+
+            // Update the CalendarView to display the selected date
+            calendarView.date = selectedDateInMillis
+
+            // Calculate the start and end of today (in milliseconds)
+            val startOfDate = calendarView.date
+            val endOfDate = calendarView.date + (24 * 60 * 60 * 1000) - 1 // Adding milliseconds for one day
+
+            val query = postsRef.orderByChild("timestamp")
+                .startAt(startOfDate.toDouble())
+                .endAt(endOfDate.toDouble())
+
+            postItemList.clear() // Clear the list to avoid duplicates
+
+            // Perform the query to find posts with the selected day's timestamp
+            query.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (postSnapshot in dataSnapshot.children) {
+
+                        val postKey = postSnapshot.key
+                        val postItem = postSnapshot.getValue(PostItem::class.java)
+
+                        if (postItem != null) {
+                            postItemList.add(postItem)
+                            Timber.tag(TAG).i(postItem.toString())
+                        }
+                    }
+
+                    // Update UI with the new postList
+                    postListAdapter.notifyDataSetChanged()
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle database errors here
+                    Timber.e("%s | Error reading post | %s", TAG, databaseError.toString())
+                }
+
+            })
+        }
+
+
+        // Listen for updates on social postings
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                postItemList.clear() // Clear the list to avoid duplicates
+
+                for (postSnapshot in dataSnapshot.children) {
+                    val postItem = postSnapshot.getValue(PostItem::class.java)
+
+                    val startOfDate = calendarView.date
+                    val endOfDate = calendarView.date + (24 * 60 * 60 * 1000) - 1 // Adding milliseconds for one day
+                    if (postItem != null) {
+                        if (postItem.timestamp in (startOfDate + 1) until endOfDate) {
+                            postItemList.add(postItem)
+                            Timber.tag(TAG).i(postItem.toString())
+                        }
+                    }
+                }
+
+                // Update UI with the new postList
+                postListAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle database errors here
+                Timber.e("%s | Error reading post | %s", TAG, databaseError.toString())
+            }
+        }
+
+        postsRef.addValueEventListener(postListener)
 
         return binding.root
+    }
+
+    companion object {
+        private const val TAG = "FeedCalendarFragment"
     }
 }
