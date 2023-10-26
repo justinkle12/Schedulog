@@ -45,4 +45,7 @@
     <string name="text_value_rating">Unrated</string>
     <string name="text_rating">Rating:</string>
     <string name="delete_account">Delete Account</string>
+    <string name="hint_enter_last_name">Enter Last Name Here</string>
+    <string name="hint_enter_first_name">Enter First Name Here</string>
+    <string name="hint_enter_username">Enter Username Here</string>
 </resources>

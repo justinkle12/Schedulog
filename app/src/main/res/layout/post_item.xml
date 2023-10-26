@@ -3,9 +3,79 @@
 <!--TODO Fix format for a single post-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/user_profile"
+        android:layout_width="229dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="@dimen/image_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/_bg__avatar_ek1"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="@dimen/button_padding_margin"
+                android:layout_marginTop="@dimen/button_padding_margin"
+                android:layout_marginEnd="@dimen/button_padding_margin"
+                android:layout_marginBottom="@dimen/button_padding_margin"
+                android:scaleType="fitXY"
+                android:src="@drawable/user_profile"
+                app:shapeAppearanceOverlay="@style/ImageStyle_Corners_Rounded"
+                tools:visibility="visible" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/user_first_last_name"
+            android:layout_width="155dp"
+            android:layout_height="22dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/button_padding_margin"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/button_padding_margin"
+            android:layout_marginBottom="0dp"
+            android:layout_toEndOf="@+id/avatar"
+            android:text="@string/user_first_last_name_string"
+            android:textColor="@color/_bg__logout_button_ek1_color"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="83dp"
+            android:layout_height="23dp"
+            android:layout_below="@+id/user_first_last_name"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/button_padding_margin"
+            android:layout_marginLeft="67dp"
+            android:layout_marginEnd="@dimen/button_padding_margin"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/avatar"
+            android:gravity="center_vertical"
+            android:text="@string/username_string"
+            android:textColor="@color/username_color"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/postDescription"
@@ -14,7 +84,9 @@
         android:layout_gravity="left"
         android:padding="@dimen/image_margin"
         android:textColor="#000000"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:text="Text description goes here"
+        />
 
     <ImageView
         android:id="@+id/postImage"
@@ -26,7 +98,8 @@
         android:paddingTop="@dimen/image_margin"
         android:paddingRight="@dimen/image_margin"
         android:paddingBottom="@dimen/image_margin"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_launcher_background" />
 
 
 </LinearLayout>

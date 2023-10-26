@@ -194,7 +194,7 @@ class AccountProfileFragment : DialogFragment() {
                 }
 
                 // Show list of rating values in logcat
-                Timber.tag(TAG).d(ratings.toString())
+                Timber.tag(TAG).d("Ratings List | %s", ratings.toString())
 
                 // Calculate the average rating
                 if (ratings.isNotEmpty()) {

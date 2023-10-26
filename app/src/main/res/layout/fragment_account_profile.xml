@@ -102,11 +102,9 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
-            android:layout_marginStart="125dp"
+            android:layout_marginStart="130dp"
             android:layout_marginTop="10dp"
-            android:text="@string/text_value_rating"
-            tools:layout_editor_absoluteX="45dp"
-            tools:layout_editor_absoluteY="25dp" />
+            android:text="@string/text_value_rating" />
 
         <RatingBar
             android:id="@+id/ratedUserBar"
