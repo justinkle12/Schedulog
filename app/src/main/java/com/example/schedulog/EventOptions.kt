@@ -37,7 +37,7 @@ class EventOptionsFragment : DialogFragment() {
             val currentUser = mAuth.currentUser
             if (currentUser != null) {
                 // Print the UID for debugging
-                Timber.tag("UID").d("Current User UID: %s", currentUser.uid)
+                Timber.tag(TAG).d("Current User UID: %s", currentUser.uid)
 
                 // Create a unique key for the event
                 val eventKey = FirebaseDatabase.getInstance().reference
@@ -45,7 +45,7 @@ class EventOptionsFragment : DialogFragment() {
                     .push().key ?:""
 
                 // Print the event key for debugging
-                Timber.tag("UID").d("Event Key: %s", eventKey)
+                Timber.tag(TAG).d("Event Key: %s", eventKey)
 
                 // Create a map to hold event details
                 val eventDetails = mapOf(
@@ -74,5 +74,9 @@ class EventOptionsFragment : DialogFragment() {
         }
 
         return view
+    }
+
+    companion object {
+        private const val TAG = "AccountProfileFragment"
     }
 }
