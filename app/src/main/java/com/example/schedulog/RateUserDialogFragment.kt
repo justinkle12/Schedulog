@@ -73,5 +73,7 @@ class RateUserDialogFragment : BottomSheetDialogFragment() {
         fun newInstance(): RateUserDialogFragment {
             return RateUserDialogFragment()
         }
+
+
     }
 }

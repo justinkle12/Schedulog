@@ -2,6 +2,7 @@ package com.example.schedulog
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.schedulog.databinding.PostItemBinding
@@ -14,12 +15,20 @@ import timber.log.Timber
 /* This class is responsible for holding onto an instance of the view and
  * binding the PostItem(post_item.xml) to the RecyclerView(fragment_feed.xml). */
 class PostViewHolder (
-    private val binding: PostItemBinding
+    private val binding: PostItemBinding,
+    private val fragmentManager: FragmentManager
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(postItem: PostItem) {
         binding.postDescription.text = postItem.description
         loadUsername(postItem.user_id)
         Glide.with(binding.root).load(postItem.image_url).into(binding.postImage)
+
+        val audioButton = binding.AudioDescription
+        audioButton.setOnClickListener {
+            val dialogFragment = AudioDescriptionDialogFragment.newInstance()
+            dialogFragment.show(fragmentManager, "AudioDescriptionDialogFragment")
+        }
+
     }
 
     fun loadUsername(userId: String) {
@@ -55,7 +64,8 @@ class PostViewHolder (
 /* This class is responsible for providing the PostViewHolder instances with a PostItem.
  * Also responsible for the communicating between RecyclerView and data. */
 class PostListAdapter(
-    private var postItems: List<PostItem>
+    private var postItems: List<PostItem>,
+    private var fragmentManager: FragmentManager
 ) : RecyclerView.Adapter<PostViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -63,7 +73,7 @@ class PostListAdapter(
     ): PostViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = PostItemBinding.inflate(inflater, parent, false)
-        return PostViewHolder(binding)
+        return PostViewHolder(binding, fragmentManager)
     }
 
     override fun getItemCount(): Int {

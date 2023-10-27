@@ -38,7 +38,7 @@ class FeedFragment : Fragment() {
 
         // Initialize variables
         var postItemList = ArrayList<PostItem>()
-        val postListAdapter = PostListAdapter(postItemList)
+        val postListAdapter = PostListAdapter(postItemList,requireActivity().supportFragmentManager)
         val recyclerView = binding.postGrid
         val searchView = binding.actionSearch
         searchView.clearFocus()
