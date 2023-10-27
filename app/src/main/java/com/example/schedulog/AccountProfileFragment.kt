@@ -217,6 +217,6 @@ class AccountProfileFragment : DialogFragment() {
     }
 
     companion object {
-        private const val TAG = "AccountProfileFragment"
+        const val TAG = "AccountProfileFragment"
     }
 }
