@@ -38,7 +38,7 @@
                 android:layout_width="390dp"
                 android:layout_height="1dp" />
 
-            <EditText android:id="@+id/event_title"
+            <TextView android:id="@+id/event_title"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal|center"
                 android:gravity="center"
@@ -126,35 +126,60 @@
             </RelativeLayout>
 
 
-            <RelativeLayout android:id="@+id/eventdate"
+            <RelativeLayout
+                android:id="@+id/eventdate"
                 android:layout_marginTop="539dp"
                 android:layout_marginStart="23dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content" >
 
-                <View   android:id="@+id/_bg__eventdate_ek1"
+                <View
+                    android:id="@+id/_bg__eventdate_ek1"
                     android:background="@drawable/_bg__eventdate_ek1_shape"
                     android:layout_marginStart="-23dp"
                     android:layout_marginTop="-539dp"
                     android:layout_width="343dp"
                     android:layout_height="52dp" />
 
-                <View   android:id="@+id/eventdaterect"
+                <View
+                    android:id="@+id/eventdaterect"
                     android:background="@drawable/eventdaterect_shape"
                     android:layout_marginStart="-2dp"
                     android:layout_marginTop="-2dp"
                     android:layout_width="343dp"
                     android:layout_height="52dp" />
 
-                <EditText android:id="@+id/event_date"
-                    android:textSize="15sp"
-                    android:textColor="@color/createeventtitle_color"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="0dp"
+                <RelativeLayout
+                    android:id="@+id/eventDateLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/eventdatetext_string" />
+                    android:layout_height="match_parent" >
+
+                    <EditText android:id="@+id/event_date"
+                        android:textSize="15sp"
+                        android:textColor="@color/createeventtitle_color"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="283dp"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:hint="@string/eventdatetext_string" />
+
+                    <ImageButton
+                        android:id="@+id/addDateCalendarButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="293dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@color/transparent"
+                        android:contentDescription="@string/select_date"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/calendar_9838161" />
+                </RelativeLayout>
 
             </RelativeLayout>
 

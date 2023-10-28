@@ -54,7 +54,7 @@ class FeedCalendarFragment : Fragment() {
 
         // Initialize Firebase reference
         val database = Firebase.database
-        val postsRef = database.getReference("posts")
+        val postsRef = database.getReference("events")
 
         // Listen for updates on selecting calendar dates
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
@@ -62,9 +62,7 @@ class FeedCalendarFragment : Fragment() {
 
             // Create a Calendar instance and set it to the selected date
             val calendar = Calendar.getInstance()
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month)
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            calendar.set(year, month, dayOfMonth, 0, 0 ,0)
 
             // Get the selected date in milliseconds
             val selectedDateInMillis = calendar.timeInMillis
@@ -76,7 +74,7 @@ class FeedCalendarFragment : Fragment() {
             val startOfDate = calendarView.date
             val endOfDate = calendarView.date + (24 * 60 * 60 * 1000) - 1 // Adding milliseconds for one day
 
-            val query = postsRef.orderByChild("timestamp") //TODO CHANGE THIS TO DATE
+            val query = postsRef.orderByChild("date")
                 .startAt(startOfDate.toDouble())
                 .endAt(endOfDate.toDouble())
 
@@ -120,7 +118,7 @@ class FeedCalendarFragment : Fragment() {
                     val startOfDate = calendarView.date
                     val endOfDate = calendarView.date + (24 * 60 * 60 * 1000) - 1 // Adding milliseconds for one day
                     if (postItem != null) {
-                        if (postItem.timestamp in (startOfDate + 1) until endOfDate) {
+                        if (postItem.date in (startOfDate + 1) until endOfDate) {
                             postItemList.add(postItem)
                             Timber.tag(TAG).i(postItem.toString())
                         }
