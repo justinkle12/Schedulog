@@ -34,6 +34,7 @@
     <string name="eventdesctext_string">Description of event</string>
     <string name="createeventtext_string">create event</string>
     <string name="addtags_string">Add Tags</string>
+    <string name="select_date">Select Date</string>
 
     <!--  accountprofile strings  -->
     <string name="logout_text_string">Logout</string>
@@ -53,4 +54,5 @@
     <!--  feed strings  -->
     <string name="share_event_button_text">Share Event</string>
     <string name="attend_event_button_text">Attend Event</string>
+
 </resources>

@@ -27,7 +27,7 @@ class PostViewHolder (
         binding.postTitle.text = postItem.title
         loadUsername(postItem.user)
         displayTags(postItem.tags)
-        Glide.with(binding.root).load(postItem.image_url).into(binding.postImage)
+        Glide.with(binding.root).load(postItem.imageURL).into(binding.postImage)
     }
 
     private fun loadUsername(userId: String) {
