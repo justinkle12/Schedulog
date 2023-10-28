@@ -33,6 +33,7 @@
     <string name="eventdatetext_string">Date of event</string>
     <string name="eventdesctext_string">Description of event</string>
     <string name="createeventtext_string">create event</string>
+    <string name="addtags_string">Add Tags</string>
 
     <!--  accountprofile strings  -->
     <string name="logout_text_string">Logout</string>
@@ -48,4 +49,8 @@
     <string name="hint_enter_last_name">Enter Last Name Here</string>
     <string name="hint_enter_first_name">Enter First Name Here</string>
     <string name="hint_enter_username">Enter Username Here</string>
+
+    <!--  feed strings  -->
+    <string name="share_event_button_text">Share Event</string>
+    <string name="attend_event_button_text">Attend Event</string>
 </resources>

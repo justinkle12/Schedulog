@@ -62,12 +62,11 @@ class FeedFragment : Fragment() {
 
         // Initialize Firebase reference
         val database = Firebase.database
-        val postsRef = database.getReference("posts")
+        val postsRef = database.getReference("events")
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 postItemList.clear() // Clear the list to avoid duplicates
-
 
                 for (postSnapshot in dataSnapshot.children) {
                     val postItem = postSnapshot.getValue(PostItem::class.java)
@@ -87,6 +86,7 @@ class FeedFragment : Fragment() {
                 Timber.e("%s | Error reading post | %s", TAG, databaseError.toString())
             }
         }
+
         //filters list and then
         fun filterList(newText: String?) {
             var emptyList = ArrayList<PostItem>()

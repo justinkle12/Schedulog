@@ -12,13 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
-        <View   android:id="@+id/_bg__create_event"
-            android:background="@drawable/_bg__create_event_shape"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_width="390dp"
-            android:layout_height="844dp" />
-
         <View   android:id="@+id/topbarline"
             android:background="@drawable/topbarline_shape"
             android:alpha="0.36000001430511"
@@ -54,16 +47,8 @@
             android:layout_marginStart="340dp"
             android:layout_marginTop="40dp"
             android:contentDescription="_sidebarbutton"
-            android:src="@drawable/_sidebarbutton" />
+            android:src="@drawable/gradient_plus_icon" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="310dp"
-            android:layout_marginTop="10dp"
-            android:text="Create Event\n'Testing Button'" />
-        <!-- Your RecyclerView -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,7 +62,6 @@
                 android:actionViewClass="androidx.appcompat.widget.SearchView"
                 android:showAsAction="ifRoom|collapseActionView"
                 />
-
 
         </LinearLayout>
 

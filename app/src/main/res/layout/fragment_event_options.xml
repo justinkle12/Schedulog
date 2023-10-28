@@ -159,52 +159,62 @@
             </RelativeLayout>
 
 
-            <RelativeLayout android:id="@+id/eventdescription"
+            <RelativeLayout
+                android:id="@+id/eventdescription"
                 android:layout_marginTop="160dp"
                 android:layout_marginStart="23dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 >
 
-                <View   android:id="@+id/eventdescrect"
+                <View
+                    android:id="@+id/eventdescrect"
                     android:background="@drawable/eventdescrect_shape"
                     android:layout_marginStart="-2dp"
                     android:layout_marginTop="-2dp"
                     android:layout_width="343dp"
-                    android:layout_height="366dp" />
+                    android:layout_height="336dp"
+                    />
 
-                <EditText android:id="@+id/event_description"
-                    android:textSize="15sp"
-                    android:textColor="@color/createeventtitle_color"
+                <EditText
+                    android:id="@+id/event_description"
+                    android:layout_width="343dp"
+                    android:layout_height="336dp"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/eventdesctext_string" />
+                    android:background="@null"
+                    android:gravity="start"
+                    android:hint="@string/eventdesctext_string"
+                    android:textColor="@color/createeventtitle_color"
+                    android:textSize="15sp" />
 
             </RelativeLayout>
 
 
-            <RelativeLayout android:id="@+id/createeventbutton"
-                android:layout_marginTop="669dp"
-                android:layout_marginStart="23dp"
+            <RelativeLayout
+                android:id="@+id/add_tags_button"
+                android:layout_marginTop="496dp"
+                android:layout_marginStart="263dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 >
 
-                <Button   android:id="@+id/create_event_button"
+                <Button
+                    android:id="@+id/addTagsbtn"
                     android:background="@drawable/_bg___createeventbutton_ek1_shape"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
-                    android:layout_width="343dp"
-                    android:layout_height="72dp" />
+                    android:layout_width="100dp"
+                    android:layout_height="40dp" />
 
-                <View   android:id="@+id/createeventrect"
+                <View
+                    android:id="@+id/addTagsrect"
                     android:background="@drawable/createeventrect_shape"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-                <TextView android:id="@+id/create_event_button_text"
+                <TextView
+                    android:id="@+id/add_tags_text"
                     android:textStyle="bold"
                     android:layout_centerVertical="true"
                     android:gravity="center"
@@ -212,7 +222,44 @@
                     android:textColor="@color/createeventtitle_color"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/createeventtext_string" />
+                    android:text="@string/addtags_string" />
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/createeventbutton"
+                android:layout_marginTop="669dp"
+                android:layout_marginStart="23dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <Button
+                    android:id="@+id/create_event_button"
+                    android:background="@drawable/_bg___createeventbutton_ek1_shape"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="343dp"
+                    android:layout_height="72dp" />
+
+                <View
+                    android:id="@+id/createeventrect"
+                    android:background="@drawable/createeventrect_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/create_event_button_text"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    android:textColor="@color/createeventtitle_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/submit" />
 
             </RelativeLayout>
 

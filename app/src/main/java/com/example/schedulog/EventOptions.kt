@@ -1,12 +1,10 @@
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import com.example.schedulog.databinding.FragmentEventOptionsBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -14,6 +12,7 @@ import timber.log.Timber
 
 class EventOptionsFragment : DialogFragment() {
 
+    private var selectedTags: MutableList<String> = mutableListOf()
     private lateinit var binding: FragmentEventOptionsBinding
     private lateinit var mAuth: FirebaseAuth
 
@@ -25,6 +24,11 @@ class EventOptionsFragment : DialogFragment() {
         val view = binding.root
 
         mAuth = FirebaseAuth.getInstance()
+
+        val addTagsButton = binding.addTagsbtn
+        addTagsButton.setOnClickListener{
+            showTagSelectionDialog()
+        }
 
         binding.createEventButton.setOnClickListener {
             // Get the user input from EditText fields
@@ -53,7 +57,8 @@ class EventOptionsFragment : DialogFragment() {
                     "title" to eventTitle,
                     "description" to eventDescription,
                     "date" to eventDate,
-                    "startEndTime" to eventStartEndTime
+                    "startEndTime" to eventStartEndTime,
+                    "tags" to selectedTags
                 )
 
                 // Store event details in Firebase under the user's UID
@@ -74,6 +79,40 @@ class EventOptionsFragment : DialogFragment() {
         }
 
         return view
+    }
+
+    private fun showTagSelectionDialog() {
+        // Can put this list in the database for future maintainability
+        val predefinedTags = listOf("Meetup", "Hackathon", "Expo",                  // Event types
+        "Technology", "Finance", "Sports", "Arts and Culture", "Food and Beverage", // Topics
+        "English", "Spanish", "French", "Multilingual",                             // Languages
+        "Students", "Developers", "Professionals", "Parents",                       // Audience
+        "Panel Discussion", "Q&A", "Hands-On",                                      // Format
+        "Charity", "Sustainability", "Mental Health",                               // Social Causes
+        "18+", "21+", "All Ages"                                                    // Age Restrictions
+        )
+
+        val checkedItems = BooleanArray(predefinedTags.size)
+
+        context?.let {
+            AlertDialog.Builder(it)
+                .setTitle("Select Tags")
+                .setMultiChoiceItems(
+                    predefinedTags.toTypedArray(),
+                    checkedItems
+                ) { _, which, isChecked ->
+                    checkedItems[which] = isChecked
+                }
+                .setPositiveButton("OK") { _, _ ->
+                        selectedTags = predefinedTags
+                        .filterIndexed { index, _ -> checkedItems[index] }
+                        .toMutableList()
+                    Timber.tag(TAG).d("Selected Tags | %s", selectedTags)
+                    // selectedTags is added in the createEventButton listener
+                }
+                .setNegativeButton("Cancel", null)
+                .create()
+        }?.show()
     }
 
     companion object {

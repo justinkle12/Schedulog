@@ -1,7 +1,12 @@
 package com.example.schedulog
 
+import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.schedulog.databinding.PostItemBinding
@@ -14,15 +19,18 @@ import timber.log.Timber
 /* This class is responsible for holding onto an instance of the view and
  * binding the PostItem(post_item.xml) to the RecyclerView(fragment_feed.xml). */
 class PostViewHolder (
-    private val binding: PostItemBinding
+    private val binding: PostItemBinding,
+    private val context: Context
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(postItem: PostItem) {
         binding.postDescription.text = postItem.description
-        loadUsername(postItem.user_id)
+        binding.postTitle.text = postItem.title
+        loadUsername(postItem.user)
+        displayTags(postItem.tags)
         Glide.with(binding.root).load(postItem.image_url).into(binding.postImage)
     }
 
-    fun loadUsername(userId: String) {
+    private fun loadUsername(userId: String) {
         val usersRef = FirebaseDatabase.getInstance().getReference("users/$userId")
 
         usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -49,6 +57,35 @@ class PostViewHolder (
             }
         })
     }
+
+    private fun displayTags(selectedTags: MutableList<String>){
+        binding.tagsContainer.removeAllViews()      // clear child views(tags) to prevent duplicates
+        for (tag in selectedTags) {
+            val tagTextView = TextView(context)
+            tagTextView.text = tag
+
+            // Set margin or padding to create spacing
+            val layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            layoutParams.leftMargin = 16
+
+            tagTextView.layoutParams = layoutParams
+            tagTextView.textSize = 12F
+            tagTextView.setBackgroundResource(R.drawable.rectangle_tag_light_blue)   // Optional: Set a background drawable
+            tagTextView.setPadding(8, 4, 8, 4)                  // Optional: Set padding
+            tagTextView.setTextColor(ContextCompat.getColor(context, R.color.black)) // Optional: Set text color
+
+            // Add click listener to handle tag selection or other actions for future implementation
+            tagTextView.setOnClickListener {
+                // Handle tag selection or other actions
+            }
+
+            // Add the TextView to the layout
+            binding.tagsContainer.addView(tagTextView)
+        }
+    }
 }
 
 
@@ -61,9 +98,10 @@ class PostListAdapter(
         parent: ViewGroup,
         viewType: Int
     ): PostViewHolder {
+        val context=  parent.context
         val inflater = LayoutInflater.from(parent.context)
         val binding = PostItemBinding.inflate(inflater, parent, false)
-        return PostViewHolder(binding)
+        return PostViewHolder(binding, context)
     }
 
     override fun getItemCount(): Int {

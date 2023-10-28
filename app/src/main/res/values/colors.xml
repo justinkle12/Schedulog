@@ -18,13 +18,18 @@
     <color name="shape_color">#000000</color>
     <color name="rectangle_2_ek2_color">#F7C6B2</color>
 
-    <!-- register colors -->
+    <!--  tag colors  -->
+    <color name="teal_tag_color">#FF018786</color>
+    <color name="light_blue_tag_color">#ADD8E6</color>
 
+    <!-- register colors -->
     <color name="_bg__register_color">#FFFFFF</color>
     <color name="bottombar_color">#000000</color>
 
     <!--  login colors  -->
     <color name="_bg__login_color">#FFFFFF</color>
+
+    <!--  feed colors  -->
 
     <!--  create_event colors  -->
     <color name="_bg__create_event_color">#FFFFFF</color>

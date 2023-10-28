@@ -3,4 +3,5 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="image_margin">16dp</dimen>
     <dimen name="button_padding_margin">5dp</dimen>
+    <dimen name="tag_font_size">12sp</dimen>
 </resources>

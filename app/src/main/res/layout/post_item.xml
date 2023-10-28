@@ -2,7 +2,7 @@
 
 <!--TODO Fix format for a single post-->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,9 +13,9 @@
         android:id="@+id/user_profile"
         android:layout_width="229dp"
         android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="@dimen/image_margin"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible">
@@ -37,8 +37,7 @@
                 android:layout_marginBottom="@dimen/button_padding_margin"
                 android:scaleType="fitXY"
                 android:src="@drawable/user_profile"
-                app:shapeAppearanceOverlay="@style/ImageStyle_Corners_Rounded"
-                tools:visibility="visible" />
+                app:shapeAppearanceOverlay="@style/ImageStyle_Corners_Rounded" />
 
         </RelativeLayout>
 
@@ -77,6 +76,78 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/event_date_time"
+        android:layout_width="159dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/user_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/user_profile"
+        app:layout_constraintTop_toTopOf="@+id/user_profile"
+        tools:visibility="visible">
+
+
+        <TextView
+            android:id="@+id/textDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginStart="@dimen/button_padding_margin"
+            tools:text="October 27, 2023"
+            android:textColor="@color/_bg__logout_button_ek1_color"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textDate"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/button_padding_margin"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/_bg__logout_button_ek1_color"
+            android:textSize="14sp"
+            tools:text="7pm-8pm" />
+
+    </RelativeLayout>
+
+    <!--TODO ADD DATE AND START/END TIME HERE-->
+
+
+    <!--    For dynamic tag allocation  -->
+    <com.nex3z.flowlayout.FlowLayout
+        android:id="@+id/tagsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        app:flChildSpacing="6dp"
+        app:flRowSpacing="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_profile"
+        tools:layout_height="50dp"
+        tools:layout_width="300dp">
+
+    </com.nex3z.flowlayout.FlowLayout>
+
+    <TextView
+        android:id="@+id/postTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:padding="@dimen/image_margin"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tagsContainer"
+        tools:text="Event Title goes here" />
+
     <TextView
         android:id="@+id/postDescription"
         android:layout_width="match_parent"
@@ -84,9 +155,10 @@
         android:layout_gravity="left"
         android:padding="@dimen/image_margin"
         android:textColor="#000000"
-        android:textSize="16sp"
-        tools:text="Text description goes here"
-        />
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postTitle"
+        tools:text="Text description goes here" />
 
     <ImageView
         android:id="@+id/postImage"
@@ -99,7 +171,78 @@
         android:paddingRight="@dimen/image_margin"
         android:paddingBottom="@dimen/image_margin"
         android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postDescription"
         tools:src="@drawable/ic_launcher_background" />
 
+    <RelativeLayout
+        android:id="@+id/platformShare_button"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_gravity="start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postImage">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/platform_share_button_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/transparent" />
+
+        <TextView
+            android:id="@+id/platform_share_button_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/rectangle_2_ek1_shape"
+            android:gravity="center"
+            android:text="@string/share_event_button_text"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/attendEvent_button"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postImage">
+
+        <Button
+            android:id="@+id/attend_event_button_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent" />
+
+        <TextView
+            android:id="@+id/attend_event_button_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/rectangle_2_ek1_shape"
+            android:gravity="center"
+            android:text="@string/attend_event_button_text"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

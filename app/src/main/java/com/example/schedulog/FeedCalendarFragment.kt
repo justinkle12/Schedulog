@@ -76,7 +76,7 @@ class FeedCalendarFragment : Fragment() {
             val startOfDate = calendarView.date
             val endOfDate = calendarView.date + (24 * 60 * 60 * 1000) - 1 // Adding milliseconds for one day
 
-            val query = postsRef.orderByChild("timestamp")
+            val query = postsRef.orderByChild("timestamp") //TODO CHANGE THIS TO DATE
                 .startAt(startOfDate.toDouble())
                 .endAt(endOfDate.toDouble())
 
