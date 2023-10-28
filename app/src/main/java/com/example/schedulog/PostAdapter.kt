@@ -1,12 +1,14 @@
 package com.example.schedulog
 
 import android.content.Context
-import android.content.res.Resources
+import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.schedulog.databinding.PostItemBinding
@@ -20,14 +22,17 @@ import timber.log.Timber
  * binding the PostItem(post_item.xml) to the RecyclerView(fragment_feed.xml). */
 class PostViewHolder (
     private val binding: PostItemBinding,
-    private val context: Context
+    private val context: Context,
 ) : RecyclerView.ViewHolder(binding.root) {
+
+    val shareButton = binding.platformShareButtonBtn
     fun bind(postItem: PostItem) {
         binding.postDescription.text = postItem.description
         binding.postTitle.text = postItem.title
         loadUsername(postItem.user)
         displayTags(postItem.tags)
         Glide.with(binding.root).load(postItem.image_url).into(binding.postImage)
+
     }
 
     private fun loadUsername(userId: String) {
@@ -111,12 +116,33 @@ class PostListAdapter(
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         Timber.tag("PostListAdapter").i(postItems.toString())
         val post = postItems[position]
+
+        holder.shareButton.setOnClickListener{
+            sharePost(it, position)
+        }
+
         holder.bind(post)
     }
     fun setFilteredList(filteredList: ArrayList<PostItem>) {
         this.postItems = filteredList
         notifyDataSetChanged()
     }
+
+    fun sharePost(view: View, position: Int) {
+        val post = postItems[position] // Get the post data for the clicked item
+
+        val postMessage = "Check out this awesome post: ${post.title} ${post.description}"
+
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, postMessage)
+        }
+
+        val context = view.context
+        context.startActivity(Intent.createChooser(sendIntent, "Share via"))
+    }
+
 }
 
 
