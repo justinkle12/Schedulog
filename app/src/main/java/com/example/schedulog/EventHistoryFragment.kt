@@ -41,10 +41,7 @@ class EventHistoryFragment : Fragment() {
 
         // Set up RecyclerView
         val layoutManager = LinearLayoutManager(context)
-        adapter = EventHistoryAdapter(eventList) { event ->
-            // Handle the "Attend" event here
-            onAttendEvent(event)
-        }
+        adapter = EventHistoryAdapter(eventList)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
 
@@ -59,28 +56,41 @@ class EventHistoryFragment : Fragment() {
         val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
 
         if (currentUserUid != null) {
-            // Reference to the "attending-users" node for the current user
-            val attendingUsersRef = FirebaseDatabase.getInstance().reference
-                .child("attending-users")
-                .child(currentUserUid)
+            // Reference to the "events" node
+            val eventsRef = FirebaseDatabase.getInstance().reference.child("events")
 
-            attendingUsersRef.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
+            eventsRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(eventsSnapshot: DataSnapshot) {
                     eventList.clear() // Clear the list
 
-                    for (dataSnapshot in snapshot.children) {
-                        val eventKey = dataSnapshot.key
+                    for (eventDataSnapshot in eventsSnapshot.children) {
+                        val eventKey = eventDataSnapshot.key
 
-                        // Fetch event details from the "events" node
+                        // Reference to the "attending-users" node for the current user within the event
                         if (eventKey != null) {
-                            databaseReference.child(eventKey).addListenerForSingleValueEvent(object : ValueEventListener {
-                                override fun onDataChange(eventDataSnapshot: DataSnapshot) {
-                                    val event = eventDataSnapshot.getValue(Event::class.java)
+                            val attendingUsersRef = FirebaseDatabase.getInstance().reference
+                                .child("events").child(eventKey)
+                                .child("attending-users")
+                                .child(currentUserUid)
 
-                                    if (event != null) {
-                                        val eventWithKey = Event(eventKey, event.date, event.description, event.startEndTime, event.title, event.user)
-                                        eventList.add(eventWithKey)
-                                        adapter.notifyDataSetChanged() // Notify the adapter of the data change
+                            attendingUsersRef.addValueEventListener(object : ValueEventListener {
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    // Check if the user is attending this event
+                                    if (snapshot.exists()) {
+                                        val event = eventDataSnapshot.getValue(Event::class.java)
+
+                                        if (event != null) {
+                                            val eventWithKey = Event(
+                                                eventKey,
+                                                event.date,
+                                                event.description,
+                                                event.startEndTime,
+                                                event.title,
+                                                event.user
+                                            )
+                                            eventList.add(eventWithKey)
+                                            adapter.notifyDataSetChanged() // Notify the adapter of the data change
+                                        }
                                     }
                                 }
 
@@ -97,9 +107,5 @@ class EventHistoryFragment : Fragment() {
                 }
             })
         }
-    }
-
-    private fun onAttendEvent(event: Event) {
-        // Implement your logic to handle attending events
     }
 }
