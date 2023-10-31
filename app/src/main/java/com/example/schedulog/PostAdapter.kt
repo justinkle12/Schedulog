@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.schedulog.databinding.PostItemBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -26,6 +27,7 @@ class PostViewHolder (
 ) : RecyclerView.ViewHolder(binding.root) {
 
     val shareButton = binding.platformShareButtonBtn
+    val attendEventButton = binding.attendEventButtonBtn
     fun bind(postItem: PostItem) {
         binding.postDescription.text = postItem.description
         binding.postTitle.text = postItem.title
@@ -120,6 +122,10 @@ class PostListAdapter(
             sharePost(it, position)
         }
 
+        holder.attendEventButton.setOnClickListener{
+            onAttendEvent(it, position)
+        }
+
         holder.bind(post)
     }
     fun setFilteredList(filteredList: ArrayList<PostItem>) {
@@ -142,6 +148,18 @@ class PostListAdapter(
         context.startActivity(Intent.createChooser(sendIntent, "Share via"))
     }
 
+
+    fun onAttendEvent(view: View, position: Int) {
+        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+        val post = postItems[position]
+
+        if (currentUserUid != null) {
+            Timber.d("Current User UID: %s", currentUserUid)
+            val attendingUsersRef = eventRef.child("attending-users").child(currentUserUid)
+
+            attendingUsersRef.setValue(true)
+        }
+    }
 }
 
 
