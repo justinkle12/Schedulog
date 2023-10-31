@@ -54,5 +54,6 @@
     <!--  feed strings  -->
     <string name="share_event_button_text">Share Event</string>
     <string name="attend_event_button_text">Attend Event</string>
+    <string name="attending_event_button_text">Attending</string>
 
 </resources>

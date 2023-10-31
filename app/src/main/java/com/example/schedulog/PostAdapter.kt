@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.schedulog.databinding.PostItemBinding
@@ -18,6 +17,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 /* This class is responsible for holding onto an instance of the view and
  * binding the PostItem(post_item.xml) to the RecyclerView(fragment_feed.xml). */
@@ -28,11 +30,15 @@ class PostViewHolder (
 
     val shareButton = binding.platformShareButtonBtn
     val attendEventButton = binding.attendEventButtonBtn
+    val cancelAttendingEventButton = binding.attendingEventButtonBtn
     fun bind(postItem: PostItem) {
         binding.postDescription.text = postItem.description
         binding.postTitle.text = postItem.title
         loadUsername(postItem.user)
         displayTags(postItem.tags)
+        binding.textDate.text = millisecondDateToFormattedDate(postItem.date)
+        binding.textTime.text = postItem.startEndTime
+        isAttendingButton(postItem.eventKey)
         Glide.with(binding.root).load(postItem.imageURL).into(binding.postImage)
     }
 
@@ -92,6 +98,49 @@ class PostViewHolder (
             binding.tagsContainer.addView(tagTextView)
         }
     }
+
+    private fun millisecondDateToFormattedDate(milliseconds: Long): String {
+        val dateFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
+        val date = Date(milliseconds)
+        return dateFormat.format(date)
+    }
+
+    private fun isAttendingButton(eventKey: String) {
+        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+
+        if (currentUserUid != null) {
+            val eventRef = FirebaseDatabase.getInstance().reference.child("events").child(eventKey)
+            Timber.d("Current User UID: %s", currentUserUid)
+            val attendingUserRef = eventRef.child("attending-users").child(currentUserUid)
+
+            attendingUserRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        // Retrieve the value
+                        val value = dataSnapshot.value
+
+                        if (value == true){
+                            binding.attendingEventButtonText.visibility = View.VISIBLE
+                            binding.attendingEventButtonBtn.visibility = View.VISIBLE
+                        }
+                        else {
+                            binding.attendingEventButtonText.visibility = View.GONE
+                            binding.attendingEventButtonBtn.visibility = View.GONE
+                        }
+                    } else {
+                        binding.attendingEventButtonText.visibility = View.GONE
+                        binding.attendingEventButtonBtn.visibility = View.GONE
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle any errors here
+                }
+            })
+
+
+        }
+    }
 }
 
 
@@ -117,13 +166,18 @@ class PostListAdapter(
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         Timber.tag("PostListAdapter").i(postItems.toString())
         val post = postItems[position]
+        val postKey = post.eventKey
 
         holder.shareButton.setOnClickListener{
-            sharePost(it, position)
+            sharePost(it, post)
         }
 
         holder.attendEventButton.setOnClickListener{
-            onAttendEvent(it, position)
+            onAttendEvent(it, postKey)
+        }
+
+        holder.cancelAttendingEventButton.setOnClickListener {
+            cancelAttendedEvent(it, postKey)
         }
 
         holder.bind(post)
@@ -133,8 +187,7 @@ class PostListAdapter(
         notifyDataSetChanged()
     }
 
-    fun sharePost(view: View, position: Int) {
-        val post = postItems[position] // Get the post data for the clicked item
+    private fun sharePost(view: View, post: PostItem) {
 
         val postMessage = "Check out this awesome post: ${post.title} ${post.description}"
 
@@ -149,15 +202,27 @@ class PostListAdapter(
     }
 
 
-    fun onAttendEvent(view: View, position: Int) {
+    private fun onAttendEvent(view: View, eventKey: String) {
         val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
-        val post = postItems[position]
 
         if (currentUserUid != null) {
+            val eventRef = FirebaseDatabase.getInstance().reference.child("events").child(eventKey)
             Timber.d("Current User UID: %s", currentUserUid)
             val attendingUsersRef = eventRef.child("attending-users").child(currentUserUid)
 
             attendingUsersRef.setValue(true)
+        }
+    }
+
+    private fun cancelAttendedEvent(view: View, eventKey: String) {
+        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+
+        if (currentUserUid != null) {
+            val eventRef = FirebaseDatabase.getInstance().reference.child("events").child(eventKey)
+            Timber.d("Current User UID: %s", currentUserUid)
+            val attendingUsersRef = eventRef.child("attending-users").child(currentUserUid)
+
+            attendingUsersRef.setValue(false)
         }
     }
 }

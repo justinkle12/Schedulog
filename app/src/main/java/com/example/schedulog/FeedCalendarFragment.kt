@@ -94,6 +94,8 @@ class FeedCalendarFragment : Fragment() {
                         }
                     }
 
+                    postItemList.reverse()
+
                     // Update UI with the new postList
                     postListAdapter.notifyDataSetChanged()
                 }
@@ -124,6 +126,8 @@ class FeedCalendarFragment : Fragment() {
                         }
                     }
                 }
+
+                postItemList.reverse()
 
                 // Update UI with the new postList
                 postListAdapter.notifyDataSetChanged()

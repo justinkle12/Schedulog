@@ -77,6 +77,8 @@ class FeedFragment : Fragment() {
                     }
                 }
 
+                postItemList.reverse()
+
                 // Update UI with the new postList
                 postListAdapter.notifyDataSetChanged()
             }

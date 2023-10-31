@@ -66,7 +66,8 @@ class EventOptionsFragment : DialogFragment() {
                     "description" to eventDescription,
                     "date" to selectedDateInMillis,
                     "startEndTime" to eventStartEndTime,
-                    "tags" to selectedTags
+                    "tags" to selectedTags,
+                    "eventKey" to eventKey
                 )
 
                 // Store event details in Firebase under the user's UID
@@ -74,6 +75,17 @@ class EventOptionsFragment : DialogFragment() {
                     .child("events")
                     .child(eventKey)
                     .setValue(eventDetails)
+
+                // The user creating the event also has to attend to event
+                val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+
+                if (currentUserUid != null) {
+                    val eventRef = FirebaseDatabase.getInstance().reference.child("events").child(eventKey)
+                    Timber.d("Current User UID: %s", currentUserUid)
+                    val attendingUsersRef = eventRef.child("attending-users").child(currentUserUid)
+
+                    attendingUsersRef.setValue(true)
+                }
 
                 // Optionally, provide feedback to the user
                 // You can show a toast message or navigate to another screen
