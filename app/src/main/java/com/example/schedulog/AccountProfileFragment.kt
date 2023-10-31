@@ -48,6 +48,15 @@ class AccountProfileFragment : DialogFragment() {
             logoutUser()
         }
 
+        // In the AccountProfileFragment, add a click listener for the "Event History" button
+        val eventHistoryButton = binding.eventHistoryButtonBtn
+        eventHistoryButton.setOnClickListener {
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentContainer, EventHistoryFragment())
+            transaction.addToBackStack(null) // Optional: Add the fragment to the back stack
+            transaction.commit()
+        }
+
         //Find the Manage account info button and set its click listener
         val accountInfoButton = binding.manageAccButtonBtn
         accountInfoButton.setOnClickListener {
