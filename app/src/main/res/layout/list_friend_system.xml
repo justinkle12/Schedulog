@@ -1,0 +1,37 @@
+<!-- Updated list_item_friend.xml without avatar -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="friend"
+            type="com.example.schedulog.FriendSystemFragment.Friend" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/friendUsernameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="0dp"
+            android:text="@{friend.email}"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/friendEmailTextView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@{friend.username}"
+            android:textSize="18sp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@id/friendUsernameTextView" />
+    </RelativeLayout>
+</layout>

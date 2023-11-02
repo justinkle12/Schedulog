@@ -198,13 +198,13 @@
                     android:layout_marginStart="-2dp"
                     android:layout_marginTop="-2dp"
                     android:layout_width="343dp"
-                    android:layout_height="336dp"
+                    android:layout_height="300dp"
                     />
 
                 <EditText
                     android:id="@+id/event_description"
                     android:layout_width="343dp"
-                    android:layout_height="336dp"
+                    android:layout_height="300dp"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
                     android:background="@null"
@@ -248,6 +248,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/addtags_string" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/uploadImage"
+                android:layout_marginTop="496dp"
+                android:layout_marginStart="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <Button
+                    android:id="@+id/uploadImageButton"
+                    android:background="@drawable/_bg___createeventbutton_ek1_shape"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp" />
+
+                <TextView
+                    android:id="@+id/uploadImageText"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    android:textColor="@color/createeventtitle_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Choose Thumbnail" />
 
             </RelativeLayout>
 

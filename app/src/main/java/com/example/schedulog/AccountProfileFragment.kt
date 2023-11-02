@@ -48,6 +48,13 @@ class AccountProfileFragment : DialogFragment() {
             logoutUser()
         }
 
+        binding.friendsButton.setOnClickListener(){
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentContainer, FriendSystemFragment())
+            dismiss()
+            transaction.commit()
+        }
+
         //Find the Manage account info button and set its click listener
         val accountInfoButton = binding.manageAccButtonBtn
         accountInfoButton.setOnClickListener {
