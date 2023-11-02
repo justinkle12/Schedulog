@@ -81,6 +81,7 @@
         android:layout_width="159dp"
         android:layout_height="60dp"
         android:gravity="center"
+
         app:layout_constraintBottom_toBottomOf="@+id/user_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -93,14 +94,14 @@
             android:id="@+id/textDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/button_padding_margin"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="0dp"
-            android:layout_marginStart="@dimen/button_padding_margin"
-            tools:text="October 27, 2023"
             android:textColor="@color/_bg__logout_button_ek1_color"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:text="October 27, 2023" />
 
         <TextView
             android:id="@+id/textTime"
@@ -110,7 +111,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/button_padding_margin"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:textColor="@color/_bg__logout_button_ek1_color"
             android:textSize="14sp"
             tools:text="7pm-8pm" />
@@ -141,7 +142,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:padding="@dimen/image_margin"
+        android:padding="10dp"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -153,7 +154,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:padding="@dimen/image_margin"
+        android:padding="10dp"
         android:textColor="#000000"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -241,7 +242,36 @@
             android:gravity="center"
             android:text="@string/attend_event_button_text"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:visibility="invisible" />
+
+        <Button
+            android:id="@+id/attending_event_button_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/attending_event_button_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/attending_event_button"
+            android:gravity="center"
+            android:text="@string/attending_event_button_text"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            tools:visibility="visible" />
 
     </RelativeLayout>
 

@@ -79,6 +79,7 @@ class EventOptionsFragment : DialogFragment() {
                     "date" to selectedDateInMillis,
                     "startEndTime" to eventStartEndTime,
                     "tags" to selectedTags,
+                    "eventKey" to eventKey,
                     "imageURL" to "" // Initialize with an empty string
                 )
 
@@ -133,15 +134,27 @@ class EventOptionsFragment : DialogFragment() {
                         .child("events")
                         .child(eventKey)
                         .setValue(eventDetails)
-
-                    // Provide feedback to the user
-                    Toast.makeText(
-                        requireContext(),
-                        "Event successfully created!!!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    dismiss()
                 }
+
+                // The user creating the event also has to attend to event
+                val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+
+                if (currentUserUid != null) {
+                    val eventRef = FirebaseDatabase.getInstance().reference.child("events").child(eventKey)
+                    Timber.d("Current User UID: %s", currentUserUid)
+                    val attendingUsersRef = eventRef.child("attending-users").child(currentUserUid)
+
+                    attendingUsersRef.setValue(true)
+                }
+
+                // Optionally, provide feedback to the user
+                // You can show a toast message or navigate to another screen
+                Toast.makeText(
+                    requireContext(),
+                    "Event successfully created!!!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                dismiss()
             }
         }
 

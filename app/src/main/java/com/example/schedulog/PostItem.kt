@@ -9,4 +9,5 @@ data class PostItem(
     val date: Long = 0,
     val startEndTime: String = "",
     val tags: MutableList<String> = mutableListOf(),
+    val eventKey: String = "",
 )
