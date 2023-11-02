@@ -83,7 +83,11 @@ class EventOptionsFragment : DialogFragment() {
                     "imageURL" to "" // Initialize with an empty string
                 )
 
-
+                /*// The user creating the event also has to attend to event
+                val eventRef = FirebaseDatabase.getInstance().reference.child("events").child(eventKey)
+                Timber.d("user created an event and is attending it")
+                val attendingUsersRef = eventRef.child("attending-users").child(currentUser.uid)
+                attendingUsersRef.setValue(true)*/
 
                 if (selectedImageUri != null) {
                     // Define the path in Firebase Storage where the image should be stored (e.g., "images/users/UID")
@@ -106,6 +110,15 @@ class EventOptionsFragment : DialogFragment() {
                                         .child(eventKey)
                                         .setValue(eventDetails)
 
+                                    // User has to attend their own event. They are the host.
+                                    // Have to add this to both if and else statement for some reason.
+                                    FirebaseDatabase.getInstance().reference
+                                        .child("events")
+                                        .child(eventKey)
+                                        .child("attending-users")
+                                        .child(currentUser.uid)
+                                        .setValue(true)
+
                                     dismiss()
                                 }
                             }
@@ -124,16 +137,16 @@ class EventOptionsFragment : DialogFragment() {
                         .child("events")
                         .child(eventKey)
                         .setValue(eventDetails)
+
+                    // User has to attend their own event. They are the host.
+                    // Have to add this to both if and else statement for some reason.
+                    FirebaseDatabase.getInstance().reference
+                        .child("events")
+                        .child(eventKey)
+                        .child("attending-users")
+                        .child(currentUser.uid)
+                        .setValue(true)
                 }
-
-                // The user creating the event also has to attend to event
-
-                val eventRef = FirebaseDatabase.getInstance().reference.child("events").child(eventKey)
-                Timber.d("Current User UID: %s", currentUser.uid)
-                val attendingUsersRef = eventRef.child("attending-users").child(currentUser.uid)
-
-                attendingUsersRef.setValue(true)
-
 
                 // Optionally, provide feedback to the user
                 // You can show a toast message or navigate to another screen
