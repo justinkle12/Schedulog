@@ -83,12 +83,6 @@ class EventOptionsFragment : DialogFragment() {
                     "imageURL" to "" // Initialize with an empty string
                 )
 
-                /*// The user creating the event also has to attend to event
-                val eventRef = FirebaseDatabase.getInstance().reference.child("events").child(eventKey)
-                Timber.d("user created an event and is attending it")
-                val attendingUsersRef = eventRef.child("attending-users").child(currentUser.uid)
-                attendingUsersRef.setValue(true)*/
-
                 if (selectedImageUri != null) {
                     // Define the path in Firebase Storage where the image should be stored (e.g., "images/users/UID")
                     val imagePath = "images/users/${currentUser.uid}/${eventKey}.jpg"
