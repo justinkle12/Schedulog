@@ -54,6 +54,11 @@ class AccountProfileFragment : DialogFragment() {
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainer, EventHistoryFragment())
             transaction.addToBackStack(null) // Optional: Add the fragment to the back stack
+            
+        binding.friendsButton.setOnClickListener(){
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentContainer, FriendSystemFragment())
+            dismiss()
             transaction.commit()
         }
 

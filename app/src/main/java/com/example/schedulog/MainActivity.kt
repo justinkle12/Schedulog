@@ -1,7 +1,9 @@
 package com.example.schedulog
 
+import android.net.Uri
 import com.example.schedulog.AccountProfileFragment
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
@@ -9,17 +11,20 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.schedulog.databinding.ActivityMainBinding
+import com.squareup.picasso.Picasso
 
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         val drawerLayout = binding.drawerLayout
         val navigationView = binding.navigationView
         val btnHamburger = binding.btnHamburger
+
+
 
         //drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
@@ -41,6 +46,13 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_item_2 -> {
                     val fragment = FeedAndCalendarFragment()
+                    val transaction = supportFragmentManager.beginTransaction()
+                    transaction.replace(R.id.fragmentContainer, fragment)
+                    transaction.addToBackStack(null) // Optional, for back navigation
+                    transaction.commit()
+                }
+                R.id.nav_item_3 -> {
+                    val fragment = TestFeedFragment()
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.replace(R.id.fragmentContainer, fragment)
                     transaction.addToBackStack(null) // Optional, for back navigation
