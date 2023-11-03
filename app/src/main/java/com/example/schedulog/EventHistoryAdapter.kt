@@ -24,7 +24,7 @@ class EventHistoryAdapter(
 
             // Convert the Long date to a formatted String and set it
             val date = Date(event.date)
-            val dateFormat = SimpleDateFormat("MM/dd/yyyyob") // Change the format as needed
+            val dateFormat = SimpleDateFormat("MM/dd/yyyy") // Change the format as needed
             val dateString = dateFormat.format(date)
             binding.eventHistoryDate.text = dateString
 

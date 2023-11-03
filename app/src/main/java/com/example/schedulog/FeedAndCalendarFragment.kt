@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.schedulog.databinding.FragmentFeedAndCalendarBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import timber.log.Timber
 
 
 class FeedAndCalendarFragment : Fragment() {
@@ -40,6 +41,7 @@ class FeedAndCalendarFragment : Fragment() {
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
+                Timber.tag(TAG).d("Tab Selected %s", tab.toString())
                 // Handle tab selection here, if needed
             }
 
@@ -48,7 +50,7 @@ class FeedAndCalendarFragment : Fragment() {
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                // Handle tab reselection here, if needed
+                Timber.tag(TAG).d("Tab Resumed %s", tab.toString() )
             }
         })
 

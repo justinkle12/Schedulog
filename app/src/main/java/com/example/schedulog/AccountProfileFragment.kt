@@ -54,12 +54,13 @@ class AccountProfileFragment : DialogFragment() {
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainer, EventHistoryFragment())
             transaction.addToBackStack(null) // Optional: Add the fragment to the back stack
+            transaction.commit()
         }
             
         binding.friendsButton.setOnClickListener(){
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainer, FriendSystemFragment())
-            dismiss()
+            transaction.addToBackStack(null) // Optional: Add the fragment to the back stack
             transaction.commit()
         }
 
@@ -103,7 +104,7 @@ class AccountProfileFragment : DialogFragment() {
         // Replace R.id.fragmentContainer with the ID of the container where you want to display the login fragment
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, AccountInfoFragment())
-        dismiss()
+        transaction.addToBackStack(null) // Optional: Add the fragment to the back stack
         transaction.commit()
     }
 
