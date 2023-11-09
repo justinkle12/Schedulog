@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import com.example.schedulog.databinding.FragmentRateUserDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import timber.log.Timber
 
 class RateUserDialogFragment : BottomSheetDialogFragment() {
@@ -26,6 +29,8 @@ class RateUserDialogFragment : BottomSheetDialogFragment() {
         val ratingBar = binding.ratingBar
         val reviewEditText = binding.reviewEditText
         val submitButton = binding.submitButton
+        val userId = arguments?.getString("userId") ?: ""
+
 
         // Set a click listener for the submit button
         submitButton.setOnClickListener {
@@ -33,9 +38,9 @@ class RateUserDialogFragment : BottomSheetDialogFragment() {
             val rating = ratingBar.rating
             val review = reviewEditText.text.toString()
 
+            // Load username then call send rating function
             // Pass the rating and review to your function to send to the database
-            sendUserRating("bryant88", rating, review)            // TODO fix hard coding. Need to get ratedUserId
-            /*sendUserRating(ratedUserId, rating, review)*/                 // Original method
+            loadUsernameFromUserId({username -> sendUserRating(username, rating, review)}, userId)
 
             // Close the dialog
             dismiss()
@@ -44,14 +49,40 @@ class RateUserDialogFragment : BottomSheetDialogFragment() {
         return view
     }
 
-    private fun sendUserRating(ratedUserId: String, rating: Float, review: String) {
+    private fun loadUsernameFromUserId(callback: (String) -> Unit, userId: String) {
+
+        Timber.tag(TAG).d("loading username from profileId: %s", userId)
+        // Reference to the "users" node in the database
+        val userRef = FirebaseDatabase.getInstance().getReference("users/$userId")
+        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val profileUsername = dataSnapshot.child("username").getValue(String::class.java)
+
+                    if (profileUsername != null) {
+                        callback(profileUsername)
+                    }
+
+                } else {
+                    Timber.tag(TAG).d("The username does not exist in the database")
+                    // The username does not exist in the database
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle database error
+            }
+        })
+    }
+
+    private fun sendUserRating(ratedUsername: String, rating: Float, review: String) {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
 
         if (currentUserId != null && rating in 0.0..5.0) {
                 // Get Firebase instance and path to ratings data
                 val database = FirebaseDatabase.getInstance()
                 val userRatingsRef: DatabaseReference =
-                    database.getReference("user_ratings/$ratedUserId/$currentUserId")
+                    database.getReference("user_ratings/$ratedUsername/$currentUserId")
 
                 // Processing rater's data
                 val timestamp = System.currentTimeMillis()
@@ -70,8 +101,12 @@ class RateUserDialogFragment : BottomSheetDialogFragment() {
 
     companion object {
         private const val TAG = "RateUserDialogFragment"
-        fun newInstance(): RateUserDialogFragment {
-            return RateUserDialogFragment()
+        fun newInstance(userId: String): RateUserDialogFragment {
+            val fragment = RateUserDialogFragment()
+            val args = Bundle()
+            args.putString("userId", userId)
+            fragment.arguments = args
+            return fragment
         }
     }
 }

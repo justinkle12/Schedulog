@@ -35,7 +35,7 @@ class FeedCalendarFragment : Fragment() {
 
         // Initialize variables
         val postItemList = ArrayList<PostItem>()
-        val postListAdapter = PostListAdapter(postItemList)
+        val postListAdapter = PostListAdapter(requireContext(), postItemList)
         val recyclerView = binding.calendarGrid
 
         // Initialize Calendar

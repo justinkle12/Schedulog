@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -31,6 +32,10 @@ class PostViewHolder (
     val shareButton = binding.platformShareButtonBtn
     val attendEventButton = binding.attendEventButtonBtn
     val cancelAttendingEventButton = binding.attendingEventButtonBtn
+    val userPictureButton = binding.userPictureBtn
+    val userFullnameButton = binding.userFullnameBtn
+    val usernameButton = binding.usernameBtn
+
     fun bind(postItem: PostItem) {
         binding.postDescription.text = postItem.description
         binding.postTitle.text = postItem.title
@@ -147,13 +152,14 @@ class PostViewHolder (
 /* This class is responsible for providing the PostViewHolder instances with a PostItem.
  * Also responsible for the communicating between RecyclerView and data. */
 class PostListAdapter(
+    private val context: Context,
     private var postItems: List<PostItem>
 ) : RecyclerView.Adapter<PostViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): PostViewHolder {
-        val context=  parent.context
+        val context = parent.context
         val inflater = LayoutInflater.from(parent.context)
         val binding = PostItemBinding.inflate(inflater, parent, false)
         return PostViewHolder(binding, context)
@@ -178,6 +184,22 @@ class PostListAdapter(
 
         holder.cancelAttendingEventButton.setOnClickListener {
             cancelAttendedEvent(it, postKey)
+        }
+
+        // Three ways a user can go to another profile
+        holder.userPictureButton.setOnClickListener {
+            val userProfileFragment = UserProfileFragment.newInstance(post.user)
+            userProfileFragment.show((context as AppCompatActivity).supportFragmentManager, "UserProfileFragment")
+        }
+
+        holder.userFullnameButton.setOnClickListener {
+            val userProfileFragment = UserProfileFragment.newInstance(post.user)
+            userProfileFragment.show((context as AppCompatActivity).supportFragmentManager, "UserProfileFragment")
+        }
+
+        holder.usernameButton.setOnClickListener {
+            val userProfileFragment = UserProfileFragment.newInstance(post.user)
+            userProfileFragment.show((context as AppCompatActivity).supportFragmentManager, "UserProfileFragment")
         }
 
         holder.bind(post)

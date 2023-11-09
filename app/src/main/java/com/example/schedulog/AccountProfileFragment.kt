@@ -22,7 +22,6 @@ class AccountProfileFragment : DialogFragment() {
     private lateinit var mAuth: FirebaseAuth
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,11 +34,17 @@ class AccountProfileFragment : DialogFragment() {
         mAuth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
 
+        // Get the current user's UID
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val uid = currentUser?.uid
+
         // Load and display the current user's account username
         loadAccountUsername()
 
-        // Load and display the rating for the current user
-        loadAccountRating()
+        // Get username then load and display the rating for the current user
+        if (uid != null) {
+            loadUsernameFromUserId({username -> loadAccountRating(username)}, uid)
+        }
 
         // Find the logout button and set its click listener
         val logoutButton = binding.logoutButtonBtn
@@ -57,7 +62,7 @@ class AccountProfileFragment : DialogFragment() {
             transaction.commit()
         }
             
-        binding.friendsButton.setOnClickListener(){
+        binding.friendsButton.setOnClickListener {
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainer, FriendSystemFragment())
             transaction.addToBackStack(null) // Optional: Add the fragment to the back stack
@@ -69,13 +74,6 @@ class AccountProfileFragment : DialogFragment() {
         accountInfoButton.setOnClickListener {
             // Call the logout function
             navigateUserToAccountInfo()
-        }
-
-        //Bind Write a Review button and set its click listener
-        val writeReviewButton = binding.buttonWriteReview
-        writeReviewButton.setOnClickListener {
-            val dialogFragment = RateUserDialogFragment.newInstance()
-            dialogFragment.show(parentFragmentManager, "RateUserDialogFragment")
         }
 
         fetchCurrentUserUsername { username ->
@@ -125,14 +123,18 @@ class AccountProfileFragment : DialogFragment() {
             // Create a ChildEventListener to listen for changes in the "username" field
             val childEventListener = object : ChildEventListener {
                 override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
-                    val userData = dataSnapshot.value as Map<*, *>?
-                    val username = userData?.get("username") as String?
+                    val username = dataSnapshot.child("username").getValue(String::class.java)
+                    val firstName = dataSnapshot.child("first_name").getValue(String::class.java)
+                    val lastName = dataSnapshot.child("last_name").getValue(String::class.java)
+                    val email = dataSnapshot.child("email").getValue(String::class.java)
 
-                    if (username != null && userData?.get("email") == currentUser.email) {
+                    val fullName = "$firstName $lastName"
+                    if (username != null && email == currentUser.email) {
                         Timber.tag(TAG).d("Username: %s", username)
 
                         // Set the retrieved username in the binding
                         binding.username.text = username
+                        binding.userFirstLastName.text = fullName
                     }
                 }
 
@@ -193,9 +195,35 @@ class AccountProfileFragment : DialogFragment() {
             })
         }
     }
-    private fun loadAccountRating(){
-        val ratedUserId = "bryant88" //TODO Replace with the userId with rated user
-        val ratingsRef = FirebaseDatabase.getInstance().getReference("user_ratings/$ratedUserId")
+
+    private fun loadUsernameFromUserId(callback: (String) -> Unit, userId: String) {
+
+        Timber.tag(TAG).d("loading username from profileId: %s", userId)
+        // Reference to the "users" node in the database
+        val userRef = FirebaseDatabase.getInstance().getReference("users/$userId")
+        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val profileUsername = dataSnapshot.child("username").getValue(String::class.java)
+
+                    if (profileUsername != null) {
+                        callback(profileUsername)
+                    }
+
+                } else {
+                    Timber.tag(TAG).d("The username does not exist in the database")
+                    // The username does not exist in the database
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle database error
+            }
+        })
+    }
+
+    private fun loadAccountRating(username: String){
+        val ratingsRef = FirebaseDatabase.getInstance().getReference("user_ratings/$username")
 
         ratingsRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -218,10 +246,10 @@ class AccountProfileFragment : DialogFragment() {
                     val averageRatingTextView = String.format("%.2f", averageRating)
                     binding.textValueRating.text = averageRatingTextView
                     binding.ratedUserBar.rating = averageRating.toFloat()
-                    Timber.tag(TAG).i("loadAccountRating | %s rating: %s", ratedUserId, averageRatingTextView)
+                    Timber.tag(TAG).i("loadAccountRating | %s rating: %s", username, averageRatingTextView)
                 } else {
                     // Handle the case where there are no ratings
-                    Timber.tag(TAG).i("loadAccountRating | %s has no ratings.", ratedUserId)
+                    Timber.tag(TAG).i("loadAccountRating | %s has no ratings.", username)
                 }
             }
 
