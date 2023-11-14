@@ -18,7 +18,8 @@ class EventHistoryFragment : Fragment() {
         val description: String? = null,
         val startEndTime: String? = null,
         val title: String? = null,
-        val user: String? = null
+        val user: String? = null,
+        val isAttending: Boolean = false // New property for attendance status
     ) {
         constructor() : this("", 0, "", "", "")
     }
@@ -76,7 +77,9 @@ class EventHistoryFragment : Fragment() {
                             attendingUsersRef.addValueEventListener(object : ValueEventListener {
                                 override fun onDataChange(snapshot: DataSnapshot) {
                                     // Check if the user is attending this event
-                                    if (snapshot.exists()) {
+                                    val isAttending = snapshot.getValue(Boolean::class.java) ?: false
+
+                                    if (isAttending) {
                                         val event = eventDataSnapshot.getValue(Event::class.java)
 
                                         if (event != null) {
@@ -86,7 +89,8 @@ class EventHistoryFragment : Fragment() {
                                                 event.description,
                                                 event.startEndTime,
                                                 event.title,
-                                                event.user
+                                                event.user,
+                                                isAttending
                                             )
                                             eventList.add(eventWithKey)
                                             adapter.notifyDataSetChanged() // Notify the adapter of the data change
