@@ -1,9 +1,6 @@
 package com.example.schedulog
 
-import android.net.Uri
-import com.example.schedulog.AccountProfileFragment
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
