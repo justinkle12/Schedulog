@@ -24,6 +24,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import twitter4j.TwitterException
+import twitter4j.v1.StatusUpdate
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -272,15 +274,15 @@ class PostListAdapter(
             // Implement logic with image through twitter API
 
             // Depreciated version of posting tweets using twitter4j and twitter APIv1.1
-            /*GlobalScope.launch(Dispatchers.Main){
-            val success = withContext(Dispatchers.IO){
+            GlobalScope.launch(Dispatchers.Main){
+            val result = withContext(Dispatchers.IO){
                 val twitter = (context.applicationContext as SchedulogApplication).getTwitterInstance()
 
                 try {
                     // Create a StatusUpdate object with the message and image URL
                     val statusUpdate = StatusUpdate.of(message)
-                    val imageUri = Uri.parse(post.imageURL)
-                    //statusUpdate.attachmentUrl(post.imageURL)
+                    //val imageUri = Uri.parse(imageURL)
+                    statusUpdate.attachmentUrl(imageURL)
 
                     // Post the tweet
                     val status = twitter.v1().tweets().updateStatus(statusUpdate)
@@ -299,7 +301,7 @@ class PostListAdapter(
                     e.printStackTrace()
                 }
             }
-        }*/
+            }
         }
     }
 
