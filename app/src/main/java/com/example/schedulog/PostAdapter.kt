@@ -227,11 +227,10 @@ class PostListAdapter(
         val popupMenu = PopupMenu(view.context, view)
         popupMenu.menuInflater.inflate(R.menu.share_menu, popupMenu.menu)
 
-        val message = "Check out this awesome post: ${post.title} ${post.description}"
+        val message = "Check out my post from Schedulog: ${post.title} ${post.description}"
 
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.share_facebook -> shareToFacebook(post.imageURL, message, view)
                 R.id.share_twitter -> shareToTwitter(post.imageURL, message, view)
                 R.id.share_other -> shareToOther(post.imageURL, message, view)
                 // Add other cases for additional platforms
@@ -239,23 +238,6 @@ class PostListAdapter(
             true
         }
         popupMenu.show()
-    }
-
-    private fun shareToFacebook(imageURL: String, message: String, view: View) {
-        // Implement Facebook sharing logic
-        if(imageURL == ""){
-            val sendIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                type = "text/plain"
-                putExtra(Intent.EXTRA_TEXT, message)
-            }
-
-            val context = view.context
-            context.startActivity(Intent.createChooser(sendIntent, "Share via"))
-        }
-        else{
-            // Implement logic with image through facebook API
-        }
     }
 
     private fun shareToTwitter(imageURL: String, message: String, view: View) {
