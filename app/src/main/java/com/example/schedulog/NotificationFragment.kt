@@ -121,48 +121,6 @@ class NotificationFragment : Fragment() {
 
     }
 
-
-
-
-    /*
-        if (eventKey != null) {
-            val attendingUsersRef = FirebaseDatabase.getInstance().reference
-                .child("events").child(eventKey)
-                .child("attending-users")
-                .child(currentUserUid)
-
-            attendingUsersRef.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    // Check if the user is attending this event
-                    val isAttending = snapshot.getValue(Boolean::class.java) ?: false
-
-                    if (isAttending) {
-                        val event = eventDataSnapshot.getValue(EventHistoryFragment.Event::class.java)
-
-        private fun isUserAttendingEvent(event: Event, userId: String, callback: (Boolean) -> Unit) {
-            val attendingUsersRef = FirebaseDatabase.getInstance().reference
-                .child("events").child(event.key)
-                .child("attending-users")
-                .child(userId)
-
-            attendingUsersRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    // Check if the user is attending this event
-                    val isAttending = snapshot.getValue(Boolean::class.java) ?: false
-                    callback(isAttending)
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    // Handle any errors
-                    callback(false) // Default to false in case of an error
-                }
-            })
-        }
-
-     */
-
-
-
     private fun displayEventsForToday() {
         val today = Calendar.getInstance()
         today.time = Date()
@@ -179,6 +137,9 @@ class NotificationFragment : Fragment() {
 
         val titleTextView: TextView = requireView().findViewById(R.id.textTitle)
         val notificationContent: LinearLayout = requireView().findViewById(R.id.notificationContent)
+
+        // Clear existing views in notificationContent
+        notificationContent.removeAllViews()
 
         if (eventsForToday.isNotEmpty()) {
             // User has events for today
@@ -202,6 +163,7 @@ class NotificationFragment : Fragment() {
             titleTextView.text = "No events today"
         }
     }
+
 
 
     // Function to check if two Calendar instances represent the same day

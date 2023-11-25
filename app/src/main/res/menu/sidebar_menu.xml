@@ -7,6 +7,9 @@
         android:title="Feed" />
     <item
         android:id="@+id/nav_item_3"
+        android:title="Schedule" />
+    <item
+        android:id="@+id/nav_item_4"
         android:title="Notifications" />
 
     <!-- Add more items as needed -->
