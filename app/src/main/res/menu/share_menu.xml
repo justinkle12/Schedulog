@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/share_twitter"
+        android:title="@string/twittertext_string" />
+    <item
+        android:id="@+id/share_other"
+        android:title="@string/othertext_string" />
+    <!-- Add other share options as needed -->
+</menu>

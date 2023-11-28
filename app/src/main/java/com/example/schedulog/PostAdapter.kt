@@ -2,10 +2,12 @@ package com.example.schedulog
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -17,7 +19,13 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
+import twitter4j.TwitterException
+import twitter4j.v1.StatusUpdate
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -29,6 +37,7 @@ class PostViewHolder (
     private val context: Context,
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    // Initialize buttons for logic
     val shareButton = binding.platformShareButtonBtn
     val attendEventButton = binding.attendEventButtonBtn
     val cancelAttendingEventButton = binding.attendingEventButtonBtn
@@ -209,18 +218,101 @@ class PostListAdapter(
         notifyDataSetChanged()
     }
 
+    /* Note: Posting the reddit requires a fixed subreddit.
+    *  Would need to create a method that can select a subreddit :(
+    *
+    *  Note: Posting on Twitter would require API keys. */
     private fun sharePost(view: View, post: PostItem) {
 
-        val postMessage = "Check out this awesome post: ${post.title} ${post.description}"
+        val popupMenu = PopupMenu(view.context, view)
+        popupMenu.menuInflater.inflate(R.menu.share_menu, popupMenu.menu)
 
-        val sendIntent = Intent().apply {
-            action = Intent.ACTION_SEND
-            type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, postMessage)
+        val message = "Check out my post from Schedulog: ${post.title} ${post.description}"
+
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.share_twitter -> shareToTwitter(post.imageURL, message, view)
+                R.id.share_other -> shareToOther(post.imageURL, message, view)
+                // Add other cases for additional platforms
+            }
+            true
         }
+        popupMenu.show()
+    }
 
-        val context = view.context
-        context.startActivity(Intent.createChooser(sendIntent, "Share via"))
+    private fun shareToTwitter(imageURL: String, message: String, view: View) {
+        // Implement Twitter sharing logic
+        if(imageURL == ""){
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, message)
+            }
+
+            val context = view.context
+            context.startActivity(Intent.createChooser(sendIntent, "Share via"))
+        }
+        else {
+            // Implement logic with image through twitter API
+
+            // Depreciated version of posting tweets using twitter4j and twitter APIv1.1
+            GlobalScope.launch(Dispatchers.Main){
+            val result = withContext(Dispatchers.IO){
+                val twitter = (context.applicationContext as SchedulogApplication).getTwitterInstance()
+
+                try {
+                    // Create a StatusUpdate object with the message and image URL
+                    val statusUpdate = StatusUpdate.of(message)
+                    //val imageUri = Uri.parse(imageURL)
+                    statusUpdate.attachmentUrl(imageURL)
+
+                    // Post the tweet
+                    val status = twitter.v1().tweets().updateStatus(statusUpdate)
+
+
+                    if (status.inReplyToStatusId > 0) {
+                        // Tweet was successfully posted
+                        Timber.d("Tweet posted: ${status.id}")
+                    } else {
+                        // Handle the case where the tweet was not posted successfully
+                        Timber.d("Tweet was not posted: ${status.id}")
+                    }
+
+                } catch (e: TwitterException) {
+                    // Handle exceptions
+                    e.printStackTrace()
+                }
+            }
+            }
+        }
+    }
+
+    private fun shareToOther(imageURL: String, message: String, view: View) {
+        // If there is no image then post the message
+        // Else, post the image + message
+        if(imageURL == ""){
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, message)
+            }
+
+            val context = view.context
+            context.startActivity(Intent.createChooser(sendIntent, "Share via"))
+        }
+        else{
+            val imageUri = Uri.parse(imageURL)
+
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                type = "image/*"
+                putExtra(Intent.EXTRA_STREAM, imageUri)
+                putExtra(Intent.EXTRA_TEXT, message)
+            }
+
+            val context = view.context
+            context.startActivity(Intent.createChooser(sendIntent, "Share via"))
+        }
     }
 
 
