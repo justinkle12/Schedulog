@@ -37,7 +37,7 @@ class FeedCalendarFragment : Fragment() {
 
         // Initialize variables
         val postItemList = ArrayList<PostItem>()
-        val postListAdapter = PostListAdapter(requireContext(), postItemList)
+        val postListAdapter = PostListAdapter(requireContext(), postItemList,requireActivity().supportFragmentManager)
         val recyclerView = binding.calendarGrid
         val compareButton = binding.compareButton
         val selectedDateInMillis : Long = 0

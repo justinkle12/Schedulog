@@ -11,4 +11,5 @@ data class UserItem(
     val attendingUsers: Map<String, Boolean> = emptyMap(),
 
 
+
 )

@@ -10,4 +10,6 @@ data class PostItem(
     val startEndTime: String = "",
     val tags: MutableList<String> = mutableListOf(),
     val eventKey: String = "",
+    val timestamp: Long = 0,
+    val average_rating: Float = 0.0f,
 )

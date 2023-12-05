@@ -11,6 +11,7 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.schedulog.databinding.PostItemBinding
@@ -35,6 +36,7 @@ import java.util.Locale
 class PostViewHolder (
     private val binding: PostItemBinding,
     private val context: Context,
+    private val fragmentManager: FragmentManager
 ) : RecyclerView.ViewHolder(binding.root) {
 
     // Initialize buttons for logic
@@ -53,7 +55,37 @@ class PostViewHolder (
         binding.textDate.text = millisecondDateToFormattedDate(postItem.date)
         binding.textTime.text = postItem.startEndTime
         isAttendingButton(postItem.eventKey)
+        binding.postDescription.text = postItem.description
+
+        //review button on click listener
+        val writeReviewButton = binding.buttonWriteReview
+
+        writeReviewButton.setOnClickListener {
+
+            val dialogFragment = RatePostDialogFragment.newInstance(postItem)
+
+            dialogFragment.show(fragmentManager, "RatePostDialogFragment")
+
+        }
+
+        binding.ratedUserBar.rating = postItem.average_rating
+        binding.textValueRating.text = postItem.average_rating.toString()
+
+        val myRatingRef = FirebaseDatabase.getInstance().getReference("post_ratings/${postItem.eventKey}/${FirebaseAuth.getInstance().currentUser?.uid}").child("rating")
+        myRatingRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val rating = dataSnapshot.value.toString()
+                binding.textValueRating2.text = rating
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
         Glide.with(binding.root).load(postItem.imageURL).into(binding.postImage)
+
+
+
     }
 
     private fun loadUsername(userId: String) {
@@ -162,7 +194,8 @@ class PostViewHolder (
  * Also responsible for the communicating between RecyclerView and data. */
 class PostListAdapter(
     private val context: Context,
-    private var postItems: List<PostItem>
+    private var postItems: List<PostItem>,
+    private val fragmentManager: FragmentManager
 ) : RecyclerView.Adapter<PostViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -171,7 +204,7 @@ class PostListAdapter(
         val context = parent.context
         val inflater = LayoutInflater.from(parent.context)
         val binding = PostItemBinding.inflate(inflater, parent, false)
-        return PostViewHolder(binding, context)
+        return PostViewHolder(binding, context, fragmentManager)
     }
 
     override fun getItemCount(): Int {
@@ -340,5 +373,7 @@ class PostListAdapter(
         }
     }
 }
+
+
 
 
