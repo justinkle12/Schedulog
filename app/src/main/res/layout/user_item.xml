@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--TODO Fix format for a single post-->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/textview_border"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/user_profile"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/_bg__avatar_ek1"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="@dimen/button_padding_margin"
+                android:layout_marginTop="@dimen/button_padding_margin"
+                android:layout_marginEnd="@dimen/button_padding_margin"
+                android:layout_marginBottom="@dimen/button_padding_margin"
+                android:scaleType="fitXY"
+                android:src="@drawable/user_profile"
+                app:shapeAppearanceOverlay="@style/ImageStyle_Corners_Rounded" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/user_first_last_name"
+            android:layout_width="155dp"
+            android:layout_height="22dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/button_padding_margin"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/button_padding_margin"
+            android:layout_marginBottom="0dp"
+            android:layout_toEndOf="@+id/avatar"
+            android:text="@string/user_first_last_name_string"
+            android:textColor="@color/_bg__logout_button_ek1_color"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="83dp"
+            android:layout_height="23dp"
+            android:layout_below="@+id/user_first_last_name"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/button_padding_margin"
+            android:layout_marginLeft="67dp"
+            android:layout_marginEnd="@dimen/button_padding_margin"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/avatar"
+            android:gravity="center_vertical"
+            android:text="@string/username_string"
+            android:textColor="@color/username_color"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/event_date_time"
+        android:layout_width="159dp"
+        android:layout_height="60dp"
+        android:gravity="left"
+        app:layout_constraintBottom_toBottomOf="@+id/user_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/user_profile"
+        app:layout_constraintTop_toTopOf="@+id/user_profile"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/textPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="0dp"
+            android:textColor="@color/_bg__logout_button_ek1_color"
+            android:textSize="12sp"
+            android:textStyle="bold|italic"
+            tools:text="Fortnite Party" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_date_time"
+        tools:visibility="visible">
+
+        <!-- TextView above the button -->
+        <TextView
+            android:id="@+id/attending_users_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="0dp"
+            android:gravity="center"
+            android:text="No users attending yet :("
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

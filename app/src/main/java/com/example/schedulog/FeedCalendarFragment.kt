@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,6 +16,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import timber.log.Timber
+import java.sql.Time
 import java.util.Calendar
 
 class FeedCalendarFragment : Fragment() {
@@ -37,6 +39,8 @@ class FeedCalendarFragment : Fragment() {
         val postItemList = ArrayList<PostItem>()
         val postListAdapter = PostListAdapter(requireContext(), postItemList)
         val recyclerView = binding.calendarGrid
+        val compareButton = binding.compareButton
+        val selectedDateInMillis : Long = 0
 
         // Initialize Calendar
         val calendarView = binding.calendarView
@@ -55,10 +59,15 @@ class FeedCalendarFragment : Fragment() {
         // Initialize Firebase reference
         val database = Firebase.database
         val postsRef = database.getReference("events")
+        compareButton.setOnClickListener {
+                Toast.makeText(requireContext(),"Please Select a Date",Toast.LENGTH_SHORT)
+        }
 
         // Listen for updates on selecting calendar dates
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             // When the user selects a different date, this callback is triggered
+
+
 
             // Create a Calendar instance and set it to the selected date
             val calendar = Calendar.getInstance()
@@ -67,6 +76,11 @@ class FeedCalendarFragment : Fragment() {
             // Get the selected date in milliseconds
             val selectedDateInMillis = calendar.timeInMillis
 
+            compareButton.setOnClickListener {
+                Timber.e(selectedDateInMillis.toString())
+                val dialogFragment = FeedCalendarCompareFragment.newInstance(selectedDateInMillis)
+                dialogFragment.show(parentFragmentManager, "FeedCalendarCompareFragment")
+            }
             // Update the CalendarView to display the selected date
             calendarView.date = selectedDateInMillis
 
@@ -79,6 +93,8 @@ class FeedCalendarFragment : Fragment() {
                 .endAt(endOfDate.toDouble())
 
             postItemList.clear() // Clear the list to avoid duplicates
+
+
 
             // Perform the query to find posts with the selected day's timestamp
             query.addListenerForSingleValueEvent(object : ValueEventListener {
