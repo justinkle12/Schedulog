@@ -16,6 +16,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import timber.log.Timber
+import java.sql.Time
 import java.util.Calendar
 
 class FeedCalendarFragment : Fragment() {
@@ -76,6 +77,7 @@ class FeedCalendarFragment : Fragment() {
             val selectedDateInMillis = calendar.timeInMillis
 
             compareButton.setOnClickListener {
+                Timber.e(selectedDateInMillis.toString())
                 val dialogFragment = FeedCalendarCompareFragment.newInstance(selectedDateInMillis)
                 dialogFragment.show(parentFragmentManager, "FeedCalendarCompareFragment")
             }

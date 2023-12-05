@@ -125,7 +125,7 @@ class FeedFragment : Fragment() {
     }
 
     companion object {
-        private const val TAG = "FeedFragment"
+        const val TAG = "FeedFragment"
     }
 
 }
