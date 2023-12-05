@@ -57,5 +57,10 @@
     <string name="attend_event_button_text">Attend Event</string>
     <string name="attending_event_button_text">Attending</string>
 
+    <string name="consumerKey">your_consumer_key</string>
+    <string name="consumerSecret">your_consumer_secret</string>
+    <string name="accessToken">your_access_token</string>
+    <string name="accessTokenSecret">your_access_token_secret</string>
+
 
 </resources>

@@ -24,7 +24,7 @@ class SchedulogApplication : Application() {    // This class contains global ap
 
         // Depreciated version of posting tweets using twitter4j and twitter APIv1.1
         twitterInstance = Twitter.newBuilder()
-            .oAuthConsumer(consumerKey, consumerSecret)
+           .oAuthConsumer(consumerKey, consumerSecret)
             .oAuthAccessToken(accessToken, accessTokenSecret)
             .build()
     }
@@ -32,7 +32,7 @@ class SchedulogApplication : Application() {    // This class contains global ap
 
     // Depreciated version of posting tweets using twitter4j and twitter APIv1.1
     fun getTwitterInstance(): Twitter {
-        // Return the pre-configured Twitter instance
+         //Return the pre-configured Twitter instance
         return twitterInstance
     }
 }
