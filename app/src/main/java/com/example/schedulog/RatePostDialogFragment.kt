@@ -37,6 +37,7 @@ class RatePostDialogFragment : BottomSheetDialogFragment() {
             val currentUser = FirebaseAuth.getInstance().currentUser
             val ratedUserId = currentUser?.uid //TODO Replace with the userId with rated user
             val postId = (arguments?.getString("post_id"))
+            Timber.e(postId + "This is post ID")
 
             // Pass the rating and review to your function to send to the database
             sendPostRating(postId.toString(), rating, review)            // TODO fix hard coding. Need to get ratedUserId

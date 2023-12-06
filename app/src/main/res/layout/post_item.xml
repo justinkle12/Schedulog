@@ -427,5 +427,46 @@ tools:visibility="visible">
     android:text="@string/button_write_a_review"
     android:textColor="@color/_bg__logout_button_ek1_color"
     android:textSize="16sp" />
+
 </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/audio_description"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/write_review_button"
+        tools:visibility="visible">
+
+        <Button
+            android:id="@+id/AudioDescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/transparent" />
+
+        <TextView
+            android:id="@+id/audio_description_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/rectangle_2_ek1_shape"
+            android:gravity="center"
+            android:text="Audio Description"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+
+    </RelativeLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

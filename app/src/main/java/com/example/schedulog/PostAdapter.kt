@@ -60,6 +60,11 @@ class PostViewHolder (
         //review button on click listener
         val writeReviewButton = binding.buttonWriteReview
 
+        val audioButton = binding.AudioDescription
+        audioButton.setOnClickListener {
+            val dialogFragment = AudioDescriptionDialogFragment.newInstance(postItem)
+            dialogFragment.show(fragmentManager, "AudioDescriptionDialogFragment")
+        }
         writeReviewButton.setOnClickListener {
 
             val dialogFragment = RatePostDialogFragment.newInstance(postItem)
@@ -82,6 +87,8 @@ class PostViewHolder (
                 TODO("Not yet implemented")
             }
         })
+
+
         Glide.with(binding.root).load(postItem.imageURL).into(binding.postImage)
 
 
