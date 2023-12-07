@@ -50,7 +50,7 @@
                 android:layout_height="73.6dp"
                 android:hint="@string/createeventtitle_string" />
 
-            <ImageView android:id="@+id/_sidebarbutton"
+            <ImageView android:id="@+id/backbutton"
                 android:src="@drawable/backarrow"
                 android:background="@drawable/_bg___createeventbutton_ek1_shape"
                 android:contentDescription="_sidebarbutton"
@@ -224,9 +224,9 @@
                 android:layout_height="wrap_content"
                 >
 
-                <Button
+                <View
                     android:id="@+id/addTagsbtn"
-                    android:background="@drawable/_bg___createeventbutton_ek1_shape"
+                    android:background="@drawable/rectangle_2_ek2_shape"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     android:layout_width="100dp"
@@ -244,24 +244,40 @@
                     android:layout_centerVertical="true"
                     android:gravity="center"
                     android:textSize="13sp"
-                    android:textColor="@color/createeventtitle_color"
+                    android:textColor="@color/_bg__menu_color"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/addtags_string" />
 
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="-20dp"
+                android:layout_alignTop="@id/uploadImage"
+                >
+                <ImageView
+                    android:id="@+id/imagePreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/uploadImage"
                 android:layout_marginTop="496dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="100dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 >
 
-                <Button
+
+
+                <View
                     android:id="@+id/uploadImageButton"
-                    android:background="@drawable/_bg___createeventbutton_ek1_shape"
+                    android:background="@drawable/rectangle_2_ek2_shape"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     android:layout_width="150dp"
@@ -273,10 +289,13 @@
                     android:layout_centerVertical="true"
                     android:gravity="center"
                     android:textSize="13sp"
-                    android:textColor="@color/createeventtitle_color"
+                    android:textColor="@color/_bg__menu_color"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Choose Thumbnail" />
+
+
+
 
             </RelativeLayout>
 
@@ -290,9 +309,9 @@
                 android:layout_height="wrap_content"
                 >
 
-                <Button
+                <View
                     android:id="@+id/create_event_button"
-                    android:background="@drawable/_bg___createeventbutton_ek1_shape"
+                    android:background="@drawable/rectangle_2_ek2_shape"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     android:layout_width="343dp"
@@ -310,7 +329,7 @@
                     android:layout_centerVertical="true"
                     android:gravity="center"
                     android:textSize="13sp"
-                    android:textColor="@color/createeventtitle_color"
+                    android:textColor="@color/_bg__menu_color"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/submit" />

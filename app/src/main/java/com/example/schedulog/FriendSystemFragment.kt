@@ -1,14 +1,15 @@
 package com.example.schedulog
 
-import FriendAdapter
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.schedulog.databinding.FragmentFriendSystemBinding
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,8 +18,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class FriendSystemFragment : Fragment() {
@@ -34,8 +33,9 @@ class FriendSystemFragment : Fragment() {
     private val friendsList = mutableListOf<Friend>()
 
     data class Friend(
-        val username: String,
-        val email: String
+        val uid: String,
+        val fullName: String,
+        val username: String
     )
 
     override fun onCreateView(
@@ -50,11 +50,13 @@ class FriendSystemFragment : Fragment() {
             .child(currentUser?.uid.toString())
             .child("friends")
 
-        adapter = FriendAdapter(friendsList)
+        adapter = FriendAdapter(requireContext(), friendsList)
         binding.friendsRecyclerView.adapter = adapter
         binding.friendsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+
         binding.addFriendButton.setOnClickListener {
+
             val friendUsername = binding.usernameInput.text.toString().trim()
             if (friendUsername.isNotEmpty()) {
                 addFriendByUsername(friendUsername)
@@ -64,10 +66,7 @@ class FriendSystemFragment : Fragment() {
         }
 
         // Use Coroutine to introduce a delay before loading friends
-        coroutineScope.launch {
-            delay(2000) // Delay for 1 second (adjust as needed)
-            loadFriends() // Load friends after the delay
-        }
+        loadFriends()
 
         return view
     }
@@ -86,6 +85,7 @@ class FriendSystemFragment : Fragment() {
                         binding.usernameInputLayout.error = null // Clear any previous error
                         binding.usernameInput.text?.clear() // Clear the input field
                     }
+
                 } else {
                     binding.usernameInputLayout.error = "Username not found"
                 }
@@ -96,7 +96,6 @@ class FriendSystemFragment : Fragment() {
             }
         })
     }
-
     private fun loadFriends() {
         friendsRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -112,15 +111,14 @@ class FriendSystemFragment : Fragment() {
                         friendDetailsRef.addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onDataChange(detailsSnapshot: DataSnapshot) {
                                 if (detailsSnapshot.exists()) {
-                                    // You can get the email and other details here
-                                    val email = detailsSnapshot.child("email").value.toString()
-                                    val username = detailsSnapshot.child("username").value.toString()
-                                    val friend = Friend(username, email)
+                                    val fname = detailsSnapshot.child("first_name").value.toString()
+                                    val lname = detailsSnapshot.child("last_name").value.toString()
+                                    val username = "@" + detailsSnapshot.child("username").value.toString()
+                                    val fullName = "$fname $lname"
+                                    val uid = detailsSnapshot.key
+                                    val friend = Friend(uid.toString(), fullName, username)
                                     friendsList.add(friend)
-                                    Timber.d(friend.email)
                                     Timber.d(friend.username)
-
-                                    // Notify the adapter that the data has changed
                                     adapter.notifyDataSetChanged()
                                 }
                             }
@@ -139,6 +137,7 @@ class FriendSystemFragment : Fragment() {
         })
         Timber.d("loadFriends() has been called!!!")
     }
+
 
 
 

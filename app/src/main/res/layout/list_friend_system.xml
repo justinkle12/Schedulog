@@ -12,26 +12,52 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/friendFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/friendUsernameTextView"
+        <View   android:id="@+id/rectangle_2"
+            android:background="@drawable/rectangle_2_shape"
+            android:alpha="0.60000002384186"
+            android:layout_marginStart="-0dp"
+            android:layout_marginTop="-0dp"
             android:layout_width="match_parent"
+            android:layout_height="75dp" />
+
+        <ImageView
+            android:id="@+id/friendImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/user_profile"/>
+
+        <ImageView
+            android:id="@+id/xbutton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="340dp"
+            android:layout_marginTop="20dp"
+            android:rotation="45"
+            android:src="@drawable/gradient_plus_icon" />
+
+        <TextView
+            android:id="@+id/friendFullNameTextView"
+            android:layout_width="200dp"
             android:layout_height="30dp"
-            android:layout_marginTop="0dp"
-            android:text="@{friend.email}"
+            android:textColor="@color/white"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="80dp"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/friendEmailTextView"
-            android:layout_width="match_parent"
+            android:id="@+id/friendUsernameTextView"
+            android:layout_width="200dp"
             android:layout_height="30dp"
-            android:text="@{friend.username}"
-            android:textSize="18sp"
-            android:layout_marginTop="40dp"
-            app:layout_constraintTop_toBottomOf="@id/friendUsernameTextView" />
+            android:textColor="@color/username_color"
+            android:textSize="14sp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="80dp"
+            app:layout_constraintTop_toBottomOf="@id/friendFullNameTextView" />
     </RelativeLayout>
 </layout>

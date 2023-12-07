@@ -51,6 +51,10 @@ class EventOptionsFragment : DialogFragment() {
             openImagePicker()
         }
 
+        binding.backbutton.setOnClickListener{
+            dismiss()
+        }
+
         binding.createEventButton.setOnClickListener {
             // Get the user input from EditText fields
             val eventTitle = binding.eventTitleText.text.toString()
@@ -84,7 +88,7 @@ class EventOptionsFragment : DialogFragment() {
                 )
 
                 if (selectedImageUri != null) {
-                    // Define the path in Firebase Storage where the image should be stored (e.g., "images/users/UID")
+                    // Define the path in Firebase Storage where the image shouontld be stored (e.g., "images/users/UID")
                     val imagePath = "images/users/${currentUser.uid}/${eventKey}.jpg"
 
                     // Upload the selected image to Firebase Storage
@@ -202,6 +206,13 @@ class EventOptionsFragment : DialogFragment() {
         if (requestCode == PICK_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             selectedImageUri = data?.data
             // Display the selected image to the user if needed
+        }
+        if (requestCode == PICK_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            selectedImageUri = data?.data
+            binding.imagePreview.visibility = View.VISIBLE
+
+            // Set the selected image to the ImageView using ViewBinding
+            binding.imagePreview.setImageURI(selectedImageUri)
         }
     }
 

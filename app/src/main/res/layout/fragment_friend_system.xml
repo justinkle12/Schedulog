@@ -19,11 +19,33 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Button to add a friend -->
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Friend"
-        android:id="@+id/addFriendButton" />
+    <RelativeLayout android:id="@+id/addFriendButton"
+        android:layout_marginStart="0dp"
+        android:layout_width="167dp"
+        android:layout_height="52dp"
+        >
+
+        <View   android:id="@+id/rectangle_2_ek2"
+            android:background="@drawable/rectangle_2_ek2_shape"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView android:id="@+id/register"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal|center"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:textColor="@color/_bg__menu_color"
+            android:layout_marginLeft="39dp"
+            android:layout_marginTop="18dp"
+            android:layout_width="91.3dp"
+            android:layout_height="20.3dp"
+            android:text="ADD FRIEND"
+            />
+
+    </RelativeLayout>
 
     <!-- RecyclerView to display the list of friends -->
     <androidx.recyclerview.widget.RecyclerView
