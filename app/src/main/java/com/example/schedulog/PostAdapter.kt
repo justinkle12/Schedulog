@@ -62,8 +62,22 @@ class PostViewHolder (
 
         val audioButton = binding.AudioDescription
         audioButton.setOnClickListener {
-            val dialogFragment = AudioDescriptionDialogFragment.newInstance(postItem)
-            dialogFragment.show(fragmentManager, "AudioDescriptionDialogFragment")
+            val currentUser = FirebaseAuth.getInstance().currentUser
+            val userId = currentUser?.uid //TODO Replace with the userId with rated user
+            if(postItem.user != userId){
+                val dialogFragment = AudioDescriptionListenerDialogFragment.newInstance(postItem)
+                dialogFragment.show(fragmentManager, "AudioDescriptionListenerDialogFragment")
+
+            }else{
+                val dialogFragment = AudioDescriptionDialogFragment.newInstance(postItem)
+                dialogFragment.show(fragmentManager, "AudioDescriptionDialogFragment")
+
+            }
+
+
+
+
+
         }
         writeReviewButton.setOnClickListener {
 

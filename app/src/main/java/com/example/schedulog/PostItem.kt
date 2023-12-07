@@ -12,4 +12,5 @@ data class PostItem(
     val eventKey: String = "",
     val timestamp: Long = 0,
     val average_rating: Float = 0.0f,
+    val audioUrl: String = "",
 )

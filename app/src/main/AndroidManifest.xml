@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Schedulog"
         tools:targetApi="31"
+        android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true">
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
