@@ -2,6 +2,7 @@ package com.example.schedulog
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Build
@@ -12,6 +13,7 @@ import android.provider.MediaStore.Audio
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.example.schedulog.databinding.FragmentAudioDescriptionListenerDialogBinding
@@ -23,10 +25,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
-import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.Date
+
 
 
 
@@ -37,13 +36,13 @@ class AudioDescriptionListenerDialogFragment : BottomSheetDialogFragment() {
     private var permissionGranted = false
 
 
-    private lateinit var recorder : MediaRecorder
 
     private var isPlaying = false
     private var isPaused = false
     val currentUser = FirebaseAuth.getInstance().currentUser
-    val userId = currentUser?.uid //TODO Replace with the userId with rated user
+
     var postId = arguments?.getString("user_id") ?: ""
+    var hostId = arguments?.getString("user_id") ?: ""
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreateView(
@@ -51,6 +50,7 @@ class AudioDescriptionListenerDialogFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         postId = (arguments?.getString("post_id").toString())
+        hostId = (arguments?.getString("user_id").toString())
         binding = FragmentAudioDescriptionListenerDialogBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -60,57 +60,55 @@ class AudioDescriptionListenerDialogFragment : BottomSheetDialogFragment() {
             ActivityCompat.requestPermissions(requireActivity(),permissions, REQUEST_CODE)
         }
 
-
-
-
-
-
         // Initialize variables
 
         var playButton = binding.playButton
 
-
-
         // Set a click listener for the submit button
         playButton.setOnClickListener {
             // Get the rating and review from the input fields
-            when{
-                isPaused -> resumeRecording()
-                isPlaying -> pauseRecording()
-                else -> startRecording()
-            }
-            Timber.e("recording audio")
+            startAudio()
+
             Timber.e("playing audio")
 
         }
-
-
 
         return view
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.S)
-    private fun pauseRecording(){
-        isPaused = true
-        binding.playButton.text = "Play"
-
-    }
-
-    @RequiresApi(Build.VERSION_CODES.S)
-    private fun resumeRecording(){
-        startRecording()
-        isPaused = false
-        binding.playButton.text = "Pause"
-    }
 
 
 
-    @RequiresApi(Build.VERSION_CODES.S)
-    private fun startRecording(){
-        binding.playButton.text = "Pause"
-        isPlaying = true
-        isPaused = false
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun startAudio(){
+        val storageRef = Firebase.storage.reference
+        var mp = MediaPlayer()
+        var audioPath = "audios/events/$postId/$hostId"
+        var audioRef = storageRef.child(audioPath)
+        audioRef.downloadUrl.addOnSuccessListener { uri ->
+            Timber.e(audioPath)
+            Timber.e(uri.toString())
+
+            mp.setDataSource(uri.toString())
+            mp.prepare()
+            mp.start()
+
+        }.addOnFailureListener{e ->
+            Toast.makeText(requireContext(),"No audio for this event.",Toast.LENGTH_SHORT
+            ).show()
+            dismiss()
+        }
+
+        binding.pauseButton.setOnClickListener {
+            mp?.stop()
+            mp?.reset()
+            mp?.release()
+            // Get the rating and review from the input fields
+            Timber.e("stopping audio")
+
+        }
 
     }
 
@@ -120,6 +118,7 @@ class AudioDescriptionListenerDialogFragment : BottomSheetDialogFragment() {
             val fragment = AudioDescriptionListenerDialogFragment()
             val args = Bundle()
             args.putString("post_id", postItem.eventKey)
+            args.putString("user_id",postItem.user)
             fragment.arguments = args
 
 

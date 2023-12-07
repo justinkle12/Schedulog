@@ -198,9 +198,6 @@ class AudioDescriptionDialogFragment : BottomSheetDialogFragment() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun startAudio(){
         val storageRef = Firebase.storage.reference
-        //val audioRef = storageRef.child("audios/events/$postId/$userId").toString() + ".mp3"
-        var firebaseAudio = Uri.fromFile(File("https://firebasestorage.googleapis.com/v0/b/schedulog.appspot.com/o/audios%2Fevents%2F-Nl0e0xDNg1OJd3qpeCH%2FWChSnRaRqwa6iTIPxZSt5PrNGSc2?alt=media&token=4ea47103-0067-49c1-9c97-af3d98985037"))
-
         var mp = MediaPlayer()
         var audioPath = "audios/events/$postId/$hostId"
         var audioRef = storageRef.child(audioPath)
