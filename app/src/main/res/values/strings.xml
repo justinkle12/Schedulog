@@ -20,7 +20,7 @@
 
     <!--  login strings  -->
     <string name="passwordhint_string">Password</string>
-    <string name="username_email_string">Username/Email</string>
+    <string name="username_email_string">Email</string>
     <string name="loginbuttontext_string">LOGIN</string>
     <string name="logintitle_string">Login</string>
     <string name="hello_blank_fragment">Blank Fragment</string>
