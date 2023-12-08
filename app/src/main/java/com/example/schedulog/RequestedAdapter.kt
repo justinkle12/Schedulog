@@ -51,7 +51,7 @@ class RequestedAdapter(private val context: Context, private val friends: List<R
                 .child("friends")
                 .child("pending")
                 .child(currentUser?.uid.toString()).removeValue()
-            notifyDataSetChanged()
+            notifyItemRemoved(position)
 
         }
         holder.bind(friend)

@@ -51,6 +51,7 @@ class FriendAdapter(private val context: Context, private val friends: List<Frie
                 .child(currentUser?.uid.toString())
                 .child("friends")
                 .child(friend.uid).removeValue()
+            notifyItemRemoved(position)
 
         }
         holder.bind(friend)

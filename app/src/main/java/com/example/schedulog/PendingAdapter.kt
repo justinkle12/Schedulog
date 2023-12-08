@@ -51,7 +51,7 @@ class PendingAdapter(private val context: Context, private val friends: List<Pen
                 .child("friends")
                 .child("pending")
                 .child(friend.uid).removeValue()
-            notifyDataSetChanged()
+            notifyItemRemoved(position)
         }
         holder.binding.accbutton.setOnClickListener{
             val currentUser = FirebaseAuth.getInstance().currentUser
@@ -73,6 +73,7 @@ class PendingAdapter(private val context: Context, private val friends: List<Pen
                 .child("friends")
                 .child("pending")
                 .child(friend.uid).removeValue()
+            notifyItemRemoved(position)
 
         }
 
