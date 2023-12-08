@@ -32,13 +32,6 @@
             android:layout_height="73.6dp"
             android:hint="Feed" />
 
-        <ImageView android:id="@+id/_sidebarbutton"
-            android:src="@drawable/_sidebarbutton"
-            android:contentDescription="_sidebarbutton"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="40dp"
-            android:layout_width="32dp"
-            android:layout_height="32dp" />
 
         <ImageView
             android:id="@+id/sidebarbutton2"
