@@ -144,7 +144,7 @@ class RegistrationFragment : DialogFragment() {
     }
 
     companion object {
-        private const val TAG = "RegistrationFragment"
+        const val TAG = "RegistrationFragment"
     }
 
 }

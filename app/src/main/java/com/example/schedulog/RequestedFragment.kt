@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schedulog.databinding.FragmentFriendSystemBinding
+import com.example.schedulog.databinding.FragmentPendingBinding
+import com.example.schedulog.databinding.FragmentRequestedBinding
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
@@ -24,17 +27,16 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-
-class FriendSystemFragment : Fragment() {
+class RequestedFragment : DialogFragment() {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
-    private var _binding: FragmentFriendSystemBinding? = null
+    private var _binding: FragmentRequestedBinding? = null
     private val binding get() = _binding!!
 
     private val currentUser = FirebaseAuth.getInstance().currentUser
     private lateinit var friendsRef: DatabaseReference
 
-    private lateinit var adapter: FriendAdapter
+    private lateinit var adapter: RequestedAdapter
     private val friendsList = mutableListOf<Friend>()
 
     data class Friend(
@@ -47,40 +49,24 @@ class FriendSystemFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFriendSystemBinding.inflate(inflater, container, false)
+        _binding = FragmentRequestedBinding.inflate(inflater, container, false)
         val view = binding.root
 
         friendsRef = FirebaseDatabase.getInstance().reference
             .child("users")
             .child(currentUser?.uid.toString())
             .child("friends")
+            .child("requested")
 
-        adapter = FriendAdapter(requireContext(), friendsList)
+        adapter = RequestedAdapter(requireContext(), friendsList)
         binding.friendsRecyclerView.adapter = adapter
         binding.friendsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        binding.pendingButton.setOnClickListener {
+        binding.backbutton.setOnClickListener {
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragmentContainer, PendingFragment())
+            transaction.replace(R.id.fragmentContainer, FriendSystemFragment())
             transaction.addToBackStack(null) // Optional: Add the fragment to the back stack
             transaction.commit()
-        }
-
-        binding.requestedButton.setOnClickListener{
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragmentContainer, RequestedFragment())
-            transaction.addToBackStack(null) // Optional: Add the fragment to the back stack
-            transaction.commit()
-        }
-
-        binding.addFriendButton.setOnClickListener {
-
-            val friendUsername = binding.usernameInput.text.toString().trim()
-            if (friendUsername.isNotEmpty()) {
-                addFriendByUsername(friendUsername)
-            } else {
-                binding.usernameInputLayout.error = "Please enter a username"
-            }
         }
 
         // Use Coroutine to introduce a delay before loading friends
@@ -107,46 +93,11 @@ class FriendSystemFragment : Fragment() {
                 }
 
                 // Delay for 1000 ms (1 second)
-                delay(500)
+                delay(700)
             }
         }
     }
 
-    private fun addFriendByUsername(username: String) {
-        // Check if the username exists in the database
-        val usersRef = FirebaseDatabase.getInstance().reference.child("users")
-        usersRef.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    // Username found, get the friend's UID
-                    val friendUID = snapshot.children.first().key
-                    if (friendUID != null) {
-                        // Add the friend to the current user's friends list
-                        friendsRef.child("requested").child(friendUID).setValue(true)
-                        FirebaseDatabase.getInstance().reference
-                            .child("users")
-                            .child(friendUID)
-                            .child("friends")
-                            .child("pending")
-                            .child(currentUser?.uid.toString())
-                            .setValue(true)
-
-                        adapter.notifyDataSetChanged()
-                        binding.usernameInputLayout.error = null // Clear any previous error
-                        binding.usernameInput.text?.clear() // Clear the input field
-
-                    }
-
-                } else {
-                    binding.usernameInputLayout.error = "Username not found"
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Handle errors here
-            }
-        })
-    }
     private fun loadFriends() {
         friendsRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -188,10 +139,6 @@ class FriendSystemFragment : Fragment() {
         })
         Timber.d("loadFriends() has been called!!!")
     }
-
-
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

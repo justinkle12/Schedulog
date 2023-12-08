@@ -38,9 +38,9 @@ class LoginFragment : DialogFragment() {
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
                         //testing purposes only, uncomment to bypass authentication
-                        dismiss()
-                        navigateToFeedFragment()
-                        /*if(mAuth.currentUser?.isEmailVerified == true){
+                        //dismiss()
+                        //navigateToFeedFragment()
+                        if(mAuth.currentUser?.isEmailVerified == true){
 
                             // Navigate to the FeedFragment upon successful login and user is verified
                             dismiss()
@@ -49,9 +49,17 @@ class LoginFragment : DialogFragment() {
                         }else {
 
                             dismiss()
+                            mAuth.currentUser?.sendEmailVerification()
+                                ?.addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        Timber.tag(RegistrationFragment.TAG).d("Email sent.")
+
+                                    }else (Timber.tag(RegistrationFragment.TAG).d("Email has not been sent."))
+
+                                }
                             navigateToAuthFragment()
 
-                        }*/
+                        }
                     } else {
                         // Handle login failure, e.g., show an error message.
                         Toast.makeText(

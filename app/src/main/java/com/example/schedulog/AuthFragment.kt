@@ -31,6 +31,16 @@ class AuthFragment : DialogFragment() {
                 navigateToLoginFragment()
 
         }
+        binding.resendButton.setOnClickListener {
+            mAuth.currentUser?.sendEmailVerification()
+                ?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Timber.tag(RegistrationFragment.TAG).d("Email sent.")
+
+                    }else (Timber.tag(RegistrationFragment.TAG).d("Email has not been sent."))
+
+                }
+        }
 
         return binding.root
     }

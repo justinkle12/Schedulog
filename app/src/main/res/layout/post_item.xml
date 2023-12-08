@@ -38,7 +38,7 @@
                 android:background="@color/transparent" />
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/_bg__avatar_ek1"
+                android:id="@+id/avatar_img"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_marginStart="@dimen/button_padding_margin"
@@ -46,6 +46,7 @@
                 android:layout_marginEnd="@dimen/button_padding_margin"
                 android:layout_marginBottom="@dimen/button_padding_margin"
                 android:scaleType="fitXY"
+                android:adjustViewBounds="true"
                 android:src="@drawable/user_profile"
                 app:shapeAppearanceOverlay="@style/ImageStyle_Corners_Rounded" />
 

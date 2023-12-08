@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/friendfrag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <!-- TextInput for entering friend's username -->
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:id="@+id/usernameInputLayout"
         android:hint="Enter Friend's Username">
@@ -20,8 +21,9 @@
 
     <!-- Button to add a friend -->
     <RelativeLayout android:id="@+id/addFriendButton"
-        android:layout_marginStart="0dp"
-        android:layout_width="167dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="-55dp"
+        android:layout_width="130dp"
         android:layout_height="52dp"
         >
 
@@ -38,11 +40,71 @@
             android:gravity="center"
             android:textSize="13sp"
             android:textColor="@color/_bg__menu_color"
-            android:layout_marginLeft="39dp"
+            android:layout_marginStart="19dp"
             android:layout_marginTop="18dp"
             android:layout_width="91.3dp"
             android:layout_height="20.3dp"
             android:text="ADD FRIEND"
+            />
+
+    </RelativeLayout>
+
+    <!-- Button to add a friend -->
+    <RelativeLayout android:id="@+id/pendingButton"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="130dp"
+        android:layout_height="52dp"
+        >
+
+        <View   android:id="@+id/rectangle_2_ek3"
+            android:background="@drawable/rectangle_2_ek2_shape"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView android:id="@+id/register1"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal|center"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:textColor="@color/_bg__menu_color"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="18dp"
+            android:layout_width="91.3dp"
+            android:layout_height="20.3dp"
+            android:text="PENDING"
+            />
+
+    </RelativeLayout>
+
+    <!-- Button to add a friend -->
+    <RelativeLayout android:id="@+id/requestedButton"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="-52dp"
+        android:layout_width="130dp"
+        android:layout_height="52dp"
+        >
+
+        <View   android:id="@+id/rectangle_2_ek4"
+            android:background="@drawable/rectangle_2_ek2_shape"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView android:id="@+id/register2"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal|center"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:textColor="@color/_bg__menu_color"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="18dp"
+            android:layout_width="91.3dp"
+            android:layout_height="20.3dp"
+            android:text="REQUESTED"
             />
 
     </RelativeLayout>

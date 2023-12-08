@@ -95,7 +95,7 @@ class FeedFragment : Fragment() {
             var emptyList = ArrayList<PostItem>()
             var filteredList = ArrayList<PostItem>()
             for(item in postItemList){
-                if(item.description.lowercase().contains(newText.toString().lowercase())){
+                if(item.title.lowercase().contains(newText.toString().lowercase())){
                     filteredList.add(item)
                 }
             }
